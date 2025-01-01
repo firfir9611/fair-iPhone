@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-Head>Welcome to Fair</x-Head>
+<x-head>Welcome to Fair</x-head>
 <body class="bg-gray-100">
     <video class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="{{ asset('videos/introduce_new_iphone_16_series.mp4') }}" autoplay muted loop></video>
     <x-Header :active="request() -> is ('/')"></x-Header>

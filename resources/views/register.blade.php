@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-Head>Buat Akun</x-Head>
+<x-head>Buat Akun</x-head>
 <body class="bg-gray-100" x-data="{ isOpen: false }">
     <x-center-form-container>
         <form action="{{ route('registration.submit') }}" method="POST"

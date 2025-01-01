@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-Head>Wishlist</x-Head>
+<x-head>Wishlist</x-head>
 <body class="bg-gray-100">
     <x-Header></x-Header>
     <div class="py-6 lg:px-16 md:px-6 m-6 p-2 lg:w-3/4 md:w-full mx-auto lg:rounded-lg bg-white">

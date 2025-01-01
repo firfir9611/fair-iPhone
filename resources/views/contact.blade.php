@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-Head>Contact</x-Head>
+<x-head>Contact</x-head>
 <body class="bg-gray-100">
     <x-Header></x-Header>
     <div class="p-6 m-6 p-2 w-3/4 mx-auto rounded-lg bg-white">

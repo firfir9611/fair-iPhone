@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-Head>Product</x-Head>
+<x-head>Product</x-head>
 <body class="bg-gray-100">
     <x-Header></x-Header>
     <div class="">

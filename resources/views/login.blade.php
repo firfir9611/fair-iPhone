@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-Head>Login</x-Head>
+<x-head>Login</x-head>
 <body class="bg-gray-100">
     <x-center-form-container x-show="!isOpen">
         <form action="{{ route('login.submit') }}" method="POST"
