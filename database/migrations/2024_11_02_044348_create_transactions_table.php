@@ -1,7 +1,8 @@
 <?php
 
+
 use App\Models\User;
-use App\Models\iphone;
+use App\Models\unit_id;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -16,10 +17,18 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->foreignIdFor(iphone::class);
-            $table->date('rent_at');
-            $table->date('return_plan');
+            $table->foreignIdFor(unit_id::class);
+            $table->integer('rented_price')->nullable();
+            $table->integer('dp')->nullable();
+            $table->integer('shipping_cost')->nullable();
+            $table->integer('total_paid')->nullable();
+            $table->integer('penalty')->nullable();
+            $table->integer('rented_battery_health')->nullable();
+            $table->integer('status')->nullable();
+            $table->date('rent_at')->nullable();
+            $table->date('return_plan')->nullable();
             $table->date('return_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

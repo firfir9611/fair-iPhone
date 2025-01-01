@@ -18,10 +18,11 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('address')->nullable();
-            $table->integer('phone_number')->nullable();
+            $table->string('phone_number')->nullable();
             $table->enum('gender',['male','female'])->nullable();
-            $table->enum('role',['admin','customer'])->nullable();
+            $table->enum('role',['gm','admin','customer'])->default('customer');
             $table->text('img')->nullable();
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

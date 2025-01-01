@@ -13,19 +13,20 @@ return new class extends Migration
     {
         Schema::create('iphones', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('color');
-            $table->string('storage');
-            $table->integer('rent_price');
-            $table->integer('stok');
-            $table->string('display');
-            $table->string('os');
-            $table->string('rearcam');
-            $table->string('selfie');
-            $table->string('chipset');
-            $table->string('battey');
-            $table->string('dimention');
-            $table->date('launch_at');
+            $table->string('model')->nullable();
+            $table->string('name')->nullable();
+            $table->integer('stok_spare')->nullable();
+            $table->integer('stok_ready')->nullable();
+            $table->string('display')->nullable();
+            $table->string('os')->nullable();
+            $table->string('rearcam')->nullable();
+            $table->string('selfie')->nullable();
+            $table->string('chipset')->nullable();
+            $table->string('battery')->nullable();
+            $table->string('dimention')->nullable();
+            $table->date('launch_at')->nullable();
+            $table->integer('show')->default(1);
+            $table->softDeletes();
             $table->text('img')->nullable();
             $table->timestamps();
         });
