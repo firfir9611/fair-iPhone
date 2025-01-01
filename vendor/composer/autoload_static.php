@@ -334,8 +334,8 @@ class ComposerStaticInit1947da51e571e7df08037e2755338050
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -509,9 +509,22 @@ class ComposerStaticInit1947da51e571e7df08037e2755338050
     );
 
     public static $classMap = array (
+        'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\iphone' => __DIR__ . '/../..' . '/app/Http/Controllers/iphone.php',
+        'App\\Http\\Controllers\\transaction' => __DIR__ . '/../..' . '/app/Http/Controllers/transaction.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\iphone' => __DIR__ . '/../..' . '/app/Models/iphone.php',
+        'App\\Models\\iphone_color' => __DIR__ . '/../..' . '/app/Models/iphone_color.php',
+        'App\\Models\\iphone_storage' => __DIR__ . '/../..' . '/app/Models/iphone_storage.php',
+        'App\\Models\\transaction' => __DIR__ . '/../..' . '/app/Models/transaction.php',
+        'App\\Models\\unit_code' => __DIR__ . '/../..' . '/app/Models/unit_code.php',
+        'App\\Models\\unit_color' => __DIR__ . '/../..' . '/app/Models/unit_color.php',
+        'App\\Models\\unit_id' => __DIR__ . '/../..' . '/app/Models/unit_id.php',
+        'App\\Models\\unit_img' => __DIR__ . '/../..' . '/app/Models/unit_img.php',
+        'App\\Models\\unit_storage' => __DIR__ . '/../..' . '/app/Models/unit_storage.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
+        'App\\View\\Components\\Header' => __DIR__ . '/../..' . '/app/View/Components/Header.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',

@@ -6,9 +6,22 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\iphone' => $baseDir . '/app/Http/Controllers/iphone.php',
+    'App\\Http\\Controllers\\transaction' => $baseDir . '/app/Http/Controllers/transaction.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Models\\iphone' => $baseDir . '/app/Models/iphone.php',
+    'App\\Models\\iphone_color' => $baseDir . '/app/Models/iphone_color.php',
+    'App\\Models\\iphone_storage' => $baseDir . '/app/Models/iphone_storage.php',
+    'App\\Models\\transaction' => $baseDir . '/app/Models/transaction.php',
+    'App\\Models\\unit_code' => $baseDir . '/app/Models/unit_code.php',
+    'App\\Models\\unit_color' => $baseDir . '/app/Models/unit_color.php',
+    'App\\Models\\unit_id' => $baseDir . '/app/Models/unit_id.php',
+    'App\\Models\\unit_img' => $baseDir . '/app/Models/unit_img.php',
+    'App\\Models\\unit_storage' => $baseDir . '/app/Models/unit_storage.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
+    'App\\View\\Components\\Header' => $baseDir . '/app/View/Components/Header.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Brick\\Math\\BigDecimal' => $vendorDir . '/brick/math/src/BigDecimal.php',
     'Brick\\Math\\BigInteger' => $vendorDir . '/brick/math/src/BigInteger.php',
