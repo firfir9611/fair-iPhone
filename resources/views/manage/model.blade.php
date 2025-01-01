@@ -5,11 +5,11 @@
     <x-header></x-header>
     <div class="w-11/12 mx-auto my-4 bg-white rounded-md p-8">
         <p class="font-bold text-2xl text-center mb-4">Kelola iPhone</p>
-        <div class="flex flex-wrap justify-center gap-4">
-        <div class="flex justify-items-start">
+        <div class="gap-4">
+        <div class="flex mb-4 justify-center">
                 <button class="bg-red-500 hover:bg-red-600 py-2 px-4 text-white rounded-md" id="hapus_terpilih">Hapus Terpilih</button>
         </div>
-            <table class="bg-white w-full mx-auto min-w-max table-auto text-left">
+            <table class="bg-white w-full mb-4 mx-auto min-w-max table-auto text-left">
                 <thead>
                     <tr>
                         <th class="border-y border-blue-gray-50 p-4">
@@ -81,6 +81,11 @@
                     </tr> --}}
               </tbody>
             </table>
+            @if(session('exist'))
+            <div class="flex justify-center mb-4">
+                <p class="text-center text-red-500">{{ session('exist') }}</p>
+            </div>
+            @endif
             <div class="flex">
                 <button type="button" onclick="open_popup_add()" class="mx-auto hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 p-1 rounded-md underline">
                     <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="5" stroke="currentColor">

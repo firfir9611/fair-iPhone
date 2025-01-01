@@ -97,7 +97,7 @@ class iphone extends Controller
     }
 
     public function manageModelAdd(Request $request, $id){
-        $iphone = new iphones();
+        
         // $model = 'ip_'.$request->model_number.$request->model_type;
         // if($request->model_type == ''){
         //     $type_name = '';
@@ -114,10 +114,18 @@ class iphone extends Controller
         // $iphone->model = $model;
         // $iphone->rent_price = $request->rent_price;
         // $iphone->save();
-        $iphone->name = $request->name;
-        $iphone->save();
+        $iphone_exist = iphones::where('name', $request->name)->first();
 
-        return redirect()->route('manageModelEdit', $id);
+        if($iphone_exist){
+            return redirect()->route('manageModel')->with('exist','Nama Model iPhone sudah ada!, gunakan nama model lain');
+        }else{
+            $iphone = new iphones();
+            $iphone->name = $request->name;
+            $iphone->save();
+    
+            return redirect()->route('manageModelEdit', $id);
+        }
+
     }
 
     public function manageModelVariantColorAdd(Request $request, $id){
@@ -197,7 +205,7 @@ class iphone extends Controller
     public function manageUnit(){
         $id = unit_id::max('id')+1;
         $unit_ids = unit_id::select(
-            'unit_ids.id AS id','unit_ids.stok AS stok','unit_ids.show AS show','unit_ids.battery_health AS battery_health','unit_ids.rent_price AS rent_price',
+            'unit_ids.id AS unit_id','unit_ids.stok AS stok','unit_ids.show AS show','unit_ids.battery_health AS battery_health','unit_ids.rent_price AS rent_price',
             'iphones.id AS iphone_id','iphones.name AS iphone_name',
             'unit_colors.id AS color_id','unit_colors.color AS color_name',
             'unit_storages.id AS storage_id','unit_storages.capacity AS storage_capacity',
@@ -224,14 +232,17 @@ class iphone extends Controller
         ->leftJoin('unit_colors','unit_colors.id','=','unit_ids.unit_color_id')
         ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
         ->leftJoin('unit_imgs','unit_imgs.unit_id_id','=','unit_ids.id')->first();
-        $iphone_colors = iphone_color::select(
-            'iphone_colors.id AS iphone_color_id','unit_colors.id AS unit_color_id','unit_colors.color AS color', 'unit_colors.color_code AS color_code'
-        )->where('iphone_id',$unit_id->iphone_id)
-        ->leftJoin('unit_colors','unit_colors.id','=','iphone_colors.unit_color_id')->get();
-        $iphone_storages = iphone_storage::select(
-            'iphone_storages.id AS iphone_storage_id','unit_storages.id AS unit_storage_id','unit_storages.capacity AS capacity'
-        )->where('iphone_id',$unit_id->iphone_id)
-        ->leftJoin('unit_storages','unit_storages.id','=','iphone_storages.unit_storage_id')->get();
+        // $iphone_colors = iphone_color::select(
+        //     'iphone_colors.id AS iphone_color_id','unit_colors.id AS unit_color_id','unit_colors.color AS color', 'unit_colors.color_code AS color_code'
+        // )->where('iphone_id',$unit_id->iphone_id)
+        // ->leftJoin('unit_colors','unit_colors.id','=','iphone_colors.unit_color_id')->get();
+        // $iphone_storages = iphone_storage::select(
+        //     'iphone_storages.id AS iphone_storage_id','unit_storages.id AS unit_storage_id','unit_storages.capacity AS capacity'
+        // )->where('iphone_id',$unit_id->iphone_id)
+        // ->leftJoin('unit_storages','unit_storages.id','=','iphone_storages.unit_storage_id')->get();
+        $iphone_colors = unit_color::all();
+        $iphone_storages = unit_storage::all();
+
         $unit_codes = unit_code::select('*')->where('unit_id_id', $id)->get();
 
         return view('manage.unit_edit', compact('unit_id','iphone_colors','iphone_storages','unit_codes'));
@@ -331,6 +342,15 @@ class iphone extends Controller
     }
     public function manageUnitDelete($id){
         unit_id::where('id',$id)->delete();
+
+        return redirect()->back();
+    }
+    public function manageUnitDeleteSelected(Request $request){
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:unit_ids,id'
+        ]);
+        unit_id::whereIn('id', $request->ids)->delete();
 
         return redirect()->back();
     }

@@ -60,7 +60,7 @@
                     <select name="color" class="p-2 border rounded-md">
                         @if($iphone_colors->isNotEmpty())
                         @foreach ($iphone_colors as $iphone_color)
-                            <option value="{{ $iphone_color->unit_color_id }}" >{{ $iphone_color->color }}</option>
+                            <option value="{{ $iphone_color->id }}" >{{ $iphone_color->color }}</option>
                         @endforeach
                         @endif
                     </select>
@@ -70,7 +70,7 @@
                 <select name="storage" class="p-2 border rounded-md">
                     @if($iphone_storages->isNotEmpty())
                     @foreach ($iphone_storages as $iphone_storage)
-                        <option value="{{ $iphone_storage->unit_storage_id }}">{{ $iphone_storage->capacity }}</option>
+                        <option value="{{ $iphone_storage->id }}">{{ $iphone_storage->capacity }}</option>
                     @endforeach
                     @endif
                 </select>

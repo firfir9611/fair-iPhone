@@ -6,15 +6,15 @@
     <div class="w-11/12 mx-auto my-4 bg-white rounded-md p-8">
         <p class="font-bold text-2xl text-center mb-4">Kelola Unit</p>
         <div class="flex flex-wrap justify-center gap-4">
-        <div class="flex justify-items-start">
+        {{-- <div class="flex justify-items-start">
                 <button class="bg-red-500 hover:bg-red-600 py-2 px-4 text-white rounded-md" id="hapus_terpilih">Hapus Terpilih</button>
-        </div>
+        </div> --}}
             <table class="bg-white w-full mx-auto min-w-max table-auto text-left">
                 <thead>
                     <tr>
-                        <th class="border-y border-blue-gray-50 p-4">
+                        {{-- <th class="border-y border-blue-gray-50 p-4">
                             <input type="checkbox" id="pilih_semua" class="ml-2 w-6 h-6">
-                        </th>
+                        </th> --}}
                         <x-table-header>ID Unit</x-table-header>
                         <x-table-header>Nama iPhone</x-table-header>
                         <x-table-header>Harga Sewa</x-table-header>
@@ -30,10 +30,10 @@
                     @if($unit_ids->isNotEmpty())
                     @foreach ($unit_ids as $unit_id)
                         <tr>
-                            <td class="p-4 border-b border-blue-gray-50">
-                                <input type="checkbox" class="checkbox_pilih ml-2 w-6 h-6" name="ids[]" value="{{ $unit_id->id }}">
-                            </td>
-                            <x-table-contents>{{ $unit_id->id }}</x-table-contents>
+                            {{-- <td class="p-4 border-b border-blue-gray-50">
+                                <input type="checkbox" class="checkbox_pilih ml-2 w-6 h-6" name="ids[]" value="{{ $unit_id->unit_id }}">
+                            </td> --}}
+                            <x-table-contents>{{ $unit_id->unit_id }}</x-table-contents>
                             <x-table-contents>{{ $unit_id->iphone_name }}</x-table-contents>
                             <x-table-contents>{{ $unit_id->rent_price }}</x-table-contents>
                             <x-table-contents>{{ $unit_id->battery_health }}</x-table-contents>
@@ -48,14 +48,14 @@
                             <td class="p-4 border-b border-blue-gray-50">
                                 <div class="flex items-center gap-3">
                                     <div class="flex justify-end">
-                                        <form action="{{ route('manageUnitEdit', $unit_id->id) }}" method="GET">
+                                        <form action="{{ route('manageUnitEdit', $unit_id->unit_id) }}" method="GET">
                                         <button type="submit" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 p-1 rounded-md">
                                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                             </svg>
                                         </button>
                                         </form>
-                                        <form action="{{ route('manageUnitDelete', $unit_id->id) }}" method="POST">
+                                        <form action="{{ route('manageUnitDelete', $unit_id->unit_id) }}" method="POST">
                                             @csrf
                                             <button type="submit" class="mx-1 border hover:bg-blue-500 hover:text-white text-blue-500  border-blue-500 p-1 rounded-md">
                                                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
@@ -201,6 +201,44 @@
     function close_popup_add() {
         document.getElementById('popup-add').classList.add('hidden');
     }
+
+    document.getElementById('pilih_semua').addEventListener('change', function () {
+            let checkbox_pilih = document.querySelectorAll('.checkbox_pilih');
+            checkbox_pilih.forEach(function (checkbox) {
+                checkbox.checked = this.checked;
+            }, this);
+        });
+
+        document.getElementById('hapus_terpilih').addEventListener('click', function() {
+        const selectedIds = Array.from(document.querySelectorAll('.checkbox_pilih:checked')).map(checkbox => checkbox.value);
+
+        if (selectedIds.length === 0) {
+            alert('Tidak ada data terpilih');
+            return;
+        }
+
+        if (confirm('hapus data terpilih?')) {
+            $.ajax({
+                url: '{{ route('manageUnitDeleteSelected') }}',
+                type: 'DELETE',
+                data: {
+                    ids: selectedIds,
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function() {
+                    location.reload();
+                }
+            });
+        }
+
+        setTimeout(function(){
+            location.reload();
+        }, 1000);
+    });
+
+    $('#pilih_semua').click(function(){
+            $('')
+    })
 </script>
 </body>
 </html>

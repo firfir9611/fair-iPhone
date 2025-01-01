@@ -48,7 +48,7 @@
                 <label for="stok_ready">Stok Tersedia : </label><br>
                 <input class="p-2 border rounded-md w-full mb-2" value="{{ $iphone->stok_ready }}" disabled type="number" min="0" name="stok_ready" required>
             </form>
-                <label for="colors">Daftar Warna : </label>
+                {{-- <label for="colors">Daftar Warna : </label>
                 <div class="flex gap-2 flex-wrap items-center">
                         @if($unit_current_colors)
                         @foreach($unit_current_colors as $unit_current_color)
@@ -131,7 +131,7 @@
                             </button>
                         </div>
                     </form>
-                </div>
+                </div> --}}
         </div>
     </div>
 </body>

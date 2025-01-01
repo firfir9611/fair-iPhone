@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::get('manage/unit/edit/{id}', [iphone::class, 'manageUnitEdit'])->name('manageUnitEdit');
     Route::post('manage/unit/edit/save/{id}', [iphone::class, 'manageUnitEditSave'])->name('manageUnitEditSave');
     Route::post('manage/unit/delete/{id}', [iphone::class, 'manageUnitDelete'])->name('manageUnitDelete');
+    Route::delete('manage/unit/delete/selected', [iphone::class, 'manageUnitDeleteSelected'])->name('manageUnitDeleteSelected');
     Route::post('manage/unit/add/{id}', [iphone::class, 'manageUnitAdd'])->name('manageUnitAdd');
     Route::post('manage/unit/code/delete/{id}', [iphone::class, 'manageUnitCodeDelete'])->name('manageUnitCodeDelete');
     Route::post('manage/unit/code/add/{id}', [iphone::class, 'manageUnitCodeAdd'])->name('manageUnitCodeAdd');
