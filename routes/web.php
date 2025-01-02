@@ -3,8 +3,6 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\iphone;
 use App\Http\Controllers\transaction;
-use App\Http\Controllers\wishlist;
-use App\Models\Item;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
