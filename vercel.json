@@ -17,6 +17,10 @@
             "dest": "/public/index.php"
         }
     ],
+    "commands": [
+        "npm install",
+        "npm run build"
+      ],
     "public": true,
     "buildCommand": "vite build",
     "outputDirectory": "public",
