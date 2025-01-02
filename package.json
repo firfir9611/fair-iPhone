@@ -2,9 +2,9 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build",
+        "build": "npm run build",
         "dev": "vite",
-        "start": "vite preview"
+        "start": "npm run start"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.20",

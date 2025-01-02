@@ -8,7 +8,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{  asset('favicon_io/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{  asset('favicon_io/favicon-16x16.png') }}">
     <link rel="manifest" href="{{  asset('favicon_io/site.webmanifest') }}">
-    @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
+    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- @vite('resources/css/app.css')
+    @vite('resources/js/app.js') --}}
     <title>{{ $slot }}</title>
 </head>
