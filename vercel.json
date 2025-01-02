@@ -15,6 +15,10 @@
         {
             "src": "/(.*)",
             "dest": "/public/index.php"
+        },
+        {
+            "src": "/(images|videos)/(.*)",
+            "dest": "/public/$1/$2"
         }
     ],
     "public": true,
