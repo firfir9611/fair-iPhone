@@ -2,7 +2,10 @@
 <html lang="en">
 <x-head>Welcome to Fair</x-head>
 <body class="bg-gray-100">
-    <video class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="{{ asset('videos/introduce_new_iphone_16_series.mp4') }}" autoplay muted loop></video>
+    {{-- <video class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="{{ asset('videos/introduce_new_iphone_16_series.mp4') }}" autoplay muted loop></video> --}}
+    {{-- <video class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="https://drive.google.com/file/d/15EKcTPesfnXtTOqw4u8A8YHNN5ahLlzi/preview" type="video/mp4" autoplay muted loop></video> --}}
+    <iframe class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="https://drive.google.com/file/d/15EKcTPesfnXtTOqw4u8A8YHNN5ahLlzi/preview" allow="autoplay"></iframe>
+
     <x-Header :active="request() -> is ('/')"></x-Header>
     <div class="lg:hidden">
         <div class=" justify-items-center m-0">
