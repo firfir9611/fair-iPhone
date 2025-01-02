@@ -25,7 +25,7 @@ class iphone extends Controller
         ->leftJoin('unit_colors','unit_colors.id','unit_ids.unit_color_id')
         ->leftJoin('unit_storages','unit_storages.id','unit_ids.unit_storage_id')->get();
         // $iphone_15_series = iphones::select('*')->where('model', 'like', 'ip_15%')->get();
-        return view('product', compact('iphones','iphones'));
+        return view('product', compact('iphones'));
     }
 
     public function manageModel(){
