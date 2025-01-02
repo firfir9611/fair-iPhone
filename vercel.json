@@ -17,12 +17,12 @@
             "dest": "/public/index.php"
         }
     ],
-    "commands": [
+    "public": true,
+    "buildCommand": [
+        "vite build",
         "npm install",
         "npm run build"
-      ],
-    "public": true,
-    "buildCommand": "vite build",
+        ],
     "outputDirectory": "public",
     "env": {
         "APP_ENV": "production",
