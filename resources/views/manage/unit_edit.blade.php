@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-Head>Kelola Unit</x-Head>
+<x-head>Kelola Unit</x-head>
 <body class="bg-gray-100">
     <x-header></x-header>
     <div class="w-11/12 mx-auto my-4 bg-white rounded-md p-8">

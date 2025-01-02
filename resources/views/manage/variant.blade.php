@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-Head>Kelola Varian</x-Head>
+<x-head>Kelola Varian</x-head>
 <body class="bg-gray-100">
     <x-header></x-header>
         <div class="xl:flex justify-center gap-4">
