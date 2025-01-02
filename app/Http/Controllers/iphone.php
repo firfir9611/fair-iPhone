@@ -20,7 +20,7 @@ class iphone extends Controller
         $iphones = unit_id::select(
             'unit_ids.id AS unit_id','unit_colors.color AS color','unit_colors.color_code AS color_code','unit_storages.capacity AS storage',
             'iphones.name AS iphone_name','iphones.img AS img','unit_ids.show AS show_unit'
-        )->where('show_unit', 1)
+        )->where('unit_ids.show', 1)
         ->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
         ->leftJoin('unit_colors','unit_colors.id','unit_ids.unit_color_id')
         ->leftJoin('unit_storages','unit_storages.id','unit_ids.unit_storage_id')->get();
@@ -40,12 +40,12 @@ class iphone extends Controller
         $unit_colors = unit_color::all();
         $unit_current_colors = iphone_color::select(
             'iphone_colors.id AS iphone_color_id','unit_colors.id AS unit_color_id','unit_colors.color AS color', 'unit_colors.color_code AS color_code'
-        )->where('iphone_id',$id)
+        )->where('iphone_colors.iphone_id',$id)
         ->leftJoin('unit_colors','unit_colors.id','=','iphone_colors.unit_color_id')->get();
         $unit_storages = unit_storage::all();
         $unit_current_storages = iphone_storage::select(
             'iphone_storages.id AS iphone_storage_id','unit_storages.id AS unit_storage_id','unit_storages.capacity AS capacity'
-        )->where('iphone_id',$id)
+        )->where('iphone_storages.iphone_id',$id)
         ->leftJoin('unit_storages','unit_storages.id','=','iphone_storages.unit_storage_id')->get();
 
 
