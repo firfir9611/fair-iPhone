@@ -9,14 +9,16 @@
         <div class="flex items-center">
             <div class="mx-auto flex items-center">
                 @if($user->img)
-                <img class="h-52 w-52 rounded-full border-2" src="{{ asset('storage/'.$user->img) }}">
+                {{-- <img class="h-52 w-52 rounded-full border-2" src="{{ asset('storage/'.$user->img) }}"> --}}
+                <img class="h-52 w-52 rounded-full border-2" src="https://i.ibb.co.com/5xGbNmx/profile-icon.png">
                 @else
-                <img class="h-52 w-52 rounded-full border-2" src="{{ asset('icons/profile-icon.png') }}">
+                {{-- <img class="h-52 w-52 rounded-full border-2" src="{{ asset('icons/profile-icon.png') }}"> --}}
+                <img class="h-52 w-52 rounded-full border-2" src="https://i.ibb.co.com/5xGbNmx/profile-icon.png">
                 @endif
                 <svg fill="none" viewBox="0 0 24 24" id="arrow" stroke-width="1.5" stroke="currentColor" class="size-24 mx-8 hidden">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>              
-                <img class="h-52 w-52 rounded-full border-2 hidden" id="preview" src="">
+                {{-- <img class="h-52 w-52 rounded-full border-2 hidden" id="preview" src=""> --}}
             </div>
         </div>
         <div class="flex justify-center my-8">
@@ -86,7 +88,7 @@
                 phone_number.classList.add('p-2', 'border');
                 ubah.innerHTML = 'Batalkan';
                 simpan.classList.remove('hidden');
-                imageInput.classList.remove('hidden');
+                // imageInput.classList.remove('hidden');
             } else {
                 name.value = nameOld;
                 name.setAttribute('disabled', '');
@@ -102,10 +104,10 @@
                 phone_number.classList.remove('p-2', 'border');
                 ubah.innerHTML = 'Ubah';
                 simpan.classList.add('hidden');
-                imageInput.classList.add('hidden');
-                preview.classList.add('hidden');
-                arrow.classList.add('hidden');
-                imageInput.value = '';
+                // imageInput.classList.add('hidden');
+                // preview.classList.add('hidden');
+                // arrow.classList.add('hidden');
+                // imageInput.value = '';
             }
         });
 </script>

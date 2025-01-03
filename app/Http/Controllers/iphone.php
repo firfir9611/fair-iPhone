@@ -340,6 +340,7 @@ class iphone extends Controller
                 'battery_health' => $request->battery_health,
                 'unit_color_id' => $request->color,
                 'unit_storage_id' => $request->storage,
+                'stok' => $request->stok
             ]);
         }
 

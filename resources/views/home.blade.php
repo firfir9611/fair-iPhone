@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <x-head>Welcome to Fair</x-head>
-<body class="bg-gray-100">
-    <video class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="{{ asset('videos/introduce_new_iphone_16_series.mp4') }}" autoplay muted loop></video>
-    {{-- <video class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="https://github.com/firfir9611/fair-iPhone/blob/1ba0ca930a0c8675135708d10cf420aaba1c0d1f/public/videos/introduce_new_iphone_16_series.mp4" type="video/mp4" autoplay muted loop></video> --}}
-    {{-- <img class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="{{ asset('img/new_iphone_bg.jpeg.jpg') }}"></img> --}}
-
+<body class="bg-gray-100 lg:bg-black lg:w-full">
+    {{-- <video class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="{{ asset('videos/introduce_new_iphone_16_series.mp4') }}" autoplay muted loop></video> --}}
+    {{-- <video class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="https://vimeo.com/1043595477" type="video/mp4" autoplay muted loop></video> --}}
+    {{-- <img class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="https://i.ibb.co.com/QpksSQX/new-iphone-bg-jpeg.jpg" alt="new-iphone-bg-jpeg"> --}}
+    <iframe class="hidden lg:block -z-10 fixed top-0 h-full w-full border-none" width="1366" allow="fullscreen;autoplay" src="https://streamable.com/e/noyaji?autoplay=1&muted=1&nocontrols=1"></iframe>
     <x-Header :active="request() -> is ('/')"></x-Header>
     <div class="lg:hidden">
         <div class=" justify-items-center m-0">

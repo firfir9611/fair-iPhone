@@ -19,10 +19,10 @@
                         </svg>
                     </button>
                 </div>
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label for="img">Gambar iPhone (Rasio Gambar 3:4) : </label>
                     <input class="w-1/4 bg-white border rounded-md" type="file" name="img" accept="image/png, image/jpg, image/jpeg"><br>
-                </div>
+                </div> --}}
                 {{-- <label for="img_front">Gambar iPhone bagian depan (Rasio Gambar 3:4) : </label>
                 <input class="w-1/4 bg-white border rounded-md" type="file" name="img_front" accept="image/png, image/jpg, image/jpeg"><br>
                 <label for="img_back">Gambar iPhone bagian belakang (Rasio Gambar 3:4) : </label>

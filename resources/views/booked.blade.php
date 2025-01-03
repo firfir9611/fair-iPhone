@@ -8,7 +8,7 @@
             @for($i=0;$i<2;$i++)
             <div class="md:flex justify-between gap-2" data-aos="fade-up" data-aos-duration="2000">
                 <div class="py-2 min-w-fit justify-items-center">
-                    <img src="{{ asset('img/iPhone_images/Dummy/iPhone 16 Pro Natural Titanium.png') }}" class="xl:h-60 md:h-48 h-60" alt="">
+                    <img src="https://i.ibb.co.com/hgX9HRC/15-pro-white-titanium.png" class="xl:h-60 md:h-48 h-60" alt="">
                     <p class="font-bold lg:text-xl md:text-sm text-center">Iphone 13 Pro Max</p>
                 </div>
                 <div class="w-full flex">

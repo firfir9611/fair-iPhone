@@ -1,5 +1,8 @@
 /.phpunit.cache
 /node_modules/
+/database/data migration.xlsx
+/database/query_data.sql
+/database/database.sqlite
 /public/hot
 /storage/*.key
 /storage/pail
