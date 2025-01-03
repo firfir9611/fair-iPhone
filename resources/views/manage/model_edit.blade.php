@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <x-head>Ubah Model</x-head>
-<body class="bg-gray-100 overflow-hidden">
+<body class="bg-gray-100 overflow-x-hidden">
     <x-header></x-header>
     <div class="w-11/12 mx-auto my-4 bg-white rounded-md p-8">
         <div class="mx-auto w-3/4 border p-12 rounded-md">
@@ -21,7 +21,7 @@
                 </div>
                 {{-- <label for="img">Gambar iPhone (Rasio Gambar 3:4) : </label>
                 <input class="w-1/4 bg-white border rounded-md mt-2" type="file" name="img" accept="image/png, image/jpg, image/jpeg"><br> --}}
-                <label for="img">Tampilkan : </label>
+                <label for="show">Tampilkan : </label>
                 <input class="border rounded-md mt-2 h-4 w-4" type="checkbox" name="show" {{ $iphone->show == 1 ? 'checked':'' }}><br>
                 {{-- <label for="model">Model Iphone : </label><br>
                 <input class="p-2 border rounded-md w-full mb-2" value="{{ $iphone->model }}" type="text" placeholder="Masukan Model iPhone" name="model" required> --}}

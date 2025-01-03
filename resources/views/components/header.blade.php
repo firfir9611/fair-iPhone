@@ -195,7 +195,7 @@
                 <a href="/booked" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100">Sedang Disewa</a>
                 <a href="/contact" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100">Kontak</a>
             </div>
-            <div class="py-6">
+            <div class="space-y-2 py-6">
                 @if(Auth::check())
                 @if(Auth::user()->role == 'admin' || Auth::user()->role == 'gm')
                 <div x-data="{ isOn: false }" class="-mx-3">
@@ -242,6 +242,7 @@
                 </div>
                 @endif
               @endif
+            </div>
               @if(Auth::check())
                 <form method="POST" action="{{ route('logout') }}" class="flex justify-center">
                     @csrf
@@ -267,7 +268,7 @@
                     </div>
                 </a>
               @endif
-            </div>
+            
           </div>
         </div>
       </div>

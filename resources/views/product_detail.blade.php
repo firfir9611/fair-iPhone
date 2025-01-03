@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <x-head>Product</x-head>
-<body class="bg-gray-100 overflow-hidden">
+<body class="bg-gray-100 overflow-x-hidden">
     <x-Header></x-Header>
     <div class="">
         <div class="p-6 m-6 p-2 lg:w-5/6 mx-auto lg:rounded-lg bg-white md:w-full md:rounded-none">
