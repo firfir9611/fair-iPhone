@@ -29,11 +29,6 @@
             "dest": "/public/favicon_io/"
         }
     ],
-    "publicFiles": {
-        "/img/*": "/public/img/",
-        "/favicon_io/*": "/public/favicon_io/"
-    },
-    
     "public": true,
     "buildCommand": "npm run build",
     "outputDirectory": "public",
