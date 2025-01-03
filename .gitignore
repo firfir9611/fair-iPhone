@@ -1,7 +1,6 @@
 /.phpunit.cache
 /node_modules
 /public/hot
-/app/Services/DropboxService.php
 /storage/*.key
 /storage/pail
 /vendor

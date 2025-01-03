@@ -10,22 +10,13 @@ use App\Models\unit_id;
 use App\Models\unit_img;
 use App\Models\unit_storage;
 use App\Models\unit_code;
-use App\Services\DropboxService;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Illuminate\Support\Str;
 
 class iphone extends Controller
 {
-    // protected $dropboxService;
-    // public function __construct(DropboxService $dropboxService)
-    // {
-    //     $this->dropboxService = $dropboxService;
-    // }
     
     public function home(){
-        // $files = $this->dropboxService->listFiles();
-        // dd($files);
         return view('home');
     }
 
