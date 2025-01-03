@@ -18,15 +18,15 @@
         },
         {
             "src": "/img/(.*)",
-            "dest": "/public/img/"
+            "dest": "/public/img/$1"
         },
         {
             "src": "/videos/(.*)",
-            "dest": "/public/videos/"
+            "dest": "/public/videos/$1"
         },
         {
             "src": "/favicon_io/(.*)",
-            "dest": "/public/favicon_io/"
+            "dest": "/public/favicon_io/$1"
         }
     ],
     "public": true,
