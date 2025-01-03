@@ -227,9 +227,7 @@
     }
 
     // Event listener untuk perubahan pada iPhone model
-    document.getElementById('iphone_choose').addEventListener('change', iphone_filter());
-    
-    function iphone_filter() {
+    document.getElementById('iphone_choose').addEventListener('change', function() {
         const selectedIphoneId = this.value;
 
         // Filter data warna dan penyimpanan berdasarkan iPhone ID
@@ -242,10 +240,23 @@
 
         updateOptions(colorSelect, filteredColors, 'color');
         updateOptions(storageSelect, filteredStorages, 'storage');
-    }
+    });
 
     function open_popup_add() {
         document.getElementById('popup-add').classList.remove('hidden');
+        const getIphoneID = document.getElementById('iphone_choose');
+        const selectedIphoneId = getIphoneID.value;
+
+        // Filter data warna dan penyimpanan berdasarkan iPhone ID
+        const filteredColors = iphone_colors.filter(item => item.iphone_id == selectedIphoneId);
+        const filteredStorages = iphone_storages.filter(item => item.iphone_id == selectedIphoneId);
+
+        // Perbarui elemen <select> untuk warna dan penyimpanan
+        const colorSelect = document.getElementById('color_choose');
+        const storageSelect = document.getElementById('storage_choose');
+
+        updateOptions(colorSelect, filteredColors, 'color');
+        updateOptions(storageSelect, filteredStorages, 'storage');
     }
     function close_popup_add() {
         document.getElementById('popup-add').classList.add('hidden');
