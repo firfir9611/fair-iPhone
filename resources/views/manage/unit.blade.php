@@ -220,7 +220,7 @@
         // Tambahkan opsi baru
         options.forEach(option => {
             const opt = document.createElement('option');
-            opt.value = option[keyName];
+            opt.value = option[keyName+'_id'];
             opt.textContent = option[keyName + '_name'];
             selectElement.appendChild(opt);
         });
