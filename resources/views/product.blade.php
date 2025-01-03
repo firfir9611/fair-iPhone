@@ -8,17 +8,39 @@
             <h3 class="text-center mb-6 xl:text-2xl font-bold md:text-xl">Iphone 15 Series</h3>
             <div class="flex flex-wrap justify-evenly gap-5 overflow-hidden p-2 pb-4">
                 @foreach ($iphones as $iphone)
-                <div class="p-4 pt-0 rounded-md gap-1 xl:min-w-64 md:min-w-48 sm:min-w-40 m-4" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="200" data-aos-delay=150>
-                    {{-- <img src="{{ asset('storage/'.$iphone->img_front) }}" class="w-full mx-auto" alt=""> --}}
-                    <img src="{{ $iphone->img }}" class="w-full mx-auto" alt="">
+                <div class="p-4 pt-0 rounded-md gap-1 xl:min-w-64 md:min-w-48 sm:min-w-40 m-4" 
+                    data-iphone-name="{{ $iphone->iphone_id }}" 
+                    data-iphone-color="{{ $iphone->color_id }}" 
+                    data-aos="fade-up" data-aos-duration="1000" data-aos-offset="200" data-aos-delay=150>
+                    <img src="" class="w-full mx-auto" alt="">
                     <p class="w-fit font-bold xl:text-lg mx-auto md:text-sm hover:underline">{{ $iphone->iphone_name }}</p>
                     <p class="w-fit py-1 px-2 my-1 rounded-md font-bold text-white xl:text-lg mx-auto md:text-sm hover:underline" style="background-color: {{ $iphone->color_code }}">{{ $iphone->color }}</p>
                     <p class="w-fit py-1 px-2 my-1 rounded-md bg-blue-500 text-white font-bold xl:text-lg mx-auto md:text-sm hover:underline">{{ $iphone->storage }}</p>
                 </div>
                 @endforeach
+
             </div>
         </div>
     </div>
 <x-the-script></x-the-script>
+<script>
+const iphone_images = @json($iphone_colors);
+
+const iphoneDivs = document.querySelectorAll('[data-iphone-name]');
+
+iphoneDivs.forEach(div => {
+    const name = div.getAttribute('data-iphone-name');
+    const color = div.getAttribute('data-iphone-color');
+    const match = iphone_images.find(img => img.iphone_id == name && img.unit_color_id == color);
+
+    if (match) {
+        const imgElement = div.querySelector('img');
+        imgElement.src = match.img;
+    }else{
+        const imgElement = div.querySelector('img');
+        imgElement.src = 'https://i.ibb.co.com/MC9BD2m/quest-icon.png';
+    }
+});
+</script>
 </body>
 </html>

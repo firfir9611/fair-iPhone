@@ -89,8 +89,8 @@
                             </button>
                         </div>
                     </form>
-                </div>
-                <label for="colors">Daftar Storage : </label>
+                </div> --}}
+                <label for="storage">Daftar Storage : </label>
                 <div class="flex gap-2 flex-wrap items-center">
                         @if($unit_current_storages)
                         @foreach($unit_current_storages as $unit_current_storage)
@@ -131,7 +131,7 @@
                             </button>
                         </div>
                     </form>
-                </div> --}}
+                </div>
         </div>
     </div>
 </body>

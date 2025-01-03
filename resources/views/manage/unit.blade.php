@@ -145,7 +145,7 @@
             @csrf
                 <div class="mb-4">
                     <label for="iphone_id" class="block text-sm font-medium text-gray-700">Model iPhone</label>
-                    <select name="iphone_id" class="p-2 border w-full rounded-md" required>
+                    <select id="iphone_choose" name="iphone_id" class="p-2 border w-full rounded-md" required>
                         @if($iphones->isNotEmpty())
                         @foreach ($iphones as $iphone)
                         <option value="{{ $iphone->id }}">{{ $iphone->name }}</option>
@@ -155,7 +155,19 @@
                 </div>
                 <div class="mb-4">
                     <label for="color" class="block text-sm font-medium text-gray-700">Warna iPhone</label>
-                    <select name="color" class="p-2 border w-full rounded-md" required>
+                    <select id="color_choose" name="color" class="p-2 border w-full rounded-md" required>
+                        
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="storage" class="block text-sm font-medium text-gray-700">Penyimpanan iPhone</label>
+                    <select id="storage_choose" name="storage" class="p-2 border w-full rounded-md" required>
+                        
+                    </select>
+                </div>
+                {{-- <div class="mb-4">
+                    <label for="color" class="block text-sm font-medium text-gray-700">Warna iPhone</label>
+                    <select  name="color" class="p-2 border w-full rounded-md" required>
                         @if($unit_colors->isNotEmpty())
                         @foreach ($unit_colors as $unit_color)
                         <option value="{{ $unit_color->id }}">{{ $unit_color->color }}</option>
@@ -172,7 +184,7 @@
                         @endforeach
                         @endif
                     </select>
-                </div>
+                </div> --}}
                 <div class="mb-4">
                     <label for="rent_price" class="block text-sm font-medium text-gray-700">Harga Sewa</label>
                     <input type="number" name="rent_price" class="p-2 border rounded-md w-full" placeholder="Sewa per Hari">
@@ -195,6 +207,41 @@
         </div>
     </div>
 <script>
+    const iphone_colors = @json($iphone_colors);
+    const iphone_storages = @json($iphone_storages);
+
+    console.log(iphone_colors);
+    console.log(iphone_storages);
+    
+    function updateOptions(selectElement, options, keyName) {
+        // Kosongkan elemen <select>
+        selectElement.innerHTML = '';
+
+        // Tambahkan opsi baru
+        options.forEach(option => {
+            const opt = document.createElement('option');
+            opt.value = option[keyName];
+            opt.textContent = option[keyName + '_name'];
+            selectElement.appendChild(opt);
+        });
+    }
+
+    // Event listener untuk perubahan pada iPhone model
+    document.getElementById('iphone_choose').addEventListener('change', function() {
+        const selectedIphoneId = this.value;
+
+        // Filter data warna dan penyimpanan berdasarkan iPhone ID
+        const filteredColors = iphone_colors.filter(item => item.iphone_id == selectedIphoneId);
+        const filteredStorages = iphone_storages.filter(item => item.iphone_id == selectedIphoneId);
+
+        // Perbarui elemen <select> untuk warna dan penyimpanan
+        const colorSelect = document.getElementById('color_choose');
+        const storageSelect = document.getElementById('storage_choose');
+
+        updateOptions(colorSelect, filteredColors, 'color');
+        updateOptions(storageSelect, filteredStorages, 'storage');
+    });
+
     function open_popup_add() {
         document.getElementById('popup-add').classList.remove('hidden');
     }

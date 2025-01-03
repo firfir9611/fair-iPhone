@@ -24,13 +24,16 @@ class iphone extends Controller
         
         $iphones = unit_id::select(
             'unit_ids.id AS unit_id','unit_colors.color AS color','unit_colors.color_code AS color_code','unit_storages.capacity AS storage',
-            'iphones.name AS iphone_name','iphones.img AS img','unit_ids.show AS show_unit'
+            'iphones.name AS iphone_name','iphones.img AS img','unit_ids.show AS show_unit',
+            'unit_ids.iphone_id AS iphone_id','unit_ids.unit_color_id AS color_id'
         )->where('unit_ids.show', 1)
         ->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
         ->leftJoin('unit_colors','unit_colors.id','unit_ids.unit_color_id')
         ->leftJoin('unit_storages','unit_storages.id','unit_ids.unit_storage_id')->get();
         // $iphone_15_series = iphones::select('*')->where('model', 'like', 'ip_15%')->get();
-        return view('product', compact('iphones'));
+        $iphone_colors = iphone_color::all();
+
+        return view('product', compact('iphones','iphone_colors'));
     }
 
     public function manageModel(){
@@ -220,8 +223,8 @@ class iphone extends Controller
         ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
         ->leftJoin('unit_imgs','unit_imgs.unit_id_id','=','unit_ids.id')->get();
         $iphones = iphones::all();
-        $unit_colors = unit_color::all();
-        $unit_storages = unit_storage::all();
+        $unit_colors = iphone_color::all();
+        $unit_storages = iphone_storage::all();
 
         return view('manage.unit', compact('unit_ids','id','iphones','unit_colors','unit_storages'));
     }
@@ -237,16 +240,16 @@ class iphone extends Controller
         ->leftJoin('unit_colors','unit_colors.id','=','unit_ids.unit_color_id')
         ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
         ->leftJoin('unit_imgs','unit_imgs.unit_id_id','=','unit_ids.id')->first();
-        // $iphone_colors = iphone_color::select(
-        //     'iphone_colors.id AS iphone_color_id','unit_colors.id AS unit_color_id','unit_colors.color AS color', 'unit_colors.color_code AS color_code'
-        // )->where('iphone_id',$unit_id->iphone_id)
-        // ->leftJoin('unit_colors','unit_colors.id','=','iphone_colors.unit_color_id')->get();
-        // $iphone_storages = iphone_storage::select(
-        //     'iphone_storages.id AS iphone_storage_id','unit_storages.id AS unit_storage_id','unit_storages.capacity AS capacity'
-        // )->where('iphone_id',$unit_id->iphone_id)
-        // ->leftJoin('unit_storages','unit_storages.id','=','iphone_storages.unit_storage_id')->get();
-        $iphone_colors = unit_color::all();
-        $iphone_storages = unit_storage::all();
+        $iphone_colors = iphone_color::select(
+            'iphone_colors.id AS iphone_color_id','unit_colors.id AS unit_color_id','unit_colors.color AS color', 'unit_colors.color_code AS color_code'
+        )->where('iphone_colors.iphone_id',$unit_id->iphone_id)
+        ->leftJoin('unit_colors','unit_colors.id','=','iphone_colors.unit_color_id')->get();
+        $iphone_storages = iphone_storage::select(
+            'iphone_storages.id AS iphone_storage_id','unit_storages.id AS unit_storage_id','unit_storages.capacity AS capacity'
+        )->where('iphone_storages.iphone_id',$unit_id->iphone_id)
+        ->leftJoin('unit_storages','unit_storages.id','=','iphone_storages.unit_storage_id')->get();
+        // $iphone_colors = unit_color::all();
+        // $iphone_storages = unit_storage::all();
 
         $unit_codes = unit_code::select('*')->where('unit_id_id', $id)->get();
 
