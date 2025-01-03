@@ -227,7 +227,9 @@
     }
 
     // Event listener untuk perubahan pada iPhone model
-    document.getElementById('iphone_choose').addEventListener('change', function() {
+    document.getElementById('iphone_choose').addEventListener('change', iphone_filter());
+    
+    function iphone_filter() {
         const selectedIphoneId = this.value;
 
         // Filter data warna dan penyimpanan berdasarkan iPhone ID
@@ -240,7 +242,7 @@
 
         updateOptions(colorSelect, filteredColors, 'color');
         updateOptions(storageSelect, filteredStorages, 'storage');
-    });
+    }
 
     function open_popup_add() {
         document.getElementById('popup-add').classList.remove('hidden');
