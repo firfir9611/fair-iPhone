@@ -17,8 +17,12 @@
             "dest": "/public/index.php"
         },
         {
-            "src": "/(images|videos)/(.*)",
-            "dest": "/public/$1/$2"
+            "src": "/(img)/(.*)",
+            "dest": "/public/img/(.*)"
+        },
+        {
+            "src": "/(videos)/(.*)",
+            "dest": "/public/videos/(.*)"
         },
         {
             "src": "/favicon_io/(.*)",
