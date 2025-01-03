@@ -241,7 +241,6 @@
                   </div>
                 </div>
                 @endif
-              @endif
                 <form method="POST" action="{{ route('logout') }}" class="flex justify-center">
                     @csrf
                     <button type="submit" class="flex gap-2 -mx-3 block w-full rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100">
