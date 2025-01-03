@@ -3,7 +3,7 @@
 <x-head>Welcome to Fair</x-head>
 <body class="bg-gray-100">
     <video class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="{{ asset('videos/introduce_new_iphone_16_series.mp4') }}" autoplay muted loop></video>
-    {{-- <video class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="https://www.dropbox.com/scl/fi/spu8dj1p79qigw3vkv4q2/introduce_new_iphone_16_series.mp4?rlkey=ifbnadmklh8yyoedg874tskgq&st=om6xwuuw&dl=0" type="video/mp4" autoplay muted loop></video> --}}
+    {{-- <video class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="https://github.com/firfir9611/fair-iPhone/blob/1ba0ca930a0c8675135708d10cf420aaba1c0d1f/public/videos/introduce_new_iphone_16_series.mp4" type="video/mp4" autoplay muted loop></video> --}}
     {{-- <img class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="{{ asset('img/new_iphone_bg.jpeg.jpg') }}"></img> --}}
 
     <x-Header :active="request() -> is ('/')"></x-Header>
