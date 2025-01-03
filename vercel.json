@@ -17,11 +17,11 @@
             "dest": "/public/index.php"
         },
         {
-            "src": "/(img)/(.*)",
+            "src": "/img/(.*)",
             "dest": "/public/img/(.*)"
         },
         {
-            "src": "/(videos)/(.*)",
+            "src": "/videos/(.*)",
             "dest": "/public/videos/(.*)"
         },
         {
