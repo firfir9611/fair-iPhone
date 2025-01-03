@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <x-head>Welcome to Fair</x-head>
-<body class="bg-gray-100 lg:bg-black lg:w-full">
+<body class="bg-gray-100 lg:bg-black lg:w-full overflow-hidden">
     {{-- <video class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="{{ asset('videos/introduce_new_iphone_16_series.mp4') }}" autoplay muted loop></video> --}}
     {{-- <video class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="https://vimeo.com/1043595477" type="video/mp4" autoplay muted loop></video> --}}
     {{-- <img class="hidden lg:block min-w-full min-h-full -z-10 fixed top-0" src="https://i.ibb.co.com/QpksSQX/new-iphone-bg-jpeg.jpg" alt="new-iphone-bg-jpeg"> --}}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <x-head>Kelola Varian</x-head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 overflow-hidden">
     <x-header></x-header>
         <div class="xl:flex justify-center gap-4">
         <div class="w-5/12 mx-auto my-4 bg-white rounded-md p-8">

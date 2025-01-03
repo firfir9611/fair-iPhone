@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <x-head>Ubah Model</x-head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 overflow-hidden">
     <x-header></x-header>
     <div class="w-11/12 mx-auto my-4 bg-white rounded-md p-8">
         <div class="mx-auto w-3/4 border p-12 rounded-md">
