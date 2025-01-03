@@ -207,8 +207,8 @@
         </div>
     </div>
 <script>
-    const iphone_colors = @json($iphone_colors);
-    const iphone_storages = @json($iphone_storages);
+    const iphone_colors = @json($unit_colors);
+    const iphone_storages = @json($unit_storages);
 
     console.log(iphone_colors);
     console.log(iphone_storages);

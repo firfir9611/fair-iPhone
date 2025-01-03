@@ -223,8 +223,12 @@ class iphone extends Controller
         ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
         ->leftJoin('unit_imgs','unit_imgs.unit_id_id','=','unit_ids.id')->get();
         $iphones = iphones::all();
-        $unit_colors = iphone_color::all();
-        $unit_storages = iphone_storage::all();
+        $unit_colors = iphone_color::select(
+            'iphone_colors.iphone_id AS iphone_id','iphone_colors.unit_color_id AS color_id','unit_colors.color AS color_name'
+        )->leftJoin('unit_colors','unit_colors.id','=','iphone_colors.unit_color_id')->get();
+        $unit_storages = iphone_storage::select(
+            'iphone_storages.iphone_id AS iphone_id','iphone_storage.unit_storage_id AS storage_id','unit_storages.capacity AS storage_name'
+        )->leftJoin('unit_storages','unit_storages.id','=','iphone_storages.unit_storage_id')->get();
 
         return view('manage.unit', compact('unit_ids','id','iphones','unit_colors','unit_storages'));
     }
