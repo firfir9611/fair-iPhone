@@ -18,17 +18,22 @@
         },
         {
             "src": "/img/(.*)",
-            "dest": "/public/img/(.*)"
+            "dest": "/public/img/"
         },
         {
             "src": "/videos/(.*)",
-            "dest": "/public/videos/(.*)"
+            "dest": "/public/videos/"
         },
         {
             "src": "/favicon_io/(.*)",
             "dest": "/public/favicon_io/"
         }
     ],
+    "publicFiles": {
+        "/img/*": "/public/img/",
+        "/favicon_io/*": "/public/favicon_io/"
+    },
+    
     "public": true,
     "buildCommand": "npm run build",
     "outputDirectory": "public",
