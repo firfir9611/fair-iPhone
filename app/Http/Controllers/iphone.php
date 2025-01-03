@@ -10,13 +10,27 @@ use App\Models\unit_id;
 use App\Models\unit_img;
 use App\Models\unit_storage;
 use App\Models\unit_code;
+use App\Services\DropboxService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
 
 class iphone extends Controller
 {
-    public function index() : View {
+    protected $dropboxService;
+    public function __construct(DropboxService $dropboxService)
+    {
+        $this->dropboxService = $dropboxService;
+    }
+    
+    public function home(){
+        // $files = $this->dropboxService->listFiles();
+        // dd($files);
+        return view('home');
+    }
+
+    public function index() {
+        
         $iphones = unit_id::select(
             'unit_ids.id AS unit_id','unit_colors.color AS color','unit_colors.color_code AS color_code','unit_storages.capacity AS storage',
             'iphones.name AS iphone_name','iphones.img AS img','unit_ids.show AS show_unit'

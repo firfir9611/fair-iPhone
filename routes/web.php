@@ -5,9 +5,8 @@ use App\Http\Controllers\iphone;
 use App\Http\Controllers\transaction;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [iphone::class, 'home'])->name('home');
+// Route::get('/', function(){return view('home');})->name('home');
 
 // Route::get('/product', function () {
 //     return view('product');
