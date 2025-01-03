@@ -19,6 +19,10 @@
         {
             "src": "/(images|videos)/(.*)",
             "dest": "/public/$1/$2"
+        },
+        {
+            "src": "/favicon_io/(.*)",
+            "dest": "/public/favicon_io/"
         }
     ],
     "public": true,
