@@ -17,11 +17,11 @@ use Illuminate\Support\Str;
 
 class iphone extends Controller
 {
-    protected $dropboxService;
-    public function __construct(DropboxService $dropboxService)
-    {
-        $this->dropboxService = $dropboxService;
-    }
+    // protected $dropboxService;
+    // public function __construct(DropboxService $dropboxService)
+    // {
+    //     $this->dropboxService = $dropboxService;
+    // }
     
     public function home(){
         // $files = $this->dropboxService->listFiles();
