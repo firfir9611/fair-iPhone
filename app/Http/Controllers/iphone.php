@@ -50,7 +50,7 @@ class iphone extends Controller
         ->leftJoin('unit_storages','unit_storages.id','unit_ids.unit_storage_id')->first();
 
         $image = iphone_color::select('*')->where('iphone_colors.unit_color_id', $iphone->color_id)
-            ->where('iphone_colors.iphone_id'. $iphone->iphone_id)->first();
+            ->where('iphone_colors.iphone_id', $iphone->iphone_id)->first();
 
         return view('product_detail',compact('iphone','image'));
     }
