@@ -25,7 +25,7 @@ class iphone extends Controller
         $iphones = unit_id::select(
             'unit_ids.id AS unit_id','unit_colors.color AS color','unit_colors.color_code AS color_code','unit_storages.capacity AS storage',
             'iphones.name AS iphone_name','iphones.img AS img','unit_ids.show AS show_unit',
-            'unit_ids.iphone_id AS iphone_id','unit_ids.unit_color_id AS color_id'
+            'unit_ids.iphone_id AS iphone_id','unit_ids.unit_color_id AS color_id','unit_ids.rent_price AS rent_price'
         )->where('unit_ids.show', 1)
         ->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
         ->leftJoin('unit_colors','unit_colors.id','unit_ids.unit_color_id')
@@ -34,6 +34,25 @@ class iphone extends Controller
         $iphone_colors = iphone_color::all();
 
         return view('product', compact('iphones','iphone_colors'));
+    }
+
+    public function productDetail($id){
+        $iphone = unit_id::select(
+            'unit_ids.id AS unit_id','unit_colors.color AS color','unit_colors.color_code AS color_code','unit_storages.capacity AS storage',
+            'iphones.name AS iphone_name','iphones.img AS img','iphones.stok_ready AS iphone_stok','iphones.display AS iphone_display',
+            'iphones.os AS iphone_os', 'iphones.rearcam AS iphone_rearcam','iphones.selfie AS iphone_selfie','iphones.chipset AS iphone_chipset',
+            'iphones.battery AS iphone_battery','iphones.dimention AS iphone_dimention', 'iphones.launch_at AS iphone_launch_at',
+            'unit_ids.show AS show_unit','unit_ids.iphone_id AS iphone_id','unit_ids.unit_color_id AS color_id','unit_ids.rent_price AS rent_price',
+            'unit_ids.stok AS unit_stok','unit_ids.battery_health AS battery_health'
+        )->where('unit_ids.id', $id)
+        ->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
+        ->leftJoin('unit_colors','unit_colors.id','unit_ids.unit_color_id')
+        ->leftJoin('unit_storages','unit_storages.id','unit_ids.unit_storage_id')->first();
+
+        $image = iphone_color::select('*')->where('iphone_colors.unit_color_id', $iphone->color_id)
+            ->where('iphone_colors.iphone_id'. $iphone->iphone_id)->first();
+
+        return view('product_detail',compact('iphone','image'));
     }
 
     public function manageModel(){
