@@ -38,7 +38,7 @@ class transaction extends Controller
         $transactions = transactions::select(
             'transactions.id AS transaction_id','transactions.total_paid AS total_paid','transactions.rent_at AS rent_at','transactions.return_plan AS return_plan',
             'transactions.return_at AS return_at','unit_colors.color AS color','unit_storages.capacity AS storage','iphones.name AS iphone_name'
-        )->where('transactions', $user_id)
+        )->where('transactions.id', $user_id)
         ->leftJoin('unit_ids','unit_ids.id','=','transactions.id')
         ->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
         ->leftJoin('unit_colors','unit_colors.id','=','unit_ids.unit_color_id')

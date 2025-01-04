@@ -103,7 +103,7 @@
             daysRemainingElement.textContent = daysRemaining > 0 ? `${daysRemaining} Hari Tersisa` : 'Waktu Habis';
         }
     });
-    });
+     });
 
 </script>
 <x-the-script></x-the-script>
