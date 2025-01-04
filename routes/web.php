@@ -67,6 +67,9 @@ Route::middleware('auth')->group(function () {
     Route::post('manage/unit/code/delete/{id}', [iphone::class, 'manageUnitCodeDelete'])->name('manageUnitCodeDelete');
     Route::post('manage/unit/code/add/{id}', [iphone::class, 'manageUnitCodeAdd'])->name('manageUnitCodeAdd');
 
+    //transaction
+    Route::post('product/transaction/start', [iphone::class, 'productTransactionStart'])->name('productTransactionStart');
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

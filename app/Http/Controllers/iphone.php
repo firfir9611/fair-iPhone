@@ -10,6 +10,8 @@ use App\Models\unit_id;
 use App\Models\unit_img;
 use App\Models\unit_storage;
 use App\Models\unit_code;
+use App\Models\transaction;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -53,6 +55,20 @@ class iphone extends Controller
             ->where('iphone_colors.iphone_id', $iphone->iphone_id)->first();
 
         return view('product_detail',compact('iphone','image'));
+    }
+
+    public function productTransactionStart(Request $request){
+        $transaction = new transaction();
+        $transaction->user_id = Auth::user()->id;
+        $transaction->unit_id_id = $request->unit_id;
+        $transaction->rented_price = $request->rented_price_input;
+        $transaction->total_paid = $request->total_price_input;
+        $transaction->rented_battery_health = $request->rented_battery_health;
+        $transaction->rent_at = $request->rent_start;
+        $transaction->return_plan = $request->return_plan;
+        $transaction->save();
+
+        return view('booked');
     }
 
     public function manageModel(){
