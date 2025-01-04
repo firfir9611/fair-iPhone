@@ -30,7 +30,7 @@
                             <div class=" w-full">
                                 <p class="font-bold md:text-sm text-xs">: {{ $iphone->color }}</p>
                                 <p class="font-bold md:text-sm text-xs">: {{ $iphone->storage }}</p>
-                                <p class="font-bold md:text-sm text-xs">: {{ $iphoen->battery_health }}</p>
+                                <p class="font-bold md:text-sm text-xs">: {{ $iphone->battery_health }}</p>
                                 <p class="font-bold md:text-sm text-xs">: {{ $iphone->unit_stok }}</p>
                                 <p class="font-bold md:text-sm text-xs">: {{ $iphone->iphone_selfie }}</p>
                                 <p class="font-bold md:text-sm text-xs">: {{ $iphone->iphone_rearcam }}</p>
