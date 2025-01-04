@@ -5,7 +5,7 @@
     <x-Header></x-Header>
     <div class="py-6 lg:px-16 md:px-6 m-6 p-2 lg:w-3/4 md:w-full mx-auto lg:rounded-lg bg-white">
         <h3 class="text-center mb-6 text-2xl font-bold">Sedang Disewa</h3>
-            @if($transactinos->isNotEmpty())
+            @if($transactions->isNotEmpty())
             @foreach($transactions as $transaction)
             <div class="md:flex justify-between gap-2" data-aos="fade-up" data-aos-duration="2000">
                 <div class="py-2 min-w-fit justify-items-center">
