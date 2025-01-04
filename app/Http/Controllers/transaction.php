@@ -44,6 +44,6 @@ class transaction extends Controller
         ->leftJoin('unit_colors','unit_colors.id','=','unit_ids.unit_color_id')
         ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')->get();
 
-        return view('booked','transactions');
+        return view('booked',compact('transactions'));
     }
 }
