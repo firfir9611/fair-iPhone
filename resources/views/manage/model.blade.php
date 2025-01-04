@@ -17,8 +17,8 @@
                         </th>
                         <x-table-header>Nama iPhone</x-table-header>
                         {{-- <x-table-header>Stok Cadangan</x-table-header> --}}
-                        <x-table-header>Stok Siap</x-table-header>
-                        <x-table-header>Tampilkan</x-table-header>
+                        <x-table-header>Total Stok Unit</x-table-header>
+                        {{-- <x-table-header>Tampilkan</x-table-header> --}}
                         <x-table-header>Kontrol</x-table-header>
                     </tr>
                 </thead>
@@ -32,11 +32,11 @@
                             <x-table-contents>{{ $iphone->name }}</x-table-contents>
                             {{-- <x-table-contents>{{ $iphone->stok_spare }}</x-table-contents> --}}
                             <x-table-contents>{{ $iphone->stok_ready }}</x-table-contents>
-                            <td class="p-4 border-b border-blue-gray-50">
+                            {{-- <td class="p-4 border-b border-blue-gray-50">
                                 <div class="flex p-1">
                                     <input type="checkbox" class="ml-2 w-6 h-6" disabled name="visible" {{ $iphone->show == 1 ? 'checked':'' }}>
                                 </div>
-                            </td>
+                            </td> --}}
                             <td class="p-4 border-b border-blue-gray-50">
                                 <div class="flex items-center gap-3">
                                     <div class="flex justify-end">

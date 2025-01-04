@@ -42,7 +42,7 @@
                             <x-table-contents>{{ $unit_id->stok }}</x-table-contents>
                             <td class="p-4 border-b border-blue-gray-50">
                                 <div class="flex items-center p-1">
-                                    <p class="font-b">{{ $unit_id->show == 1 ? 'Tertampil':'Disembunyikan'}} | {{ $unit_id->status == 0 ? 'Tersedia':'Terpinjam' }}</p>
+                                    <p class="font-b">{{ $unit_id->show == 1 ? 'Tertampil':'Disembunyikan'}}</p>
                                 </div>
                             </td>
                             <td class="p-4 border-b border-blue-gray-50">

@@ -19,10 +19,6 @@ Route::get('/contact', function () {return view('contact');});
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/wishlist', [transaction::class, 'index']);
-
-    Route::get('/booked', function () {return view('booked');});
-
     Route::get('/product/detail', function () {return view('product_detail');});
 
     //user profile
@@ -68,7 +64,9 @@ Route::middleware('auth')->group(function () {
     Route::post('manage/unit/code/add/{id}', [iphone::class, 'manageUnitCodeAdd'])->name('manageUnitCodeAdd');
 
     //transaction
-    Route::post('product/transaction/start', [iphone::class, 'productTransactionStart'])->name('productTransactionStart');
+    Route::get('/wishlist', [transaction::class, 'index']);
+    Route::get('/booked', [transaction::class, 'booked'])->name('booked');
+    Route::post('product/transaction/start', [transaction::class, 'productTransactionStart'])->name('productTransactionStart');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

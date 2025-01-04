@@ -5,11 +5,13 @@
     <x-Header></x-Header>
     <div class="py-6 lg:px-16 md:px-6 m-6 p-2 lg:w-3/4 md:w-full mx-auto lg:rounded-lg bg-white">
         <h3 class="text-center mb-6 text-2xl font-bold">Sedang Disewa</h3>
-            @for($i=0;$i<2;$i++)
+            @if($transactinos->isNotEmpty())
+            @foreach($transactions as $transaction)
             <div class="md:flex justify-between gap-2" data-aos="fade-up" data-aos-duration="2000">
                 <div class="py-2 min-w-fit justify-items-center">
                     <img src="https://i.ibb.co.com/hgX9HRC/15-pro-white-titanium.png" class="xl:h-60 md:h-48 h-60" alt="">
-                    <p class="font-bold lg:text-xl md:text-sm text-center">Iphone 13 Pro Max</p>
+                    <p class="font-bold lg:text-xl md:text-sm text-center">{{ $transaction->iphone_name }}</p>
+                    {{-- <input type="hidden" value="{{ $transaction->transaction_id }}" class="transaction_id"> --}}
                 </div>
                 <div class="w-full flex">
                     <div class="flex justify-start w-full">
@@ -23,14 +25,13 @@
                             <p class="font-bold lg:text-sm text-xs">Total Biaya</p>
                         </div>
                         <div class=" py-10 w-full">
-                            <p class="font-bold lg:text-sm text-xs">: Sierra Blue</p>
-                            <p class="font-bold lg:text-sm text-xs">: 256GB</p>
-                            <p class="font-bold lg:text-sm text-xs">: 24 November 2024</p>
-                            <p class="font-bold lg:text-sm text-xs">: 30 November 2024</p>
-                            <p class="font-bold lg:text-sm text-xs">: 6 Hari</p>
-                            <p class="font-bold lg:text-sm text-xs">: <span class="text-red-500">4 Hari Tersisa</span></p>
-                            <p class="font-bold lg:text-sm text-xs">: <span class="text-red-500">Rp 270.000</span></p>
-                            <p class="mt-2 font-bold lg:text-sm text-xs"></p>
+                            <p class="font-bold lg:text-sm text-xs">: {{ $transaction->color }}</p>
+                            <p class="font-bold lg:text-sm text-xs">: {{ $transaction->storage }}</p>
+                            <p class="font-bold lg:text-sm text-xs">: <span id="rent_start_{{ $transaction->transaction_id }}">{{ $transaction->rent_at }}</span></p>
+                            <p class="font-bold lg:text-sm text-xs">: <span id="return_plan_{{ $transaction->transaction_id }}">{{ $transaction->return_plan }}</span></p>
+                            <p class="font-bold lg:text-sm text-xs">: <span id="total_days_{{ $transaction->transaction_id }}">? Hari</span></p>
+                            <p class="font-bold lg:text-sm text-xs">: <span id="days_remaining_{{ $transaction->transaction_id }}" class="text-red-500">? Hari Tersisa</span></p>
+                            <p class="font-bold lg:text-sm text-xs">: <span class="text-red-500">{{ $transaction->total_paid }}</span></p>
                         </div>
                     </div>
                     <div class="w-fit md:px-10 px-5 py-10 justify-items-center">
@@ -39,7 +40,8 @@
                 </div>
             </div>
             <hr class="mt-2" data-aos="fade-up" data-aos-duration="2000">
-            @endfor
+            @endforeach
+            @endif
     </div>
     <div class="py-6 lg:px-16 md:px-6 m-6 p-2 lg:w-3/4 md:w-full mx-auto lg:rounded-lg bg-white">
         <h3 class="text-center mb-6 text-2xl font-bold">Siap Diambil</h3>
@@ -77,6 +79,33 @@
             <hr class="mt-2" data-aos="fade-up" data-aos-duration="2000">
             @endfor
     </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const transactions = @json($transactions); // Laravel Blade directive to pass PHP data to JavaScript
+
+    transactions.forEach(transaction => {
+        const rentStartElement = document.getElementById(`rent_start_${transaction.transaction_id}`);
+        const returnPlanElement = document.getElementById(`return_plan_${transaction.transaction_id}`);
+        const totalDaysElement = document.getElementById(`total_days_${transaction.transaction_id}`);
+        const daysRemainingElement = document.getElementById(`days_remaining_${transaction.transaction_id}`);
+
+        if (rentStartElement && returnPlanElement) {
+            const rentStart = new Date(rentStartElement.textContent);
+            const returnPlan = new Date(returnPlanElement.textContent);
+            const today = new Date();
+
+            // Calculate total days
+            const totalDays = Math.ceil((returnPlan - rentStart) / (1000 * 60 * 60 * 24));
+            totalDaysElement.textContent = `${totalDays} Hari`;
+
+            // Calculate remaining days
+            const daysRemaining = Math.ceil((returnPlan - today) / (1000 * 60 * 60 * 24));
+            daysRemainingElement.textContent = daysRemaining > 0 ? `${daysRemaining} Hari Tersisa` : 'Waktu Habis';
+        }
+    });
+    });
+
+</script>
 <x-the-script></x-the-script>
 </body>
 </html>

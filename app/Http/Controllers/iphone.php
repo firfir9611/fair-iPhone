@@ -57,20 +57,6 @@ class iphone extends Controller
         return view('product_detail',compact('iphone','image'));
     }
 
-    public function productTransactionStart(Request $request){
-        $transaction = new transaction();
-        $transaction->user_id = Auth::user()->id;
-        $transaction->unit_id_id = $request->unit_id;
-        $transaction->rented_price = $request->rented_price_input;
-        $transaction->total_paid = $request->total_price_input;
-        $transaction->rented_battery_health = $request->rented_battery_health;
-        $transaction->rent_at = $request->rent_start;
-        $transaction->return_plan = $request->return_plan;
-        $transaction->save();
-
-        return view('booked');
-    }
-
     public function manageModel(){
         $id = iphones::max('id')+1;
         $iphones = iphones::all();
@@ -307,44 +293,11 @@ class iphone extends Controller
         ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
         ->leftJoin('unit_imgs','unit_imgs.unit_id_id','=','unit_ids.id')->first();
 
-        // $unit_id_all = unit_id::select(
-        //     'unit_ids.id AS unit_id','unit_ids.stok AS stok','unit_ids.show AS show','unit_ids.battery_health AS battery_health','unit_ids.rent_price AS rent_price',
-        //     'iphones.id AS iphone_id','iphones.name AS iphone_name',
-        //     'unit_colors.id AS color_id','unit_colors.color AS color_name',
-        //     'unit_storages.id AS storage_id','unit_storages.capacity AS storage_capacity',
-        //     'unit_imgs.top AS img_top','unit_imgs.bottom AS img_bottom','unit_imgs.left AS img_left','unit_imgs.right AS img_right'
-        // )
-        // ->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
-        // ->leftJoin('unit_colors','unit_colors.id','=','unit_ids.unit_color_id')
-        // ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
-        // ->leftJoin('unit_imgs','unit_imgs.unit_id_id','=','unit_ids.id')->get();
-
-        // foreach($unit_id_all as $unit_id){
-        //     if($unit_id->battery_health == $request->battery_health && $unit_id->color_id == $request->color && $unit_id->storage_id == $request->storage){
-        //         unit_id::where('id', $unit_id->unit_id)->update(['stok' => $unit_id->stok+1]);
-        //         $unit_code = new unit_code();
-        //         $unit_code->unit_id_id = $unit_id->unit_id;
-        //         $unit_code->code = Str::uuid();
-        //         $unit_code->save();
-        //         unit_id::where('id', $id)->delete();
-        //     }else{
-                
-        //         unit_id::where('id',$id)->update([
-        //             'rent_price' => $request->rent_price,
-        //             'battery_health' => $request->battery_health,
-        //             'unit_color_id' => $request->color,
-        //             'unit_storage_id' => $request->storage,
-        //         ]);
-        //     }
-        // }
-
         $existing_unit = unit_id::where('unit_color_id', $request->color)
         ->where('battery_health',$request->battery_health)
         ->where('unit_storage_id', $request->storage)
         ->where('rent_price', $request->rent_price)
         ->where('id', '!=', $id)->first();
-
-        
 
         if($request->show) {
             unit_id::where('id',$id)->update(['show' => 1]);
@@ -441,6 +394,8 @@ class iphone extends Controller
         $unit_code->unit_id_id = $id;
         $unit_code->code = Str::uuid();
         $unit_code->save();
+        $unit_count = unit_code::count();
+
         $unit_id = unit_id::select('*')->where('id',$unit_code->unit_id_id)->first();
         unit_id::where('id',$id)->update(['stok' => $unit_id->stok+1]);
 

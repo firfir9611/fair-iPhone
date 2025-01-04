@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Models\unit_code;
 use App\Models\User;
 use App\Models\unit_id;
 use Illuminate\Support\Facades\Schema;
@@ -18,12 +18,13 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(unit_id::class);
+            // $table->foreignIdFor(unit_code::class);
             $table->integer('rented_price')->nullable();
             $table->integer('dp')->nullable();
             $table->integer('shipping_cost')->nullable();
             $table->integer('total_paid')->nullable();
             $table->integer('penalty')->nullable();
-            $table->integer('rented_battery_health')->nullable();
+            $table->string('rented_battery_health')->nullable();
             $table->integer('status')->nullable();
             $table->date('rent_at')->nullable();
             $table->date('return_plan')->nullable();

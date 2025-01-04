@@ -51,14 +51,14 @@
                     </div> --}}
                 </div>
             </div>
-            <hr class="mt-2">
+            <hr class="mt-2 mb-4">
             <form action="{{ route('productTransactionStart') }}" method="POST">
             @csrf
             <input type="hidden" name="unit_id" value="{{ $iphone->unit_id }}">
             <input type="hidden" required name="rented_price_input" id="rented_price_input" value="">
             <input type="hidden" required name="total_price_input" id="total_price_input" value="">
             <input type="hidden" required name="rented_battery_health" id="rented_battery_health" value="{{ $iphone->battery_health }}">
-            <div>
+            <div data-aos="fade-up" data-aos-duration="2000">
                 <p class="text-lg font-bold mb-2">Metode pembayaran</p>
                 <div class="flex flex-wrap gap-4 mb-4">
                     <label class="flex items-center w-72 text-2x1 font-bold p-4 border-2 rounded-lg cursor-pointer hover:border-gray-400 focus-within:ring-2 focus-within:ring-indigo-500">
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <hr class="mb-4">    
-            <div>
+            <div data-aos="fade-up" data-aos-duration="2000">
                 <p class="font-bold text-lg mb-2">Durasi Penyewaan</p>
                 <div class="mb-4">
                   <label for="price">Harga per hari</label>
@@ -102,7 +102,7 @@
                 </div>
             </div>
             <hr class="mb-4">
-            <div>
+            <div data-aos="fade-up" data-aos-duration="2000">
                 <p class="font-bold text-lg mb-2">Rincian Penyewaan</p>
                 <div class="flex justify-center gap-2 mb-4">
                     <div class="w-1/2">
@@ -125,17 +125,21 @@
                     <div class="w-1/2">
                         <p>Total biaya sewa</p>
                         <p>PPN (12%)</p>
-                        <p>Total biaya yang harus dibayarkan</p>
+                        <p></p>
                     </div>
                     <div class="w-1/2 text-right">
                         <p id="total_price_txt_2">0</p>
                         <p id="total_ppn_txt">0</p>
-                        <p id="final_price_txt">0</p>
+                        <p class="mt-1 pt-1 border-t font-bold" id="final_price_txt">0</p>
                     </div>
                 </div>
+                @if(Auth::check())
                 <div class="flex justify-center mb-4">
                     <button class="bg-blue-500 rounded-md px-4 py-2 font-bold text-white" type="submit">Sewa Sekarang</button>
                 </div>
+                @else
+                <p class="font-bold text-red-500">Login untuk melakukan penyewaan!</p>
+                @endif
             </div>
         </form>
     </div>
@@ -175,7 +179,7 @@
             totalPriceElementTxt1.innerHTML = `Rp ${totalPrice.toLocaleString('id-ID')}`;
             totalPriceElementTxt2.innerHTML = `Rp ${totalPrice.toLocaleString('id-ID')}`;
             totalPpnTxt.innerHTML = `Rp ${ppnPrice.toLocaleString('id-ID')}`;
-            finalPriceTxt.innerHTML = `Rp ${finalPrice.toLocaleString('id-ID')}`;
+            finalPriceTxt.innerHTML = `Total Biaya Akhir : Rp ${finalPrice.toLocaleString('id-ID')}`;
             returnPlanInputTxt.innerHTML = returnPlanInput.value;
             rentedPriceInput.value = totalPrice;
             totalPriceInput.value = finalPrice;

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('battery_health')->nullable();
             $table->integer('rent_price')->nullable();
             $table->integer('stok')->default(0);
+            $table->integer('stok_booked')->default(0);
             $table->integer('show')->default(1);
             $table->softDeletes();
             $table->timestamps();
