@@ -19,9 +19,10 @@
       </div>
       <div class="hidden lg:flex lg:gap-x-2">
         <x-header-nav href="/product" :active="request() -> is ('product','product/detail')">Produk</x-header-nav>
+        @if(Auth::check())
         <div x-data="{ isOpen: false }">
           <button  type="button" class="flex items-center gap-x-1 hover:bg-slate-100 rounded-md" aria-expanded="false" @click="isOpen = !isOpen">
-              <x-header-nav href="#" :active="request() -> is ('manage/user')">Penyewaan</x-header-nav>
+              <x-header-nav href="#" :active="request() -> is ('')">Penyewaan</x-header-nav>
               <svg
               :class="{'rotate-180 transition ease-out duration-200': isOpen, 'rotate-0 transition ease-out duration-150': !isOpen }"
               class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
@@ -70,12 +71,12 @@
               </div>
             </div>
         </div>
-        <x-header-nav href="/contact" :active="request() -> is ('contact')">Kontak</x-header-nav>
-        @if(Auth::check())
+        {{-- <x-header-nav href="/contact" :active="request() -> is ('contact')">Kontak</x-header-nav> --}}
+        
         @if(Auth::user()->role == 'admin' || Auth::user()->role == 'gm')
         <div x-data="{ isOpen: false }">
           <button  type="button" class="flex items-center gap-x-1 hover:bg-slate-100 rounded-md" aria-expanded="false" @click="isOpen = !isOpen">
-              <x-header-nav href="#" :active="request() -> is ('manage/user')">Kelola</x-header-nav>
+              <x-header-nav href="#" :active="request() -> is ('')">Kelola</x-header-nav>
               <svg
               :class="{'rotate-180 transition ease-out duration-200': isOpen, 'rotate-0 transition ease-out duration-150': !isOpen }"
               class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
@@ -255,6 +256,7 @@
           <div class="-my-6 divide-y divide-gray-500/10">
             <div class="space-y-2 py-6">
                 <a href="/product" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100">Produk</a>
+                @if(Auth::check())
                 <div x-data="{ isOn: false }" class="-mx-3">
                   <button @click="isOn = !isOn" type="button" class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100" aria-controls="disclosure-1" aria-expanded="false">
                     Penyewaan
@@ -275,10 +277,10 @@
                     <a href="{{ route('bookedReturned') }}" class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-100">Penyewaan Telah Dikembalikan</a>
                   </div>
                 </div>
-                <a href="/contact" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100">Kontak</a>
+                {{-- <a href="/contact" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100">Kontak</a> --}}
             </div>
             <div class="space-y-2 py-6">
-                @if(Auth::check())
+                
                 @if(Auth::user()->role == 'admin' || Auth::user()->role == 'gm')
                 <div x-data="{ isOn: false }" class="-mx-3">
                   <button @click="isOn = !isOn" type="button" class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100" aria-controls="disclosure-1" aria-expanded="false">

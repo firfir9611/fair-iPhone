@@ -294,7 +294,6 @@ class iphone extends Controller
         ->leftJoin('unit_imgs','unit_imgs.unit_id_id','=','unit_ids.id')->first();
 
         $existing_unit = unit_id::where('unit_color_id', $request->color)
-        ->where('battery_health',$request->battery_health)
         ->where('unit_storage_id', $request->storage)
         ->where('rent_price', $request->rent_price)
         ->where('id', '!=', $id)->first();
@@ -339,11 +338,20 @@ class iphone extends Controller
             ]);
         }
 
+        $stok = unit_id::where('iphone_id', $unit_id->iphone_id)->sum('stok');
+        $stok_booked = unit_id::where('iphone_id', $unit_id->iphone_id)->sum('stok_booked');
+        $total_stok = $stok+$stok_booked;
+        iphones::where('id',$unit_id->iphone_id)->update(['stok_ready' => $total_stok]);
+
         return redirect()->route('manageUnit');
     }
     public function manageUnitDelete($id){
+        $unit_id = unit_id::select('*')->where('id',$id)->first();
         unit_id::where('id',$id)->delete();
-
+        $stok = unit_id::where('iphone_id', $unit_id->iphone_id)->sum('stok');
+        $stok_booked = unit_id::where('iphone_id', $unit_id->iphone_id)->sum('stok_booked');
+        $total_stok = $stok+$stok_booked;
+        iphones::where('id',$unit_id->iphone_id)->update(['stok_ready' => $total_stok]);
         return redirect()->back();
     }
     public function manageUnitDeleteSelected(Request $request){
@@ -357,7 +365,6 @@ class iphone extends Controller
     }
     public function manageUnitAdd(Request $request, $id){
         $existing_unit = unit_id::where('unit_color_id', $request->color)
-        ->where('battery_health',$request->battery_health)
         ->where('unit_storage_id', $request->storage)
         ->where('rent_price', $request->rent_price)
         ->where('id', '!=', $id)->first();
@@ -375,6 +382,11 @@ class iphone extends Controller
             $unit_id->stok = $request->stok;
             $unit_id->save();
         }
+
+        $stok = unit_id::where('iphone_id', $request->iphone_id)->sum('stok');
+        $stok_booked = unit_id::where('iphone_id', $request->iphone_id)->sum('stok_booked');
+        $total_stok = $stok+$stok_booked;
+        iphones::where('id',$request->iphone_id)->update(['stok_ready' => $total_stok]);
 
 
         return redirect()->back();

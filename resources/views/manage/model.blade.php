@@ -6,15 +6,15 @@
     <div class="w-11/12 mx-auto my-4 bg-white rounded-md p-8">
         <p class="font-bold text-2xl text-center mb-4">Kelola iPhone</p>
         <div class="gap-4">
-        <div class="flex mb-4 justify-center">
+        {{-- <div class="flex mb-4 justify-center">
                 <button class="bg-red-500 hover:bg-red-600 py-2 px-4 text-white rounded-md" id="hapus_terpilih">Hapus Terpilih</button>
-        </div>
+        </div> --}}
             <table class="bg-white w-full mb-4 mx-auto min-w-max table-auto text-left">
                 <thead>
                     <tr>
-                        <th class="border-y border-blue-gray-50 p-4">
+                        {{-- <th class="border-y border-blue-gray-50 p-4">
                             <input type="checkbox" id="pilih_semua" class="ml-2 w-6 h-6">
-                        </th>
+                        </th> --}}
                         <x-table-header>Nama iPhone</x-table-header>
                         {{-- <x-table-header>Stok Cadangan</x-table-header> --}}
                         <x-table-header>Total Stok Unit</x-table-header>
@@ -26,9 +26,9 @@
                     @if($iphones->isNotEmpty())
                     @foreach ($iphones as $iphone)
                         <tr>
-                            <td class="p-4 border-b border-blue-gray-50">
+                            {{-- <td class="p-4 border-b border-blue-gray-50">
                                 <input type="checkbox" class="checkbox_pilih ml-2 w-6 h-6" name="ids[]" value="{{ $iphone->id }}">
-                            </td>
+                            </td> --}}
                             <x-table-contents>{{ $iphone->name }}</x-table-contents>
                             {{-- <x-table-contents>{{ $iphone->stok_spare }}</x-table-contents> --}}
                             <x-table-contents>{{ $iphone->stok_ready }}</x-table-contents>
@@ -47,14 +47,14 @@
                                             </svg>
                                         </button>
                                         </form>
-                                        <form action="{{ route('manageModelDelete', $iphone->id) }}" method="POST">
+                                        {{-- <form action="{{ route('manageModelDelete', $iphone->id) }}" method="POST">
                                             @csrf
                                             <button type="submit" class="mx-1 border hover:bg-blue-500 hover:text-white text-blue-500  border-blue-500 p-1 rounded-md">
                                                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                                 </svg>
                                             </button>
-                                        </form>
+                                        </form> --}}
                                     </div>
                             </td>
                         </tr>
@@ -87,11 +87,11 @@
             </div>
             @endif
             <div class="flex">
-                <button type="button" onclick="open_popup_add()" class="mx-auto hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 p-1 rounded-md underline">
+                {{-- <button type="button" onclick="open_popup_add()" class="mx-auto hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 p-1 rounded-md underline">
                     <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="5" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                </button>
+                </button> --}}
             </div>
         </div>
     </div>
@@ -115,6 +115,7 @@
             </form>
         </div>
     </div>
+    <x-footer></x-footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     function open_popup_add() {

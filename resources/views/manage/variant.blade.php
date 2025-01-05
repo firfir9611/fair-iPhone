@@ -164,6 +164,7 @@
             </div>
         </div>
     </div>
+    <x-footer></x-footer>
 <script>
     let editIndex;
     

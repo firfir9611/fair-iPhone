@@ -25,6 +25,7 @@
             </div>
         </div>
     </div>
+    <x-footer></x-footer>
 <x-the-script></x-the-script>
 <script>
 const iphone_images = @json($iphone_colors);

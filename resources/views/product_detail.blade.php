@@ -147,6 +147,7 @@
             </div>
         </form>
     </div>
+    <x-footer></x-footer>
     <script>
         // Ambil elemen input dan elemen untuk menampilkan hasil
         const rentStartInput = document.getElementById('rent_start');

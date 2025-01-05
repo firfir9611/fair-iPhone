@@ -40,6 +40,7 @@
         </div>
         </form>
     </div>
+    <x-footer></x-footer>
 <script>
     const imageInput = document.getElementById('img');
     const ubah = document.getElementById('ubah');

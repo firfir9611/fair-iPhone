@@ -62,8 +62,9 @@
                     @endif
               </tbody>
             </table>
-            
+        </div>
     </div>
+    <x-footer></x-footer>
 <script>
 
     document.getElementById('pilih_semua').addEventListener('change', function () {

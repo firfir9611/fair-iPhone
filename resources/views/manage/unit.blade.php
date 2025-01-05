@@ -206,6 +206,7 @@
             </form>
         </div>
     </div>
+    <x-footer></x-footer>
 <script>
     const iphone_colors = @json($unit_colors);
     const iphone_storages = @json($unit_storages);

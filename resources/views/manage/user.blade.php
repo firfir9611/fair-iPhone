@@ -116,7 +116,7 @@
                             </td>
                             <td class="p-4 border-b border-blue-gray-50">
                                 <div class="flex justify-end">
-                                    <button type="submit" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 p-1 rounded-md underline">
+                                    <button id="user_add_btn" type="submit" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 p-1 rounded-md underline">
                                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                         </svg>
@@ -127,10 +127,22 @@
                     </tr>
               </tbody>
             </table>
+            @if(session('exist'))
+                <p class="text-red-500 text-sm">{{ session('exist') }}</p>
+            @endif
         </div>
     </div>
+<x-footer></x-footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
+    document.getElementById('user_add_btn').addEventListener('click', function(e){
+        const btn = e.target;
+        btn.disabled = true;
+        setTimeout(function(){
+            btn.disabled = false;
+        }, 3000);
+    });
+    
     let editIndex;
 
     function editAct(id){

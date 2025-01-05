@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     function submitRegistration(Request $request) {
+        $user = User::select('*')->where('email',$request->email)->first();
+        if($user) return redirect()->route('register')->with('failed','email sudah terdaftar!');
+        
         $user = new User();
         $user->name = $request->name;
         $user->address = $request->address;
@@ -94,6 +97,8 @@ class AuthController extends Controller
     }
 
     public function manageUserAdd(Request $request){
+        $user = User::select('*')->where('email',$request->email)->first();
+        if($user) return redirect()->route('manageUser')->with('exist','email sudah terdaftar!');
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;

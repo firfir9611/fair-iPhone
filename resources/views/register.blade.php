@@ -35,7 +35,10 @@
                     </svg>
                 </button>
              </div>
-             <div class="flex flex-row justify-between mb-8">
+             <div class="mb-8">
+                @if(session('failed'))
+                    <p class="text-red-500 text-sm">{{ session('failed') }}</p>
+                @endif
              </div>
              <button type="submit" class="bg-blue-500 w-full px-6 py-5 mb-5 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-lg">Buat Akun</button>
              <p class="text-sm leading-relaxed text-grey-900">Sudah punya akun? <a href="/login" class="font-bold text-blue-500">Login ke akunmu</a></p>

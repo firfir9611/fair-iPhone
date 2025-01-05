@@ -26,7 +26,7 @@
                             <p class="font-bold lg:text-sm text-xs">Mulai Sewa</p>
                             <p class="font-bold lg:text-sm text-xs">Dikembalikan</p>
                             <p class="font-bold lg:text-sm text-xs">Lama Penyewaan</p>
-                            <p class="font-bold lg:text-sm text-xs">Waktu Tersisa</p>
+                            <p class="font-bold lg:text-sm text-xs hidden">Waktu Tersisa</p>
                             <p class="font-bold lg:text-sm text-xs">Total Biaya</p>
                             @if(session('success'.$transaction->transaction_id))
                             <div class="flex justify-center mb-4">
@@ -40,7 +40,7 @@
                             <p class="font-bold lg:text-sm text-xs">: <span id="rent_start_{{ $transaction->transaction_id }}">{{ $transaction->rent_at }}</span></p>
                             <p class="font-bold lg:text-sm text-xs">: <span id="return_plan_{{ $transaction->transaction_id }}">{{ $transaction->return_at }}</span></p>
                             <p class="font-bold lg:text-sm text-xs">: <span id="total_days_{{ $transaction->transaction_id }}">? Hari</span></p>
-                            <p class="font-bold lg:text-sm text-xs">: <span id="days_remaining_{{ $transaction->transaction_id }}" class="">? Hari Tersisa</span></p>
+                            <p class="font-bold lg:text-sm text-xs hidden">: <span id="days_remaining_{{ $transaction->transaction_id }}" class="">? Hari Tersisa</span></p>
                             <p class="font-bold lg:text-sm text-xs">: <span class="text-red-500">{{  "Rp " . number_format($transaction->total_paid,0,',','.')  }}</span></p>
                         </div>
                     </div>
@@ -58,6 +58,7 @@
             <p>No Data</p>
             @endif
     </div>
+    <x-footer></x-footer>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const transactions = @json($transactions);

@@ -71,6 +71,7 @@
             <p>No Data</p>
             @endif
     </div>
+    <x-footer></x-footer>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const transactions = @json($transactions);
