@@ -114,7 +114,7 @@ class transaction extends Controller
 
     public function returnRequestAcc($id){
         $returnRequest = return_request::find($id);
-        $penalty = return_request::select('transactions.penalty AS penalty')->where('id',$id)
+        $penalty = return_request::select('transactions.penalty AS penalty')->where('transactions.id',$id)
             ->leftJoin('transactions','transactions.id','=','return_requests.transaction_id')->first();
         $user_id = Auth::user()->id;
         $this->productTransactionEnd($penalty->penalty,$returnRequest->transaction_id);
