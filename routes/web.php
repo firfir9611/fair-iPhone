@@ -12,7 +12,7 @@ Route::get('/', [iphone::class, 'home'])->name('home');
 //     return view('product');
 // });
 
-Route::get('/product', [iphone::class, 'index']);
+Route::get('/product', [iphone::class, 'index'])->name('product');
 Route::get('/product/detail/{id}', [iphone::class, 'productDetail'])->name('productDetail');
 
 Route::get('/contact', function () {return view('contact');});

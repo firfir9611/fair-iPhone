@@ -5,7 +5,7 @@
     <x-Header></x-Header>
     <div class="">
         <div class="p-6 m-6 p-2 lg:w-3/4 mx-auto lg:rounded-lg bg-white md:w-full md:rounded-none">
-            <h3 class="text-center mb-6 xl:text-2xl font-bold md:text-xl">Iphone 15 Series</h3>
+            <h3 class="text-center mb-6 xl:text-2xl font-bold md:text-xl">Daftar Produk iPhone</h3>
             <div class="flex flex-wrap justify-evenly gap-3 overflow-hidden p-2 pb-4">
                 @foreach ($iphones as $iphone)
                 <a href="{{ route('productDetail', $iphone->unit_id) }}" class="hover:border rounded-md">

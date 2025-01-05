@@ -35,7 +35,7 @@
                 <p class="text-center text-7xl text-white font-bold uppercase2" data-aos="fade" data-aos-duration="2000">Welcome !</p>
             @endif
             <div class="flex justify-center my-10">
-                <a href="/product" class="bg-blue-500 hover:bg-blue-600 font-bold py-3 px-6 rounded-full" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="3000">
+                <a href="{{ route('product') }}" class="bg-blue-500 hover:bg-blue-600 font-bold py-3 px-6 rounded-full" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="3000">
                     <button  class="text-xl text-white">Lihat Produk</button>
                 </a>
             </div>
