@@ -112,7 +112,7 @@ class transaction extends Controller
         $returnRequest = return_request::find($id);
         $user_id = Auth::user()->id;
         $this->productTransactionEnd($returnRequest->transaction_id);
-        $returnRequest->update(['approve' => 1,'user_id' => $user_id]);
+        return_request::where('transaction_id', $returnRequest->transaction_id)->update(['approve' => 1,'user_id' => $user_id]);
 
         return redirect()->back();
     }

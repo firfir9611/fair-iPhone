@@ -38,7 +38,7 @@
                             <p class="font-bold lg:text-sm text-xs">: <span class="text-red-500">{{  "Rp " . number_format($transaction->total_paid,0,',','.')  }}</span></p>
                         </div>
                     </div>
-                    <div class="w-full md:px-10 px-5 flex justify-end">
+                    <div class="w-full p-2 flex justify-end">
                         {{-- @if(session('success'.$transaction->transaction_id))
                             <div class="flex justify-center mb-4">
                                 <p class="font-bold text-red-500">{{ session('success'.$transaction->transaction_id) }}</p>
@@ -54,7 +54,7 @@
                                 @if( $transaction->status == 1 )
                                 <form action="{{ route('returnRequestSendCancel', $transaction->transaction_id) }}" method="POST">
                                     @csrf
-                                    <p class="font-bold text-green-500">Permintaan terkirim!, tunggu admin mengonfirmasi pengembalian</p>
+                                    <p class="font-bold mb-2 text-green-500">Permintaan terkirim!, tunggu admin mengonfirmasi pengembalian</p>
                                     <button class="py-2 px-4 md:text-base text-xs bg-gray-500 rounded-md text-white" type="submit">Batalkan Permintaan</button>
                                 </form>
                                 @endif

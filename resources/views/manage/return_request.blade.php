@@ -33,7 +33,11 @@
                             <x-table-contents>{{ $return_request->return_request_id }}</x-table-contents>
                             <x-table-contents>{{ $return_request->cust_name }}</x-table-contents>
                             <x-table-contents>{{ $return_request->iphone_name.' '.$return_request->color.' '.$return_request->storage }}</x-table-contents>
+                            @if($return_request->admin_name)
                             <x-table-contents>{{ $return_request->admin_name }}</x-table-contents>
+                            @else
+                            <x-table-contents>-</x-table-contents>
+                            @endif
                             <x-table-contents>{{ $return_request->created }}</x-table-contents>
                             <td class="p-4 border-b border-blue-gray-50">
                                 <div class="flex items-center gap-3">
