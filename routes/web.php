@@ -73,6 +73,7 @@ Route::middleware('auth')->group(function () {
     //confirmation
     Route::get('/return/request', [transaction::class, 'returnRequest'])->name('returnRequest');
     Route::post('/return/request/send{id}', [transaction::class, 'returnRequestSend'])->name('returnRequestSend');
+    Route::post('/return/request/send/cancel{id}', [transaction::class, 'returnRequestSendCancel'])->name('returnRequestSendCancel');
     Route::post('/return/request/acc{id}', [transaction::class, 'returnRequestAcc'])->name('returnRequestAcc');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

@@ -49,7 +49,7 @@ class transaction extends Controller
         $user_id = Auth::user()->id;
         $transactions = transactions::select(
             'transactions.id AS transaction_id','transactions.total_paid AS total_paid','transactions.rent_at AS rent_at','transactions.return_plan AS return_plan',
-            'transactions.return_at AS return_at','unit_colors.color AS color','unit_storages.capacity AS storage','iphones.name AS iphone_name',
+            'transactions.return_at AS return_at','transactions.status AS status','unit_colors.color AS color','unit_storages.capacity AS storage','iphones.name AS iphone_name',
             'unit_ids.iphone_id AS iphone_id','unit_ids.unit_color_id AS color_id','unit_ids.id AS unit_id'
         )->where('transactions.user_id', $user_id)->whereRaw('transactions.return_at IS NULL')
         ->leftJoin('unit_ids','unit_ids.id','=','transactions.unit_id_id')
@@ -79,7 +79,7 @@ class transaction extends Controller
     public function returnRequest(){
         $return_requests = return_request::select(
             'return_requests.id AS return_request_id','transactions.id AS transaction_id','cust.name AS cust_name','return_requests.created_at AS created',
-            'admin.name AS admin_name','iphones.name AS iphone_name','unit_colors.color AS color','unit_storages.capacity AS storage','return_requests.status AS status'
+            'admin.name AS admin_name','iphones.name AS iphone_name','unit_colors.color AS color','unit_storages.capacity AS storage','return_requests.approve AS approve'
         )->leftJoin('users AS admin','admin.id','=','return_requests.user_id')
         ->leftJoin('transactions','transactions.id','=','return_requests.transaction_id')
         ->leftJoin('unit_ids','unit_ids.id','=','transactions.unit_id_id')
@@ -97,14 +97,22 @@ class transaction extends Controller
         $return_request->transaction_id = $id;
         $return_request->save();
 
-        return redirect()->route('booked')->with('success'.$id,'Tunggu Admin untuk mengonfirmasi pengembalian!');
+        transactions::where('id',$id)->update(['status' => 1]);
+
+        return redirect()->route('booked');
+    }
+    public function returnRequestSendCancel($id){
+        return_request::where('transaction_id',$id)->delete();
+        transactions::where('id',$id)->update(['status' => 0]);
+
+        return redirect()->route('booked');
     }
 
     public function returnRequestAcc($id){
         $returnRequest = return_request::find($id);
-
+        $user_id = Auth::user()->id;
         $this->productTransactionEnd($returnRequest->transaction_id);
-        $returnRequest->update(['approve' => 1]);
+        $returnRequest->update(['approve' => 1,'user_id' => $user_id]);
 
         return redirect()->back();
     }

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-head>Wishlist</x-head>
+<x-head>Penyewaan Berlangsung</x-head>
 <body class="bg-gray-100 overflow-x-hidden">
     <x-Header></x-Header>
     <div class="py-6 lg:px-16 md:px-6 m-6 p-2 lg:w-3/4 md:w-full mx-auto lg:rounded-lg bg-white">
         <h3 class="text-center mb-6 text-2xl font-bold">Sedang Disewa</h3>
             @if($transactions->isNotEmpty())
             @foreach($transactions as $transaction)
-            <form action="{{ route('returnRequestSend', $transaction->transaction_id) }}" method="POST">
-            @csrf
+            
             <div class="md:flex justify-between gap-2" data-aos="fade-up" data-aos-duration="2000">
                 <div class="py-2 min-w-fit justify-items-center">
                     <img src="" id="img_{{ $transaction->transaction_id }}" class="xl:h-60 md:h-48 h-60" alt="">
@@ -28,11 +27,6 @@
                             <p class="font-bold lg:text-sm text-xs">Lama Penyewaan</p>
                             <p class="font-bold lg:text-sm text-xs">Waktu Tersisa</p>
                             <p class="font-bold lg:text-sm text-xs">Total Biaya</p>
-                            @if(session('success'.$transaction->transaction_id))
-                            <div class="flex justify-center mb-4">
-                                <p class="text-center text-red-500">{{ session('success'.$transaction->transaction_id) }}</p>
-                            </div>
-                            @endif
                         </div>
                         <div class=" pt-10 w-1/2">
                             <p class="font-bold lg:text-sm text-xs">: {{ $transaction->color }}</p>
@@ -45,13 +39,30 @@
                         </div>
                     </div>
                     <div class="w-full md:px-10 px-5 flex justify-end">
-                        <div class="w-1/2">
-                            <button class="py-2 px-4 md:text-base text-xs bg-blue-500 rounded-md text-white" type="submit">Kembalikan Sekarang</button>
-                        </div>
+                        {{-- @if(session('success'.$transaction->transaction_id))
+                            <div class="flex justify-center mb-4">
+                                <p class="font-bold text-red-500">{{ session('success'.$transaction->transaction_id) }}</p>
+                            </div>
+                            @endif --}}
+                            <div class="w-1/2">
+                                @if( $transaction->status == 0 )
+                                <form action="{{ route('returnRequestSend', $transaction->transaction_id) }}" method="POST">
+                                    @csrf
+                                    <button class="py-2 px-4 md:text-base text-xs bg-blue-500 rounded-md text-white" type="submit">Kembalikan Sekarang</button>
+                                </form>
+                                @endif
+                                @if( $transaction->status == 1 )
+                                <form action="{{ route('returnRequestSendCancel', $transaction->transaction_id) }}" method="POST">
+                                    @csrf
+                                    <p class="font-bold text-green-500">Permintaan terkirim!, tunggu admin mengonfirmasi pengembalian</p>
+                                    <button class="py-2 px-4 md:text-base text-xs bg-gray-500 rounded-md text-white" type="submit">Batalkan Permintaan</button>
+                                </form>
+                                @endif
+                            </div>
                     </div>
                 </div>
             </div>
-            </form>
+            
             <hr class="mt-2" data-aos="fade-up" data-aos-duration="2000">
             @endforeach
             @else
