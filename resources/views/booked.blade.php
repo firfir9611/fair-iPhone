@@ -15,7 +15,7 @@
                     <input type="hidden" value="{{ $transaction->unit_id }}" id="unit_id_{{ $transaction->transaction_id }}">
                     <input type="hidden" value="{{ $transaction->iphone_id }}" id="iphone_id_{{ $transaction->transaction_id }}">
                     <input type="hidden" value="{{ $transaction->color_id }}" id="color_id_{{ $transaction->transaction_id }}">
-                    {{-- <input type="hidden" value="{{ $transaction->transaction_id }}" class="transaction_id"> --}}
+                    
                 </div>
                 <div class="w-full">
                     <div class="flex justify-start mb-5 w-full">
@@ -35,7 +35,8 @@
                             <p class="font-bold lg:text-sm text-xs">: <span id="return_plan_{{ $transaction->transaction_id }}">{{ $transaction->return_plan }}</span></p>
                             <p class="font-bold lg:text-sm text-xs">: <span id="total_days_{{ $transaction->transaction_id }}">? Hari</span></p>
                             <p class="font-bold lg:text-sm text-xs">: <span id="days_remaining_{{ $transaction->transaction_id }}" class="">? Hari Tersisa</span></p>
-                            <p class="font-bold lg:text-sm text-xs">: <span class="text-red-500">{{  "Rp " . number_format($transaction->total_paid,0,',','.')  }}</span></p>
+                            <p class="font-bold lg:text-sm text-xs">: <span class="">{{  "Rp " . number_format($transaction->total_paid,0,',','.')  }}</span></p>
+                            <p class="font-bold lg:text-sm text-xs"><span id="pinalty_{{ $transaction->transaction_id }}" class="text-red-500"></span></p>
                         </div>
                     </div>
                     <div class="w-full p-2 flex justify-end">
@@ -48,6 +49,7 @@
                                 @if( $transaction->status == 0 )
                                 <form action="{{ route('returnRequestSend', $transaction->transaction_id) }}" method="POST">
                                     @csrf
+                                    <input type="hidden" value="0" name="pinalty" id="pinalty_input_{{ $transaction->transaction_id }}">
                                     <button class="py-2 px-4 md:text-base text-xs bg-blue-500 rounded-md text-white" type="submit">Kembalikan Sekarang</button>
                                 </form>
                                 @endif
@@ -82,6 +84,8 @@
             const daysRemainingElement = document.getElementById(`days_remaining_${transaction.transaction_id}`);
             const name = document.getElementById(`iphone_id_${transaction.transaction_id}`);
             const color = document.getElementById(`color_id_${transaction.transaction_id}`);
+            const pinalty = document.getElementById(`pinalty_${transaction.transaction_id}`);
+            const pinaltyInput = document.getElementById(`pinalty_input_${transaction.transaction_id}`);
             const imgSrc = document.getElementById(`img_${transaction.transaction_id}`);
             const match = iphone_colors.find(img => img.iphone_id == name.value && img.unit_color_id == color.value);
 
@@ -102,11 +106,16 @@
 
                 // Calculate remaining days
                 const daysRemaining = Math.ceil((returnPlan - today) / (1000 * 60 * 60 * 24));
-                daysRemainingElement.textContent = daysRemaining > 0 ? `${daysRemaining} Hari Tersisa` : `${daysRemaining} Hari Terlewat!, Pengembalian Terlambat`;
+                daysRemainingElement.textContent = daysRemaining > 0 ? `${daysRemaining} Hari Tersisa` : (`${daysRemaining}`*-1)+' Hari Terlewat!, Pengembalian Terlambat';
                 if(daysRemaining < 3 && daysRemaining > 0) {
                     daysRemainingElement.classList.add('text-orange-300');
                 }else if(daysRemaining < 1){
                     daysRemainingElement.classList.add('text-red-500');
+                } 
+                if(daysRemaining < 0){
+                    const p = (-1*daysRemaining)*(`${transaction.rent_price}`*0.1);
+                    pinaltyInput.value = p;
+                    pinalty.textContent = `Denda Rp ${p.toLocaleString('id-ID')}`;
                 }
 
 

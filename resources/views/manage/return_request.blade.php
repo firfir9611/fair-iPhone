@@ -15,7 +15,7 @@
                         {{-- <th class="border-y border-blue-gray-50 p-4">
                             <input type="checkbox" id="pilih_semua" class="ml-2 w-6 h-6">
                         </th> --}}
-                        <x-table-header>No</x-table-header>
+                        <x-table-header>ID Transaksi</x-table-header>
                         <x-table-header>Nama Pengguna</x-table-header>
                         <x-table-header>Nama Unit</x-table-header>
                         <x-table-header>Nama Konfirmator</x-table-header>
@@ -30,7 +30,7 @@
                             {{-- <td class="p-4 border-b border-blue-gray-50">
                                 <input type="checkbox" class="checkbox_pilih ml-2 w-6 h-6" name="ids[]" value="{{ $unit_id->unit_id }}">
                             </td> --}}
-                            <x-table-contents>{{ $return_request->return_request_id }}</x-table-contents>
+                            <x-table-contents>{{ $return_request->transaction_id }}</x-table-contents>
                             <x-table-contents>{{ $return_request->cust_name }}</x-table-contents>
                             <x-table-contents>{{ $return_request->iphone_name.' '.$return_request->color.' '.$return_request->storage }}</x-table-contents>
                             @if($return_request->admin_name)
