@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('dp')->nullable();
             $table->integer('shipping_cost')->nullable();
             $table->integer('total_paid')->nullable();
-            $table->integer('penalty')->nullable();
+            $table->integer('penalty')->default(0);
             $table->string('rented_battery_health')->nullable();
             $table->integer('status')->nullable();
             $table->date('rent_at')->nullable();
