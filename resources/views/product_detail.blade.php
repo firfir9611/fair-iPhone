@@ -5,7 +5,7 @@
     <x-Header></x-Header>
     <div class="">
         <div class="p-6 m-6 p-2 lg:w-5/6 mx-auto lg:rounded-lg bg-white md:w-full md:rounded-none">
-            <p class="text-center font-bold text-3x1">Rincian Produk</p>
+            <p class="text-center font-bold text-lg">Rincian Produk</p>
             <div class="md:flex justify-between gap-2" data-aos="fade-up" data-aos-duration="2000">
                 <div class="py-2 min-w-fit justify-items-center">
                     <img src="{{ $image->img }}" class="xl:h-96 md:h-72 h-96" alt="">
@@ -14,7 +14,7 @@
                     <div class="w-full py-5">
                     <p class="font-bold lg:text-xl md:text-sm md:px-10 px-5 py-2">{{ $iphone->iphone_name }}</p>
                         <div class="flex justify-start w-full">
-                            <div class="md:px-10 px-5 xl:min-w-48 lg:min-w-16 min-w-12">
+                            <div class="md:px-10 px-5 w-1/2">
                                 <p class="font-bold md:text-sm text-xs">Warna</p>
                                 <p class="font-bold md:text-sm text-xs">Penyimpanan</p>
                                 <p class="font-bold md:text-sm text-xs">Battery Health</p>
@@ -28,11 +28,11 @@
                                 <p class="font-bold md:text-sm text-xs">Tgl Peluncuran</p>
                                 <p class="font-bold md:text-sm text-xs">Harga</p>
                             </div>
-                            <div class=" w-full">
+                            <div class=" w-1/2">
                                 <p class="font-bold md:text-sm text-xs">: {{ $iphone->color }}</p>
                                 <p class="font-bold md:text-sm text-xs">: {{ $iphone->storage }}</p>
                                 <p class="font-bold md:text-sm text-xs">: {{ $iphone->battery_health }}</p>
-                                <p class="font-bold md:text-sm text-xs">: {{ $iphone->unit_stok }}</p>
+                                <p class="font-bold md:text-sm text-xs {{ $iphone->unit_stok < 1 ? 'text-red-500':'' }}">: {{ $iphone->unit_stok }}</p>
                                 <p class="font-bold md:text-sm text-xs">: {{ $iphone->iphone_selfie }}</p>
                                 <p class="font-bold md:text-sm text-xs">: {{ $iphone->iphone_rearcam }}</p>
                                 <p class="font-bold md:text-sm text-xs">: {{ $iphone->iphone_chipset}}</p>
@@ -64,14 +64,14 @@
                     <label class="flex items-center w-72 text-2x1 font-bold p-4 border-2 rounded-lg cursor-pointer hover:border-gray-400 focus-within:ring-2 focus-within:ring-indigo-500">
                       <input type="radio" name="payment" checked value="QRIS" class="hidden peer" />
                       <div class="h-16 border-2 rounded-md flex justify-center items-center overflow-hidden mr-3 peer-checked:border-indigo-500">
-                        <img src="https://i.ibb.co.com/XFzsbtv/qris.jpg" class="h-full" alt="qris">
+                        <img src="https://i.ibb.co.com/4KDXMcN/qris.jpg" class="h-full" alt="qris">
                       </div>
                       QRIS
                     </label>
                     <label class="flex items-center w-72 text-2x1 font-bold p-4 border-2 rounded-lg cursor-pointer hover:border-gray-400 focus-within:ring-2 focus-within:ring-indigo-500">
                       <input type="radio" name="payment" value="QRIS" class="hidden peer" />
                       <div class="h-16 border-2 rounded-md flex justify-center items-center overflow-hidden mr-3 peer-checked:border-indigo-500">
-                        <img src="https://i.ibb.co.com/F0GY9C9/kidney.jpg" class="h-full" alt="qris">
+                        <img src="https://i.ibb.co.com/kXtrwsn/kidney.jpg" class="h-full" alt="qris">
                       </div>
                       Ginjal :)
                     </label>
@@ -135,7 +135,11 @@
                 </div>
                 @if(Auth::check())
                 <div class="flex justify-center mb-4">
+                  @if($iphone->unit_stok > 1)
                     <button class="bg-blue-500 rounded-md px-4 py-2 font-bold text-white" type="submit">Sewa Sekarang</button>
+                  @else
+                    <button class="bg-gray-500 rounded-md px-4 py-2 font-bold text-white" disabled>Unit Habis</button>
+                    @endif
                 </div>
                 @else
                 <p class="font-bold text-red-500">Login untuk melakukan penyewaan!</p>

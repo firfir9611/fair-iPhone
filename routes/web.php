@@ -66,7 +66,14 @@ Route::middleware('auth')->group(function () {
     //transaction
     Route::get('/wishlist', [transaction::class, 'index']);
     Route::get('/booked', [transaction::class, 'booked'])->name('booked');
+    Route::get('/bookedReturned', [transaction::class, 'bookedReturned'])->name('bookedReturned');
     Route::post('product/transaction/start', [transaction::class, 'productTransactionStart'])->name('productTransactionStart');
+    Route::post('product/transaction/end{id}', [transaction::class, 'productTransactionEnd'])->name('productTransactionEnd');
+
+    //confirmation
+    Route::get('/return/request', [transaction::class, 'returnRequest'])->name('returnRequest');
+    Route::post('/return/request/send{id}', [transaction::class, 'returnRequestSend'])->name('returnRequestSend');
+    Route::post('/return/request/acc{id}', [transaction::class, 'returnRequestAcc'])->name('returnRequestAcc');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

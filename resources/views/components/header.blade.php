@@ -19,8 +19,61 @@
       </div>
       <div class="hidden lg:flex lg:gap-x-2">
         <x-header-nav href="/product" :active="request() -> is ('product','product/detail')">Produk</x-header-nav>
-        {{-- <x-header-nav href="/wishlist" :active="request() -> is ('wishlist')">Daftar Keinginan</x-header-nav> --}}
-        <x-header-nav href="/booked" :active="request() -> is ('booked')">Sedang Disewa</x-header-nav>
+        <div x-data="{ isOpen: false }">
+          <button  type="button" class="flex items-center gap-x-1 hover:bg-slate-100 rounded-md" aria-expanded="false" @click="isOpen = !isOpen">
+              <x-header-nav href="#" :active="request() -> is ('manage/user')">Penyewaan</x-header-nav>
+              <svg
+              :class="{'rotate-180 transition ease-out duration-200': isOpen, 'rotate-0 transition ease-out duration-150': !isOpen }"
+              class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <div
+            x-show="isOpen"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-2"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-2"
+            @click.outside="isOpen = false"
+            class="absolute -ml-56 z-10 mt-2 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+              <div class="p-4">
+                <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
+                  <div class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                    <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                  </div>
+                  <div class="flex-auto">
+                    <a href="{{ route('booked') }}" class="block font-semibold text-gray-900">
+                      Sedang Berlangsung
+                      <span class="absolute inset-0"></span>
+                    </a>
+                    <p class="mt-1 text-gray-600">Lihat penyewaan iPhonemu yang sedang berlangsung</p>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="p-4">
+                <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
+                  <div class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                    <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75" />
+                    </svg>
+                  </div>
+                  <div class="flex-auto">
+                    <a href="{{ route('bookedReturned') }}" class="block font-semibold text-gray-900">
+                      Telah DIkembalikan
+                      <span class="absolute inset-0"></span>
+                    </a>
+                    <p class="mt-1 text-gray-600">Lihat penyewaan iPhonemu yang telah dikembalikan</p>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+        </div>
         <x-header-nav href="/contact" :active="request() -> is ('contact')">Kontak</x-header-nav>
         @if(Auth::check())
         @if(Auth::user()->role == 'admin' || Auth::user()->role == 'gm')
@@ -84,6 +137,20 @@
                       <span class="absolute inset-0"></span>
                     </a>
                     <p class="mt-1 text-gray-600">Atur ketersediaan setiap unit iPhone</p>
+                  </div>
+                </div>
+                <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
+                  <div class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                    <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 3.75H6.912a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H15M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859M12 3v8.25m0 0-3-3m3 3 3-3" />
+                    </svg>
+                  </div>
+                  <div class="flex-auto">
+                    <a href="{{ route('returnRequest') }}" class="block font-semibold text-gray-900">
+                      Konfirmasi Pengembalian
+                      <span class="absolute inset-0"></span>
+                    </a>
+                    <p class="mt-1 text-gray-600">Konfirmasi Unit yang dikembalikan pelanggan</p>
                   </div>
                 </div>
               </div>
@@ -192,7 +259,26 @@
           <div class="-my-6 divide-y divide-gray-500/10">
             <div class="space-y-2 py-6">
                 <a href="/product" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100">Produk</a>
-                <a href="/booked" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100">Sedang Disewa</a>
+                <div x-data="{ isOn: false }" class="-mx-3">
+                  <button @click="isOn = !isOn" type="button" class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100" aria-controls="disclosure-1" aria-expanded="false">
+                    Penyewaan
+                    <svg :class="{'rotate-180 transition ease-out duration-100': isOn, 'rotate-0 transition ease-in duration-75': !isOn }" class="h-5 w-5 flex-none" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                      <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                  <div
+                  x-show="isOn"
+                  x-transition:enter="transition ease-out duration-100 transform"
+                  x-transition:enter-start="opacity-0"
+                  x-transition:enter-end="opacity-100"
+                  x-transition:leave="transition ease-in duration-75 transform"
+                  x-transition:leave-start="opacity-100"
+                  x-transition:leave-end="opacity-0"
+                  class="mt-2 space-y-2" id="disclosure-1">
+                    <a href="{{ route('booked') }}" class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-100">Penyewaan Berlangsung</a>
+                    <a href="{{ route('bookedReturned') }}" class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-100">Penyewaan Telah Dikembalikan</a>
+                  </div>
+                </div>
                 <a href="/contact" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100">Kontak</a>
             </div>
             <div class="space-y-2 py-6">
@@ -217,6 +303,7 @@
                     <a href="{{ route('manageModel') }}" class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-100">Model iPhone</a>
                     <a href="{{ route('manageVariant') }}" class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-100">Varian iPhone</a>
                     <a href="{{ route('manageUnit') }}" class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-100">Unit iPhone</a>
+                    <a href="{{ route('returnRequest') }}" class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-100">Konfirmasi Pengembalian</a>
                   </div>
                 </div>
                 @endif

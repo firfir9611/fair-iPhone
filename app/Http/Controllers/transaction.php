@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\transaction as transactions;
 use App\Models\unit_id;
+use App\Models\iphone_color;
+use App\Models\return_request;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +31,16 @@ class transaction extends Controller
         $transaction->save();
         $unit = unit_id::select('*')->where('id', $request->unit_id)->first();
 
-        unit_id::where('id',$request->unit_id)->update(['stok' => $unit->stok-1, 'stok_booked' => $unit->stok_booked]);
+        unit_id::where('id',$request->unit_id)->update(['stok' => $unit->stok-1, 'stok_booked' => $unit->stok_booked+1]);
+
+        return redirect()->route('booked');
+    }
+    public function productTransactionEnd($id){
+        $transaction = transactions::select('*')->where('id',$id)->first();
+        $this_time = Carbon::now('GMT+7');
+        $unit = unit_id::select('*')->where('id', $transaction->unit_id_id)->first();
+        unit_id::where('id',$transaction->unit_id_id)->update(['stok' => $unit->stok+1, 'stok_booked' => $unit->stok_booked-1]);
+        transactions::where('id',$id)->update(['return_at' => $this_time]);
 
         return redirect()->route('booked');
     }
@@ -37,13 +49,63 @@ class transaction extends Controller
         $user_id = Auth::user()->id;
         $transactions = transactions::select(
             'transactions.id AS transaction_id','transactions.total_paid AS total_paid','transactions.rent_at AS rent_at','transactions.return_plan AS return_plan',
-            'transactions.return_at AS return_at','unit_colors.color AS color','unit_storages.capacity AS storage','iphones.name AS iphone_name'
-        )->where('transactions.id', $user_id)
-        ->leftJoin('unit_ids','unit_ids.id','=','transactions.id')
+            'transactions.return_at AS return_at','unit_colors.color AS color','unit_storages.capacity AS storage','iphones.name AS iphone_name',
+            'unit_ids.iphone_id AS iphone_id','unit_ids.unit_color_id AS color_id','unit_ids.id AS unit_id'
+        )->where('transactions.user_id', $user_id)->whereRaw('transactions.return_at IS NULL')
+        ->leftJoin('unit_ids','unit_ids.id','=','transactions.unit_id_id')
         ->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
         ->leftJoin('unit_colors','unit_colors.id','=','unit_ids.unit_color_id')
         ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')->get();
+        $iphone_colors = iphone_color::all();
+        
+        return view('booked',compact('transactions','iphone_colors'));
+    }
+    public function bookedReturned(){
+        $user_id = Auth::user()->id;
+        $transactions = transactions::select(
+            'transactions.id AS transaction_id','transactions.total_paid AS total_paid','transactions.rent_at AS rent_at','transactions.return_plan AS return_plan',
+            'transactions.return_at AS return_at','unit_colors.color AS color','unit_storages.capacity AS storage','iphones.name AS iphone_name',
+            'unit_ids.iphone_id AS iphone_id','unit_ids.unit_color_id AS color_id','unit_ids.id AS unit_id'
+        )->where('transactions.user_id', $user_id)->whereRaw('transactions.return_at IS NOT NULL')
+        ->leftJoin('unit_ids','unit_ids.id','=','transactions.unit_id_id')
+        ->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
+        ->leftJoin('unit_colors','unit_colors.id','=','unit_ids.unit_color_id')
+        ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')->get();
+        $iphone_colors = iphone_color::all();
+        
+        return view('wishlist',compact('transactions','iphone_colors'));
+    }
 
-        return view('booked',compact('transactions'));
+    public function returnRequest(){
+        $return_requests = return_request::select(
+            'return_requests.id AS return_request_id','transactions.id AS transaction_id','cust.name AS cust_name','return_requests.created_at AS created',
+            'admin.name AS admin_name','iphones.name AS iphone_name','unit_colors.color AS color','unit_storages.capacity AS storage','return_requests.status AS status'
+        )->leftJoin('users AS admin','admin.id','=','return_requests.user_id')
+        ->leftJoin('transactions','transactions.id','=','return_requests.transaction_id')
+        ->leftJoin('unit_ids','unit_ids.id','=','transactions.unit_id_id')
+        ->leftJoin('unit_colors','unit_colors.id','=','unit_ids.unit_color_id')
+        ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
+        ->leftJoin('users AS cust','cust.id','=','transactions.user_id')
+        ->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
+        ->get();
+
+        return view('manage.return_request', compact('return_requests'));
+    }
+
+    public function returnRequestSend($id){
+        $return_request = new return_request();
+        $return_request->transaction_id = $id;
+        $return_request->save();
+
+        return redirect()->route('booked')->with('success'.$id,'Tunggu Admin untuk mengonfirmasi pengembalian!');
+    }
+
+    public function returnRequestAcc($id){
+        $returnRequest = return_request::find($id);
+
+        $this->productTransactionEnd($returnRequest->transaction_id);
+        $returnRequest->update(['approve' => 1]);
+
+        return redirect()->back();
     }
 }
