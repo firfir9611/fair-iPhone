@@ -19,6 +19,7 @@
                         <x-table-header>Nama Pengguna</x-table-header>
                         <x-table-header>Nama Unit</x-table-header>
                         <x-table-header>Nama Konfirmator</x-table-header>
+                        <x-table-header>Denda</x-table-header>
                         <x-table-header>Tanggal</x-table-header>
                         <x-table-header>Status</x-table-header>
                     </tr>
@@ -38,6 +39,7 @@
                             @else
                             <x-table-contents>-</x-table-contents>
                             @endif
+                            <x-table-contents>{{  "Rp " . number_format($return_request->penalty,0,',','.')  }}</x-table-contents>
                             <x-table-contents>{{ $return_request->created }}</x-table-contents>
                             <td class="p-4 border-b border-blue-gray-50">
                                 <div class="flex items-center gap-3">

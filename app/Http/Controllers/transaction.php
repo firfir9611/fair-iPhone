@@ -35,12 +35,13 @@ class transaction extends Controller
 
         return redirect()->route('booked');
     }
-    public function productTransactionEnd($pinalty,$id){
+    public function productTransactionEnd($penalty,$id){
         $transaction = transactions::select('*')->where('id',$id)->first();
         $this_time = Carbon::now('GMT+7');
         $unit = unit_id::select('*')->where('id', $transaction->unit_id_id)->first();
         unit_id::where('id',$transaction->unit_id_id)->update(['stok' => $unit->stok+1, 'stok_booked' => $unit->stok_booked-1]);
-        transactions::where('id',$id)->update(['return_at' => $this_time, 'pinalty' => $pinalty]);
+        $total = $transaction->total_paid + $penalty;
+        transactions::where('id',$id)->update(['return_at' => $this_time, 'total_paid' => $total]);
 
         return redirect()->route('booked');
     }
@@ -81,7 +82,8 @@ class transaction extends Controller
     public function returnRequest(){
         $return_requests = return_request::select(
             'return_requests.id AS return_request_id','transactions.id AS transaction_id','cust.name AS cust_name','return_requests.created_at AS created',
-            'admin.name AS admin_name','iphones.name AS iphone_name','unit_colors.color AS color','unit_storages.capacity AS storage','return_requests.approve AS approve'
+            'admin.name AS admin_name','iphones.name AS iphone_name','unit_colors.color AS color','unit_storages.capacity AS storage','return_requests.approve AS approve',
+            'transactions.penalty AS penalty'
         )->leftJoin('users AS admin','admin.id','=','return_requests.user_id')
         ->leftJoin('transactions','transactions.id','=','return_requests.transaction_id')
         ->leftJoin('unit_ids','unit_ids.id','=','transactions.unit_id_id')
@@ -99,7 +101,7 @@ class transaction extends Controller
         $return_request->transaction_id = $id;
         $return_request->save();
 
-        transactions::where('id',$id)->update(['status' => 1, 'pinalty' => $request->pinalty]);
+        transactions::where('id',$id)->update(['status' => 1, 'penalty' => $request->penalty]);
 
         return redirect()->route('booked');
     }
@@ -112,10 +114,10 @@ class transaction extends Controller
 
     public function returnRequestAcc($id){
         $returnRequest = return_request::find($id);
-        $pinalty = return_request::select('transactions.pinalty')->where('id',$id)
+        $penalty = return_request::select('transactions.penalty AS penalty')->where('id',$id)
             ->leftJoin('transactions','transactions.id','=','return_requests.transaction_id')->first();
         $user_id = Auth::user()->id;
-        $this->productTransactionEnd($pinalty,$returnRequest->transaction_id);
+        $this->productTransactionEnd($penalty->penalty,$returnRequest->transaction_id);
         return_request::where('transaction_id', $returnRequest->transaction_id)->update(['approve' => 1,'user_id' => $user_id]);
 
         return redirect()->back();

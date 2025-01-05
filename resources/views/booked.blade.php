@@ -46,13 +46,13 @@
                             </div>
                             @endif --}}
                             <div class="w-1/2">
-                                @if( $transaction->status == 0 )
                                 <form action="{{ route('returnRequestSend', $transaction->transaction_id) }}" method="POST">
                                     @csrf
-                                    <input type="hidden" value="0" name="pinalty" id="pinalty_input_{{ $transaction->transaction_id }}">
+                                    <input type="hidden" value="" name="penalty" id="pinalty_input_{{ $transaction->transaction_id }}">
+                                    @if( $transaction->status == 0 )
                                     <button class="py-2 px-4 md:text-base text-xs bg-blue-500 rounded-md text-white" type="submit">Kembalikan Sekarang</button>
+                                    @endif
                                 </form>
-                                @endif
                                 @if( $transaction->status == 1 )
                                 <form action="{{ route('returnRequestSendCancel', $transaction->transaction_id) }}" method="POST">
                                     @csrf
