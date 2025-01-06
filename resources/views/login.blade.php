@@ -42,23 +42,25 @@
 
         // Validasi input kosong
         if (!email || !password) {
-            alert('Harap isi semua kolom!');
+            // alert('Harap isi semua kolom!');
             event.preventDefault();
             return;
         }
 
         // Validasi format email (harus mengandung "@")
         if (!email.includes('@')) {
-            alert('Alamat email tidak valid! Harap masukkan email yang benar.');
+            // alert('Alamat email tidak valid! Harap masukkan email yang benar.');
             event.preventDefault();
             return;
         }
 
         // Ubah tombol jika valid
-        const button = event.target;
-        button.disabled = true;
-        button.style.backgroundColor = '#A0AEC0';
-        button.innerHTML = 'Memuat...';
+        setTimeout(function(){
+            const button = event.target;
+            button.disabled = true;
+            button.style.backgroundColor = '#A0AEC0';
+            button.innerHTML = 'Mohon Tunggu';
+        }, 100);
     });
 
 

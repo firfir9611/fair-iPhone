@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    
     function submitRegistration(Request $request) {
         $user = User::select('*')->where('email',$request->email)->first();
         if($user) return redirect()->route('register')->with('failed','email sudah terdaftar!');
@@ -23,7 +24,7 @@ class AuthController extends Controller
         }
         $user->password = bcrypt($request->password);
         $user->save();
-        return view('login')->with('registered','Akun berhasil di tambahkan!');
+        return redirect()->route('login')->with('registered','Akun berhasil di tambahkan!');
     }
 
     function submitLogin(Request $request){
