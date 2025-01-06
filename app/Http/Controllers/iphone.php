@@ -31,7 +31,7 @@ class iphone extends Controller
         )->where('unit_ids.show', 1)
         ->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
         ->leftJoin('unit_colors','unit_colors.id','unit_ids.unit_color_id')
-        ->leftJoin('unit_storages','unit_storages.id','unit_ids.unit_storage_id')->get();
+        ->leftJoin('unit_storages','unit_storages.id','unit_ids.unit_storage_id')->orderBy('iphones.id')->get();
         // $iphone_15_series = iphones::select('*')->where('model', 'like', 'ip_15%')->get();
         $iphone_colors = iphone_color::all();
 

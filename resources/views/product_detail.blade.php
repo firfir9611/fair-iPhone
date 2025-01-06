@@ -149,7 +149,9 @@
               <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md z-20">
                   <div id="qris_opt" class="hidden">
                     <h2 class="text-2xl font-bold mb-4">Bayar Menggunakan QRIS</h2>
-                    <img src="https://i.ibb.co.com/H40cDs3/Qris-Rhiu.jpg" class="w-48 rounded-md">
+                    <div class="flex justify-center">
+                      <img src="https://i.ibb.co.com/H40cDs3/Qris-Rhiu.jpg" class="w-48 rounded-md">
+                    </div>
                     <p id="payment_notes" class="text-center">Menunggu pembayaran</p>
                     {{-- <div class="flex justify-between">
                       <button type="button" onclick="close_popup_add()" class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400">Batal</button>
@@ -170,7 +172,9 @@
     <x-footer></x-footer>
     <script>
         function open_popup_add() {
-            document.getElementById('popup-add').classList.remove('hidden');
+          const return_plan = document.getElementById('return_plan').value.trim();  
+          if(!return_plan){
+          document.getElementById('popup-add').classList.remove('hidden');
             var payment = document.querySelector('input[name="payment"]:checked');
 
             if(payment.value == 'qris'){
@@ -179,20 +183,23 @@
                 document.getElementById('payment_notes').innerHTML = 'Pembayaran Berhasil';
                 setTimeout(function(){
                   document.getElementById('transaction_start').submit();
-                }, 1000);
-            }, 3000);
+                }, 2000);
+            }, 5000);
             }else if(payment.value == 'kidney'){
               document.getElementById('kidney_opt').classList.remove('hidden');
             }
+          }else{
+            document.getElementById('transaction_start').submit();
+          }
 
         }
         function close_popup_add() {
-            document.getElementById('popup-add').classList.add('hidden');
-            if(payment.value == 'qris'){
+          if(payment.value == 'qris'){
             document.getElementById('qris_opt').classList.add('hidden');
-            }else if(payment.value == 'kidney') {
+          }else if(payment.value == 'kidney') {
             document.getElementById('kidney_opt').classList.add('hidden');
-            }
+          }
+          document.getElementById('popup-add').classList.add('hidden');
         }
 
 

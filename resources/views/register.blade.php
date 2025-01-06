@@ -52,7 +52,7 @@
         const address = document.getElementById('address').value.trim();
         const phone_number = document.getElementById('phone_number').value.trim();
 
-        if (!email || !password || !name || address || !phone_number) {
+        if (!email || !password || !name || !address || !phone_number) {
             return;
         }
 

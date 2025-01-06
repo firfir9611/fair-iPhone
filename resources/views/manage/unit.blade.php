@@ -5,7 +5,6 @@
     <x-header></x-header>
     <div class="w-11/12 mx-auto my-4 bg-white rounded-md p-8">
         <p class="font-bold text-2xl text-center mb-4">Kelola Unit</p>
-        <div class="flex flex-wrap justify-center gap-4">
         {{-- <div class="flex justify-items-start">
                 <button class="bg-red-500 hover:bg-red-600 py-2 px-4 text-white rounded-md" id="hapus_terpilih">Hapus Terpilih</button>
         </div> --}}
@@ -138,7 +137,6 @@
                     </svg>
                 </button>
             </div>
-        </div>
     </div>
     <div id="popup-add" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md z-20">
@@ -188,17 +186,17 @@
                     </select>
                 </div> --}}
                 <div class="mb-4">
-                    <label for="rent_price" id="price" class="block text-sm font-medium text-gray-700">Harga Sewa</label>
-                    <input type="number" name="rent_price" class="p-2 border rounded-md w-full" placeholder="Sewa per Hari">
+                    <label for="rent_price" class="block text-sm font-medium text-gray-700">Harga Sewa</label>
+                    <input type="number" id="price"  name="rent_price" required class="p-2 border rounded-md w-full" placeholder="Sewa per Hari">
                 </div>
                 <div class="mb-4 flex gap-2">
                     <div class="">
-                        <label for="stok" id="stok" class="block text-sm font-medium text-gray-700">Stok Unit</label>
-                        <input type="number" name="stok" class="p-2 border rounded-md w-full" placeholder="Stok Unit">
+                        <label for="stok"  class="block text-sm font-medium text-gray-700">Stok Unit</label>
+                        <input type="number" id="stok" name="stok" required class="p-2 border rounded-md w-full" placeholder="Stok Unit">
                     </div>
                     <div class="">
-                        <label for="battery_health" id="battery_health" class="block text-sm font-medium text-gray-700">Battery Health</label>
-                        <input type="text" name="battery_health" class="p-2 border rounded-md w-full" placeholder="Kesehatan Baterai">
+                        <label for="battery_health" class="block text-sm font-medium text-gray-700">Battery Health</label>
+                        <input type="text" id="battery_health" name="battery_health" required class="p-2 border rounded-md w-full" placeholder="Kesehatan Baterai">
                     </div>
                 </div>
                 <div class="flex justify-evenly space-x-4">
