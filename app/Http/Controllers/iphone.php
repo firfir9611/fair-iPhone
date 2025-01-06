@@ -75,10 +75,10 @@ class iphone extends Controller
         $unit_current_storages = iphone_storage::select(
             'iphone_storages.id AS iphone_storage_id','unit_storages.id AS unit_storage_id','unit_storages.capacity AS capacity'
         )->where('iphone_storages.iphone_id',$id)
-        ->leftJoin('unit_storages','unit_storages.id','=','iphone_storages.unit_storage_id')->get();
+        ->leftJoin('unit_storages','unit_storages.id','=','iphone_storages.unit_storage_id')->orderBy('unit_storages.id')->get();
+        $img = iphone_color::select('*')->where('iphone_id', $id)->get();
 
-
-        return view('manage.model_edit', compact('iphone','unit_colors','unit_storages','unit_current_colors','unit_current_storages'));
+        return view('manage.model_edit', compact('iphone','unit_colors','unit_storages','unit_current_colors','unit_current_storages','img'));
     }
 
     public function manageModelEditSave(Request $request, $id){

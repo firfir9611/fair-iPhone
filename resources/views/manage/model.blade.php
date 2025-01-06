@@ -4,7 +4,7 @@
 <body class="bg-gray-100 overflow-x-hidden">
     <x-header></x-header>
     <div class="w-11/12 mx-auto my-4 bg-white rounded-md p-8">
-        <p class="font-bold text-2xl text-center mb-4">Kelola iPhone</p>
+        <p class="font-bold text-2xl text-center mb-4">Kelola Model iPhone</p>
         <div class="gap-4">
         {{-- <div class="flex mb-4 justify-center">
                 <button class="bg-red-500 hover:bg-red-600 py-2 px-4 text-white rounded-md" id="hapus_terpilih">Hapus Terpilih</button>

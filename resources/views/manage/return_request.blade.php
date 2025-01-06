@@ -9,6 +9,7 @@
         {{-- <div class="flex justify-items-start">
                 <button class="bg-red-500 hover:bg-red-600 py-2 px-4 text-white rounded-md" id="hapus_terpilih">Hapus Terpilih</button>
         </div> --}}
+        <div class="overflow-x-scroll">
             <table class="bg-white w-full mx-auto min-w-max table-auto text-left">
                 <thead>
                     <tr>
@@ -64,6 +65,7 @@
                     @endif
               </tbody>
             </table>
+        </div>
         </div>
     </div>
     <x-footer></x-footer>

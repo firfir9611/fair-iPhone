@@ -52,7 +52,7 @@
                 </div>
             </div>
             <hr class="mt-2 mb-4">
-            <form action="{{ route('productTransactionStart') }}" method="POST">
+            <form id="transaction_start" action="{{ route('productTransactionStart') }}" method="POST">
             @csrf
             <input type="hidden" name="unit_id" value="{{ $iphone->unit_id }}">
             <input type="hidden" required name="rented_price_input" id="rented_price_input" value="">
@@ -62,14 +62,14 @@
                 <p class="text-lg font-bold mb-2">Metode pembayaran</p>
                 <div class="flex flex-wrap gap-4 mb-4">
                     <label class="flex items-center w-72 text-2x1 font-bold p-4 border-2 rounded-lg cursor-pointer hover:border-gray-400 focus-within:ring-2 focus-within:ring-indigo-500">
-                      <input type="radio" name="payment" checked value="QRIS" class="hidden peer" />
+                      <input type="radio" name="payment" checked value="qris" class="hidden peer" />
                       <div class="h-16 border-2 rounded-md flex justify-center items-center overflow-hidden mr-3 peer-checked:border-indigo-500">
                         <img src="https://i.ibb.co.com/4KDXMcN/qris.jpg" class="h-full" alt="qris">
                       </div>
                       QRIS
                     </label>
                     <label class="flex items-center w-72 text-2x1 font-bold p-4 border-2 rounded-lg cursor-pointer hover:border-gray-400 focus-within:ring-2 focus-within:ring-indigo-500">
-                      <input type="radio" name="payment" value="QRIS" class="hidden peer" />
+                      <input type="radio" name="payment" value="kidney" class="hidden peer" />
                       <div class="h-16 border-2 rounded-md flex justify-center items-center overflow-hidden mr-3 peer-checked:border-indigo-500">
                         <img src="https://i.ibb.co.com/kXtrwsn/kidney.jpg" class="h-full" alt="qris">
                       </div>
@@ -136,7 +136,7 @@
                 @if(Auth::check())
                 <div class="flex justify-center mb-4">
                   @if($iphone->unit_stok > 1)
-                    <button class="bg-blue-500 rounded-md px-4 py-2 font-bold text-white" type="submit">Sewa Sekarang</button>
+                    <button onclick="open_popup_add()" class="bg-blue-500 rounded-md px-4 py-2 font-bold text-white" type="button">Bayar Sekarang</button>
                   @else
                     <button class="bg-gray-500 rounded-md px-4 py-2 font-bold text-white" disabled>Unit Habis</button>
                     @endif
@@ -145,10 +145,57 @@
                 <p class="font-bold text-red-500">Login untuk melakukan penyewaan!</p>
                 @endif
             </div>
+            <div id="popup-add" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+              <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md z-20">
+                  <div id="qris_opt" class="hidden">
+                    <h2 class="text-2xl font-bold mb-4">Bayar Menggunakan QRIS</h2>
+                    <img src="https://i.ibb.co.com/H40cDs3/Qris-Rhiu.jpg" class="w-48 rounded-md">
+                    <p id="payment_notes" class="text-center">Menunggu pembayaran</p>
+                    {{-- <div class="flex justify-between">
+                      <button type="button" onclick="close_popup_add()" class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400">Batal</button>
+                      <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Lanjut</button>
+                    </div> --}}
+                  </div>
+                  <div id="kidney_opt" class="hidden">
+                    <h2 class="text-2xl font-bold my-4">Get Some Help XD</h2>
+                    <div class="flex justify-between">
+                      <button type="button" onclick="close_popup_add()" class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400">Ok</button>
+                      {{-- <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Lanjut</button> --}}
+                    </div>
+                  </div>
+              </div>
+          </div>
         </form>
     </div>
     <x-footer></x-footer>
     <script>
+        function open_popup_add() {
+            document.getElementById('popup-add').classList.remove('hidden');
+            var payment = document.querySelector('input[name="payment"]:checked');
+
+            if(payment.value == 'qris'){
+              document.getElementById('qris_opt').classList.remove('hidden');
+              setTimeout(function(){
+                document.getElementById('payment_notes').innerHTML = 'Pembayaran Berhasil';
+                setTimeout(function(){
+                  document.getElementById('transaction_start').submit();
+                }, 1000);
+            }, 3000);
+            }else if(payment.value == 'kidney'){
+              document.getElementById('kidney_opt').classList.remove('hidden');
+            }
+
+        }
+        function close_popup_add() {
+            document.getElementById('popup-add').classList.add('hidden');
+            if(payment.value == 'qris'){
+            document.getElementById('qris_opt').classList.add('hidden');
+            }else if(payment.value == 'kidney') {
+            document.getElementById('kidney_opt').classList.add('hidden');
+            }
+        }
+
+
         // Ambil elemen input dan elemen untuk menampilkan hasil
         const rentStartInput = document.getElementById('rent_start');
         const rentStartInputTxt = document.getElementById('rent_start_txt');

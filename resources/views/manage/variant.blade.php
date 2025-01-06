@@ -59,7 +59,7 @@
                             </tr>
                         @endforeach
                         @endif
-                        <tr>
+                        {{-- <tr>
                             <form action="{{ route('manageVariantColorAdd') }}" method="POST">
                                 @csrf
                                 <td class="p-4 border-b border-blue-gray-50">
@@ -78,7 +78,7 @@
                                     </div>
                                 </td>
                             </form>
-                        </tr>
+                        </tr> --}}
                   </tbody>
                 </table>
             </div>
@@ -141,7 +141,7 @@
                                 @csrf
                                 <td class="p-4 border-b flex items-center gap-2 border-blue-gray-50">
                                     <div>
-                                    <input class="p-2 border rounded-md" required maxlength="20" type="text" name="capacity" placeholder="">
+                                    <input class="p-2 border rounded-md" id="capacity" required maxlength="20" type="text" name="capacity" placeholder="">
                                     <select name="capacity_type" class="p-2 border mb-2 rounded-md">
                                         <option value="GB" selected>GB</option>
                                         <option value="TB">TB</option>
@@ -150,7 +150,7 @@
                                 </td>
                                 <td class="p-4 border-b border-blue-gray-50">
                                     <div class="flex justify-end">
-                                        <button type="submit" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 p-1 rounded-md underline">
+                                        <button id="storage_add_btn" type="submit" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 p-1 rounded-md underline">
                                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                             </svg>
@@ -166,6 +166,20 @@
     </div>
     <x-footer></x-footer>
 <script>
+    document.getElementById('storage_add_btn').addEventListener('click', function (event) {
+        const capacity = document.getElementById('capacity').value.trim();
+
+        if (!capacity) {
+            return;
+        }
+
+        setTimeout(function(){
+            const button = event.target;
+            button.disabled = true;
+            button.style.backgroundColor = '#A0AEC0';
+        }, 50);
+    });
+    
     let editIndex;
     
     function editColorAct(id){

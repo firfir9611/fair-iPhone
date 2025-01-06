@@ -9,6 +9,7 @@
         <div class="flex justify-items-start">
                 <button class="bg-red-500 hover:bg-red-600 py-2 px-4 text-white rounded-md" id="hapus_terpilih">Hapus Terpilih</button>
         </div>
+        <div class="overflow-x-scroll">
             <table class="bg-white w-full mx-auto min-w-max table-auto text-left">
                 <thead>
                     <tr>
@@ -100,13 +101,13 @@
                         <form action="{{ route('manageUserAdd') }}" method="POST">
                             @csrf
                             <td class="p-4 border-b border-blue-gray-50">
-                                <input class="p-2 border rounded-md" required type="text" name="name" placeholder="Masukan Nama Pengguna Baru">
+                                <input class="p-2 border rounded-md" id="name" required type="text" name="name" placeholder="Masukan Nama Pengguna Baru">
                             </td>
                             <td class="p-4 border-b border-blue-gray-50">
-                                <input class="p-2 border rounded-md" required type="text" name="email" placeholder="Masukan Email Pengguna Baru">
+                                <input class="p-2 border rounded-md" id="email" required type="text" name="email" placeholder="Masukan Email Pengguna Baru">
                             </td>
                             <td class="p-4 border-b border-blue-gray-50">
-                                <input class="p-2 border rounded-md w-32" required maxlength="20" type="text" name="password" placeholder="Masukan Kata Sandi Pengguna Baru">
+                                <input class="p-2 border rounded-md w-32" id="password" required maxlength="20" type="text" name="password" placeholder="Masukan Kata Sandi Pengguna Baru">
                             </td>
                             <td class="p-4 border-b border-blue-gray-50">
                                 <select name="role" class="p-2 border rounded-md">
@@ -127,6 +128,7 @@
                     </tr>
               </tbody>
             </table>
+        </div>
             @if(session('exist'))
                 <p class="text-red-500 text-sm">{{ session('exist') }}</p>
             @endif
@@ -135,12 +137,24 @@
 <x-footer></x-footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-    document.getElementById('user_add_btn').addEventListener('click', function(e){
-        const btn = e.target;
-        btn.disabled = true;
+    document.getElementById('user_add_btn').addEventListener('click', function(event){
+        const email = document.getElementById('email').value.trim();
+        const name = document.getElementById('name').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!email || !password || !name) {
+            return;
+        }
+
+        if (!email.includes('@')) {
+            return;
+        }
+
         setTimeout(function(){
-            btn.disabled = false;
-        }, 3000);
+            const button = event.target;
+            button.disabled = true;
+            button.style.backgroundColor = '#A0AEC0';
+        }, 50);
     });
     
     let editIndex;

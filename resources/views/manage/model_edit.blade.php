@@ -13,11 +13,18 @@
                         <label for="id">ID iPhone : </label>
                         <input class="bg-white" name="id" type="text" value="{{ $iphone->id }}" disabled>
                     </div>
-                    <button class="border border-blue-500 rounded-md bg-white hover:bg-blue-500 text-blue-500 hover:text-white py-1 px-2" type="submit">
+                    <button id="save_btn" class="border border-blue-500 rounded-md bg-white hover:bg-blue-500 text-blue-500 hover:text-white py-1 px-2" type="submit">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
                         </svg>
                     </button>
+                </div>
+                <div class="flex flex-wrap p-2 gap-4">
+                    @if($img)
+                    @foreach($img as $link)
+                    <img src="" class="w-32 h-auto mx-auto" alt="">
+                    @endforeach
+                    @endif
                 </div>
                 {{-- <label for="img">Gambar iPhone (Rasio Gambar 3:4) : </label>
                 <input class="w-1/4 bg-white border rounded-md mt-2" type="file" name="img" accept="image/png, image/jpg, image/jpeg"><br> --}}

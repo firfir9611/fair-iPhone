@@ -22,7 +22,6 @@
                     </svg>
                 </button>
              </div>
-            <p id="notes" class="text-red-500 text-sm"></p>
             @if(session('failed'))
             <p class="text-red-500 text-sm">{{ session('failed') }}</p>
             @endif
@@ -37,24 +36,18 @@
            </form>
     </x-center-form-container>
 <script>    
-        document.getElementById('login_btn').addEventListener('click', function (event) {
+    document.getElementById('login_btn').addEventListener('click', function (event) {
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
-        const notes = document.getElementById('notes');
 
-        // Validasi input kosong
         if (!email || !password) {
-            // event.preventDefault();
             return;
         }
 
-        // Validasi format email (harus mengandung "@")
         if (!email.includes('@')) {
-            // event.preventDefault();
             return;
         }
 
-        // Ubah tombol jika valid
         setTimeout(function(){
             const button = event.target;
             button.disabled = true;

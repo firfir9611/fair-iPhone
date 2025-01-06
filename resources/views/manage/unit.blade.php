@@ -9,6 +9,7 @@
         {{-- <div class="flex justify-items-start">
                 <button class="bg-red-500 hover:bg-red-600 py-2 px-4 text-white rounded-md" id="hapus_terpilih">Hapus Terpilih</button>
         </div> --}}
+        <div class="overflow-x-scroll">
             <table class="bg-white w-full mx-auto min-w-max table-auto text-left">
                 <thead>
                     <tr>
@@ -129,6 +130,7 @@
                     </tr> --}}
               </tbody>
             </table>
+        </div>
             <div class="flex justify-center">
                 <button type="button" onclick="open_popup_add()" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 p-1 rounded-md underline">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
@@ -186,28 +188,45 @@
                     </select>
                 </div> --}}
                 <div class="mb-4">
-                    <label for="rent_price" class="block text-sm font-medium text-gray-700">Harga Sewa</label>
+                    <label for="rent_price" id="price" class="block text-sm font-medium text-gray-700">Harga Sewa</label>
                     <input type="number" name="rent_price" class="p-2 border rounded-md w-full" placeholder="Sewa per Hari">
                 </div>
                 <div class="mb-4 flex gap-2">
                     <div class="">
-                        <label for="stok" class="block text-sm font-medium text-gray-700">Stok Unit</label>
+                        <label for="stok" id="stok" class="block text-sm font-medium text-gray-700">Stok Unit</label>
                         <input type="number" name="stok" class="p-2 border rounded-md w-full" placeholder="Stok Unit">
                     </div>
                     <div class="">
-                        <label for="battery_health" class="block text-sm font-medium text-gray-700">Battery Health</label>
+                        <label for="battery_health" id="battery_health" class="block text-sm font-medium text-gray-700">Battery Health</label>
                         <input type="text" name="battery_health" class="p-2 border rounded-md w-full" placeholder="Kesehatan Baterai">
                     </div>
                 </div>
                 <div class="flex justify-evenly space-x-4">
                     <button type="button" onclick="close_popup_add()" class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Simpan</button>
+                    <button type="submit" id="save_btn" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Simpan</button>
                 </div>
             </form>
         </div>
     </div>
     <x-footer></x-footer>
 <script>
+    document.getElementById('save_btn').addEventListener('click', function (event) {
+        const price = document.getElementById('price').value.trim();
+        const stok = document.getElementById('stok').value.trim();
+        const battery_health = document.getElementById('battery_health').value.trim();
+
+        if (!price || !stok || !battery_health) {
+            return;
+        }
+
+        setTimeout(function(){
+            const button = event.target;
+            button.disabled = true;
+            button.style.backgroundColor = '#A0AEC0';
+            button.innerHTML = 'Menyimpan Data';
+        }, 50);
+    });
+
     const iphone_colors = @json($unit_colors);
     const iphone_storages = @json($unit_storages);
 
