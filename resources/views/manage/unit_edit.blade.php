@@ -52,8 +52,12 @@
                     <input class="p-2 border rounded-md w-full" value="{{ $unit_id->battery_health }}" type="text" placeholder="Masukan Kesehatan Baterai iPhone" name="battery_health" required>
                 </div>
                 <div class="mb-4">
-                    <label for="stok">Stok : </label><br>
+                    <label for="stok">Stok Tersedia : </label><br>
                     <input class="p-2 border rounded-md w-full" value="{{ $unit_id->stok }}" type="number" placeholder="Masukan Kesehatan Baterai iPhone" name="stok" required>
+                </div>
+                <div class="mb-4">
+                    <label for="stok_booked">Stok Sedang Disewa : </label><br>
+                    <input class="p-2 border rounded-md w-full" value="{{ $unit_id->stok_booked }}" disabled type="number" placeholder="Masukan Kesehatan Baterai iPhone" name="stok_booked" required>
                 </div>
                 <div class="mb-4">
                     <label for="color"> Warna : </label>

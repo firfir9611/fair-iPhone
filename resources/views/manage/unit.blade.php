@@ -21,7 +21,8 @@
                         <x-table-header>Battery Health</x-table-header>
                         <x-table-header>Warna</x-table-header>
                         <x-table-header>Penyimpanan</x-table-header>
-                        <x-table-header>Stok</x-table-header>
+                        <x-table-header>Stok Tersedia</x-table-header>
+                        <x-table-header>Stok Sedang Disewa</x-table-header>
                         <x-table-header>Status</x-table-header>
                         <x-table-header>Kontrol</x-table-header>
                     </tr>
@@ -40,6 +41,7 @@
                             <x-table-contents>{{ $unit_id->color_name }}</x-table-contents>
                             <x-table-contents>{{ $unit_id->storage_capacity }}</x-table-contents>
                             <x-table-contents>{{ $unit_id->stok }}</x-table-contents>
+                            <x-table-contents>{{ $unit_id->stok_booked }}</x-table-contents>
                             <td class="p-4 border-b border-blue-gray-50">
                                 <div class="flex items-center p-1">
                                     <p class="font-b">{{ $unit_id->show == 1 ? 'Tertampil':'Disembunyikan'}}</p>

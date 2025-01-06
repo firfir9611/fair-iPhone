@@ -235,7 +235,7 @@ class iphone extends Controller
         $id = unit_id::max('id')+1;
         $unit_ids = unit_id::select(
             'unit_ids.id AS unit_id','unit_ids.stok AS stok','unit_ids.show AS show','unit_ids.battery_health AS battery_health','unit_ids.rent_price AS rent_price',
-            'iphones.id AS iphone_id','iphones.name AS iphone_name',
+            'iphones.id AS iphone_id','iphones.name AS iphone_name','unit_ids.stok_booked AS stok_booked',
             'unit_colors.id AS color_id','unit_colors.color AS color_name',
             'unit_storages.id AS storage_id','unit_storages.capacity AS storage_capacity',
             'unit_imgs.top AS img_top','unit_imgs.bottom AS img_bottom','unit_imgs.left AS img_left','unit_imgs.right AS img_right'
@@ -255,7 +255,7 @@ class iphone extends Controller
     }
     public function manageUnitEdit($id){
         $unit_id = unit_id::select(
-            'unit_ids.id AS id','unit_ids.stok AS stok','unit_ids.show AS show','unit_ids.battery_health AS battery_health','unit_ids.rent_price AS rent_price',
+            'unit_ids.id AS id','unit_ids.stok AS stok','unit_ids.stok_booked AS stok_booked','unit_ids.show AS show','unit_ids.battery_health AS battery_health','unit_ids.rent_price AS rent_price',
             'iphones.id AS iphone_id','iphones.name AS iphone_name',
             'unit_colors.id AS color_id','unit_colors.color AS color_name',
             'unit_storages.id AS storage_id','unit_storages.capacity AS storage_capacity',
@@ -295,7 +295,7 @@ class iphone extends Controller
 
         $existing_unit = unit_id::where('unit_color_id', $request->color)
         ->where('unit_storage_id', $request->storage)
-        ->where('rent_price', $request->rent_price)
+        // ->where('rent_price', $request->rent_price)
         ->where('id', '!=', $id)->first();
 
         if($request->show) {
@@ -328,6 +328,13 @@ class iphone extends Controller
             $existing_unit->stok += $unit_id->stok;
             $existing_unit->save();
             unit_id::where('id', $id)->delete();
+
+            $stok = unit_id::where('iphone_id', $unit_id->iphone_id)->sum('stok');
+        $stok_booked = unit_id::where('iphone_id', $unit_id->iphone_id)->sum('stok_booked');
+        $total_stok = $stok+$stok_booked;
+        iphones::where('id',$unit_id->iphone_id)->update(['stok_ready' => $total_stok]);
+
+        return redirect()->route('manageUnit')->with('double','Terdapat kesaman model, warna, dan penyimpanan!, stok terjumlahkan');
         }else{
             unit_id::where('id',$id)->update([
                 'rent_price' => $request->rent_price,
@@ -336,14 +343,16 @@ class iphone extends Controller
                 'unit_storage_id' => $request->storage,
                 'stok' => $request->stok
             ]);
-        }
 
-        $stok = unit_id::where('iphone_id', $unit_id->iphone_id)->sum('stok');
-        $stok_booked = unit_id::where('iphone_id', $unit_id->iphone_id)->sum('stok_booked');
-        $total_stok = $stok+$stok_booked;
+            $stok = unit_id::where('iphone_id', $unit_id->iphone_id)->sum('stok');
+            $stok_booked = unit_id::where('iphone_id', $unit_id->iphone_id)->sum('stok_booked');
+            $total_stok = $stok+$stok_booked;
         iphones::where('id',$unit_id->iphone_id)->update(['stok_ready' => $total_stok]);
-
         return redirect()->route('manageUnit');
+    }
+    return redirect()->route('manageUnit');
+
+        
     }
     public function manageUnitDelete($id){
         $unit_id = unit_id::select('*')->where('id',$id)->first();

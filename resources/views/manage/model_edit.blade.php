@@ -22,7 +22,7 @@
                 <div class="flex flex-wrap p-2 gap-4">
                     @if($img)
                     @foreach($img as $link)
-                    <img src="" class="w-32 h-auto mx-auto" alt="">
+                    <img src="{{ $link->img }}" class="w-32 h-auto mx-auto" alt="">
                     @endforeach
                     @endif
                 </div>
