@@ -76,6 +76,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/return/request/send/cancel{id}', [transaction::class, 'returnRequestSendCancel'])->name('returnRequestSendCancel');
     Route::post('/return/request/acc{id}', [transaction::class, 'returnRequestAcc'])->name('returnRequestAcc');
 
+    //report
+    Route::get('/report/rent/history', [transaction::class, 'reportRentHistory'])->name('reportRentHistory');
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

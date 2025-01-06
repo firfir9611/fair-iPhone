@@ -23,7 +23,7 @@ class AuthController extends Controller
         }
         $user->password = bcrypt($request->password);
         $user->save();
-        return redirect()->route('login');
+        return redirect()->view('login')->with('registered','Akun berhasil di tambahkan!');
     }
 
     function submitLogin(Request $request){

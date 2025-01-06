@@ -25,14 +25,25 @@
             @if(session('failed'))
             <p class="text-red-500 text-sm">{{ session('failed') }}</p>
             @endif
+            @if(session('registered'))
+            <p class="text-green-500 text-sm">{{ session('registered') }}</p>
+            @endif
              {{-- <div class="flex flex-row justify-between mb-8">
                <a href="javascript:void(0)" class="mr-4 text-sm font-medium text-blue-500">Forget password?</a>
              </div> --}}
-             <button type="submit" class="bg-blue-500 w-full px-6 py-5 mb-5 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-lg">Masuk</button>
+             <button type="submit" id="login_btn" class="bg-blue-500 w-full px-6 py-5 mb-5 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-lg">Masuk</button>
              <p class="text-sm leading-relaxed text-grey-900">Belum punya akun?? <a href="/register" class="font-bold text-blue-500">Buat akun baru</a></p>
            </form>
     </x-center-form-container>
     <script>    
+        const loginBtn = document.getElementById('login_btn');
+        loginBtn.addEventListener('click', function(){
+            loginBtn.disabled = true;
+            setTimeout(function(){
+            loginBtn.disabled = false;
+        }, 3000);
+        });
+
         const passwordField = document.getElementById('password');
         const togglePassword = document.getElementById('toggle-password');
         const togglePassword1 = document.getElementById('toggle-password1');

@@ -83,7 +83,7 @@ class transaction extends Controller
         $return_requests = return_request::select(
             'return_requests.id AS return_request_id','transactions.id AS transaction_id','cust.name AS cust_name','return_requests.created_at AS created',
             'admin.name AS admin_name','iphones.name AS iphone_name','unit_colors.color AS color','unit_storages.capacity AS storage','return_requests.approve AS approve',
-            'transactions.penalty AS penalty'
+            'transactions.penalty AS penalty','transactions.total_paid AS total_paid'
         )->leftJoin('users AS admin','admin.id','=','return_requests.user_id')
         ->leftJoin('transactions','transactions.id','=','return_requests.transaction_id')
         ->leftJoin('unit_ids','unit_ids.id','=','transactions.unit_id_id')
@@ -121,5 +121,24 @@ class transaction extends Controller
         return_request::where('transaction_id', $returnRequest->transaction_id)->update(['approve' => 1,'user_id' => $user_id]);
 
         return redirect()->back();
+    }
+
+    public function reportRentHistory(){
+        $transactions = transactions::select(
+            'transactions.id AS transaction_id','transactions.total_paid AS total_paid','transactions.rent_at AS rent_at','transactions.return_plan AS return_plan',
+            'transactions.return_at AS return_at','unit_colors.color AS color','unit_storages.capacity AS storage','iphones.name AS iphone_name',
+            'unit_ids.iphone_id AS iphone_id','unit_ids.unit_color_id AS color_id','unit_ids.id AS unit_id',
+            'users.name AS user_name'
+        )
+        ->leftJoin('unit_ids','unit_ids.id','=','transactions.unit_id_id')
+        ->leftJoin('users','users.id','=','transactions.user_id')
+        ->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
+        ->leftJoin('unit_colors','unit_colors.id','=','unit_ids.unit_color_id')
+        ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
+        ->orderBy('transactions.id','desc')->get();
+
+
+
+        return view('report.rent_history',compact('transactions'));
     }
 }

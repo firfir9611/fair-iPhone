@@ -4,7 +4,7 @@
 <body class="bg-gray-100 overflow-x-hidden">
     <x-Header></x-Header>
     <div class="py-6 lg:px-16 md:px-6 m-6 p-2 lg:w-3/4 md:w-full mx-auto lg:rounded-lg bg-white">
-        <h3 class="text-center mb-6 text-2xl font-bold">Sedang Disewa</h3>
+        <h3 class="text-center mb-6 text-2xl font-bold">Telah dikembalikan</h3>
             @if($transactions->isNotEmpty())
             @foreach($transactions as $transaction)
             <form action="{{ route('returnRequestSend', $transaction->transaction_id) }}" method="POST">
@@ -24,9 +24,10 @@
                             <p class="font-bold lg:text-sm text-xs">Warna</p>
                             <p class="font-bold lg:text-sm text-xs">Penyimpanan</p>
                             <p class="font-bold lg:text-sm text-xs">Mulai Sewa</p>
+                            <p class="font-bold lg:text-sm text-xs">Rencana Pengembalian</p>
                             <p class="font-bold lg:text-sm text-xs">Dikembalikan</p>
+                            <p class="font-bold lg:text-sm text-xs">Rencana Lama Penyewaan</p>
                             <p class="font-bold lg:text-sm text-xs">Lama Penyewaan</p>
-                            <p class="font-bold lg:text-sm text-xs hidden">Waktu Tersisa</p>
                             <p class="font-bold lg:text-sm text-xs">Total Biaya</p>
                             @if(session('success'.$transaction->transaction_id))
                             <div class="flex justify-center mb-4">
@@ -38,9 +39,10 @@
                             <p class="font-bold lg:text-sm text-xs">: {{ $transaction->color }}</p>
                             <p class="font-bold lg:text-sm text-xs">: {{ $transaction->storage }}</p>
                             <p class="font-bold lg:text-sm text-xs">: <span id="rent_start_{{ $transaction->transaction_id }}">{{ $transaction->rent_at }}</span></p>
+                            <p class="font-bold lg:text-sm text-xs">: <span id="return_at_{{ $transaction->transaction_id }}">{{ $transaction->return_plan }}</span></p>
                             <p class="font-bold lg:text-sm text-xs">: <span id="return_plan_{{ $transaction->transaction_id }}">{{ $transaction->return_at }}</span></p>
+                            <p class="font-bold lg:text-sm text-xs">: <span id="days_remaining_{{ $transaction->transaction_id }}" class="">? Hari</span></p>
                             <p class="font-bold lg:text-sm text-xs">: <span id="total_days_{{ $transaction->transaction_id }}">? Hari</span></p>
-                            <p class="font-bold lg:text-sm text-xs hidden">: <span id="days_remaining_{{ $transaction->transaction_id }}" class="">? Hari Tersisa</span></p>
                             <p class="font-bold lg:text-sm text-xs">: <span class="text-red-500">{{  "Rp " . number_format($transaction->total_paid,0,',','.')  }}</span></p>
                         </div>
                     </div>
@@ -68,6 +70,7 @@
         transactions.forEach(transaction => {
             const rentStartElement = document.getElementById(`rent_start_${transaction.transaction_id}`);
             const returnPlanElement = document.getElementById(`return_plan_${transaction.transaction_id}`);
+            const returnAtElement = document.getElementById(`return_at_${transaction.transaction_id}`);
             const totalDaysElement = document.getElementById(`total_days_${transaction.transaction_id}`);
             const daysRemainingElement = document.getElementById(`days_remaining_${transaction.transaction_id}`);
             const name = document.getElementById(`iphone_id_${transaction.transaction_id}`);
@@ -81,9 +84,10 @@
                 imgSrc.src = 'https://i.ibb.co.com/MC9BD2m/quest-icon.png';
             }
 
-            if (rentStartElement && returnPlanElement) {
+            if (rentStartElement && returnPlanElement && returnAtElement) {
                 const rentStart = new Date(rentStartElement.textContent);
                 const returnPlan = new Date(returnPlanElement.textContent);
+                const returnAt = new Date(returnAtElement.textContent);
                 const today = new Date();
 
                 // Calculate total days
@@ -91,13 +95,9 @@
                 totalDaysElement.textContent = `${totalDays} Hari`;
 
                 // Calculate remaining days
-                const daysRemaining = Math.ceil((returnPlan - today) / (1000 * 60 * 60 * 24));
-                daysRemainingElement.textContent = daysRemaining > 0 ? `${daysRemaining} Hari Tersisa` : `${daysRemaining} Hari Terlewat!, Pengembalian Terlambat`;
-                if(daysRemaining < 3 && daysRemaining > 0) {
-                    daysRemainingElement.classList.add('text-orange-300');
-                }else if(daysRemaining < 1){
-                    daysRemainingElement.classList.add('text-red-500');
-                }
+                const daysRemaining = Math.ceil((today - rentStart) / (1000 * 60 * 60 * 24));
+                daysRemainingElement.textContent = `${daysRemaining} Hari`;
+                
 
 
             }

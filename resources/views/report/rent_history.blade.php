@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-head>Konfirmasi Pengembalian</x-head>
+<x-head>Riwayat Penyewaan</x-head>
 <body class="bg-gray-100 overflow-x-hidden">
     <x-header></x-header>
     <div class="w-11/12 mx-auto my-4 bg-white rounded-md p-8">
-        <p class="font-bold text-2xl text-center mb-4">Konfirmasi Pengembalian</p>
+        <p class="font-bold text-2xl text-center mb-4">Riyawat Penyewaan iPhone</p>
         <div class="flex flex-wrap justify-center gap-4">
         {{-- <div class="flex justify-items-start">
                 <button class="bg-red-500 hover:bg-red-600 py-2 px-4 text-white rounded-md" id="hapus_terpilih">Hapus Terpilih</button>
@@ -15,32 +15,30 @@
                         {{-- <th class="border-y border-blue-gray-50 p-4">
                             <input type="checkbox" id="pilih_semua" class="ml-2 w-6 h-6">
                         </th> --}}
-                        <x-table-header>ID Transaksi</x-table-header>
+                        <x-table-header>ID</x-table-header>
                         <x-table-header>Nama Pengguna</x-table-header>
                         <x-table-header>Nama Unit</x-table-header>
-                        <x-table-header>Nama Konfirmator</x-table-header>
-                        <x-table-header>Total Biaya</x-table-header>
-                        <x-table-header>Denda</x-table-header>
+                        <x-table-header>Total Harga</x-table-header>
+                        <x-table-header>Total Hari</x-table-header>
                         <x-table-header>Tanggal</x-table-header>
                         <x-table-header>Status</x-table-header>
                     </tr>
                 </thead>
                 <tbody>
-                    @if($return_requests->isNotEmpty())
-                    @foreach ($return_requests as $return_request)
+                    @if($transactions->isNotEmpty())
+                    @foreach ($transactions as $transaction)
                         <tr>
                             {{-- <td class="p-4 border-b border-blue-gray-50">
                                 <input type="checkbox" class="checkbox_pilih ml-2 w-6 h-6" name="ids[]" value="{{ $unit_id->unit_id }}">
                             </td> --}}
-                            <x-table-contents>{{ $return_request->transaction_id }}</x-table-contents>
-                            <x-table-contents>{{ $return_request->cust_name }}</x-table-contents>
-                            <x-table-contents>{{ $return_request->iphone_name.' '.$return_request->color.' '.$return_request->storage }}</x-table-contents>
+                            <x-table-contents>{{ $transaction->transaction_id }}</x-table-contents>
+                            <x-table-contents>{{ $transaction->user_name }}</x-table-contents>
+                            <x-table-contents>{{ $transaction->iphone_name.' '.$return_request->color.' '.$return_request->storage }}</x-table-contents>
                             @if($return_request->admin_name)
                             <x-table-contents>{{ $return_request->admin_name }}</x-table-contents>
                             @else
                             <x-table-contents>-</x-table-contents>
                             @endif
-                            <x-table-contents>{{  "Rp " . number_format($return_request->total_paid,0,',','.')  }}</x-table-contents>
                             <x-table-contents>{{  "Rp " . number_format($return_request->penalty,0,',','.')  }}</x-table-contents>
                             <x-table-contents>{{ $return_request->created }}</x-table-contents>
                             <td class="p-4 border-b border-blue-gray-50">

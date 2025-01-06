@@ -11,13 +11,13 @@
                 <h3 class="mb-3 text-4xl font-extrabold text-dark-grey-900">Buat Akun Baru</h3>
             </div>
              <label for="name" class="mt-12 mb-2 text-sm text-start text-grey-900">Nama</label>
-             <input name="name" required type="text" placeholder="Ketikan nama lengkapmu disini" class="border w-full px-5 py-4 mr-2 text-sm outline-none focus:border-blue-500 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-lg"/>
+             <input name="name" required type="text" maxlength="40" placeholder="Ketikan nama lengkapmu disini" class="border w-full px-5 py-4 mr-2 text-sm outline-none focus:border-blue-500 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-lg"/>
              <label for="email" class="mb-2 text-sm text-start text-grey-900">Email</label>
-             <input name="email" required type="email" placeholder="Ketikan alamat emailmu disini" class="border w-full px-5 py-4 mr-2 text-sm outline-none focus:border-blue-500 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-lg"/>
+             <input name="email" required type="email" maxlength="40" placeholder="Ketikan alamat emailmu disini" class="border w-full px-5 py-4 mr-2 text-sm outline-none focus:border-blue-500 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-lg"/>
              <label for="address" class="mb-2 text-sm text-start text-grey-900">Alamat</label>
-             <input name="address" required type="text" placeholder="Ketikan alamatmu disini" class="border w-full px-5 py-4 mr-2 text-sm outline-none focus:border-blue-500 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-lg"/>
+             <input name="address" required type="text" maxlength="100" placeholder="Ketikan alamatmu disini" class="border w-full px-5 py-4 mr-2 text-sm outline-none focus:border-blue-500 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-lg"/>
              <label for="phone_number" class="mb-2 text-sm text-start text-grey-900">No Whatsapp</label>
-             <input name="phone_number" required type="text" placeholder="Ketikan nomer whatsappmu disini" class="border w-full px-5 py-4 mr-2 text-sm outline-none focus:border-blue-500 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-lg"/>
+             <input name="phone_number" maxlength="15" required type="text" placeholder="Ketikan nomer whatsappmu disini" class="border w-full px-5 py-4 mr-2 text-sm outline-none focus:border-blue-500 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-lg"/>
              <label for="gender" class="text-sm text-start text-grey-900">Jenis Kelamin</label>
              <div class="flex p-2 mb-4">
                 <input name="gender" type="radio" value="male" checked/>
@@ -27,7 +27,7 @@
              </div>
              <label for="password" class="mb-2 text-sm text-start text-grey-900">Kata Sandi</label>
              <div class="flex border rounded-lg mb-4">
-                <input name="password" required type="password" id="password" placeholder="Ketikan kata sandimu disini" class="w-full px-5 py-4 text-sm outline-none focus:border-blue-500 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900"/>
+                <input name="password" minlength="8" maxlength="24" required type="password" id="password" placeholder="Ketikan kata sandimu disini" class="w-full px-5 py-4 text-sm outline-none focus:border-blue-500 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900"/>
                 <button class="p-2 my-1.5 h-full" id="toggle-password" type="button">
                     <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                       <path stroke-linecap="round" id="toggle-password1" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
