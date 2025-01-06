@@ -38,10 +38,12 @@
     <script>    
         const loginBtn = document.getElementById('login_btn');
         loginBtn.addEventListener('click', function(){
-            loginBtn.disabled = true;
+            loginBtn.innerHTML = 'Mohon Tunggu';
+            loginBtn.classList.add('bg-gray-400');
             setTimeout(function(){
-            loginBtn.disabled = false;
-        }, 3000);
+            loginBtn.disabled = true;
+
+        }, 100);
         });
 
         const passwordField = document.getElementById('password');
