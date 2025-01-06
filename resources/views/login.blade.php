@@ -22,6 +22,7 @@
                     </svg>
                 </button>
              </div>
+            <p id="notes" class="text-red-500 text-sm"></p>
             @if(session('failed'))
             <p class="text-red-500 text-sm">{{ session('failed') }}</p>
             @endif
@@ -39,18 +40,17 @@
         document.getElementById('login_btn').addEventListener('click', function (event) {
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
+        const notes = document.getElementById('notes');
 
         // Validasi input kosong
         if (!email || !password) {
-            // alert('Harap isi semua kolom!');
-            event.preventDefault();
+            // event.preventDefault();
             return;
         }
 
         // Validasi format email (harus mengandung "@")
         if (!email.includes('@')) {
-            // alert('Alamat email tidak valid! Harap masukkan email yang benar.');
-            event.preventDefault();
+            // event.preventDefault();
             return;
         }
 
@@ -60,7 +60,7 @@
             button.disabled = true;
             button.style.backgroundColor = '#A0AEC0';
             button.innerHTML = 'Mohon Tunggu';
-        }, 100);
+        }, 50);
     });
 
 
