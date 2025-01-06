@@ -35,38 +35,50 @@
              <p class="text-sm leading-relaxed text-grey-900">Belum punya akun?? <a href="/register" class="font-bold text-blue-500">Buat akun baru</a></p>
            </form>
     </x-center-form-container>
-    <script>    
-        const loginBtn = document.getElementById('login_btn');
-        const email = document.getElementById('email');
-        const password = document.getElementById('password');
-        loginBtn.addEventListener('click', function(){
-            if(email.value == '' || password == ''){
-            loginBtn.innerHTML = 'Mohon Tunggu';
-            
-            loginBtn.classList.add('bg-gray-400');
-            // setTimeout(function(){
-            // loginBtn.disabled = true;
-            // }, 100);
+<script>    
+        document.getElementById('login_btn').addEventListener('click', function (event) {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        // Validasi input kosong
+        if (!email || !password) {
+            alert('Harap isi semua kolom!');
+            event.preventDefault();
+            return;
         }
-        });
 
-        const passwordField = document.getElementById('password');
-        const togglePassword = document.getElementById('toggle-password');
-        const togglePassword1 = document.getElementById('toggle-password1');
-        const togglePassword2 = document.getElementById('toggle-password2');
+        // Validasi format email (harus mengandung "@")
+        if (!email.includes('@')) {
+            alert('Alamat email tidak valid! Harap masukkan email yang benar.');
+            event.preventDefault();
+            return;
+        }
 
-        togglePassword.addEventListener('click', () => {
-            const type = passwordField.type === 'password' ? 'text' : 'password';
-            passwordField.type = type;
+        // Ubah tombol jika valid
+        const button = event.target;
+        button.disabled = true;
+        button.style.backgroundColor = '#A0AEC0';
+        button.innerHTML = 'Memuat...';
+    });
 
-            if(passwordField.type === 'text'){
-                togglePassword1.setAttribute('d', 'M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88');
-                togglePassword2.setAttribute('d', '');
-            } else{
-                togglePassword1.setAttribute('d', 'M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z');
-                togglePassword2.setAttribute('d', 'M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z');
-            }
-        });
-    </script>
+
+    const passwordField = document.getElementById('password');
+    const togglePassword = document.getElementById('toggle-password');
+    const togglePassword1 = document.getElementById('toggle-password1');
+    const togglePassword2 = document.getElementById('toggle-password2');
+
+    togglePassword.addEventListener('click', () => {
+        const type = passwordField.type === 'password' ? 'text' : 'password';
+        passwordField.type = type;
+
+        if(passwordField.type === 'text'){
+            togglePassword1.setAttribute('d', 'M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88');
+            togglePassword2.setAttribute('d', '');
+        } else{
+            togglePassword1.setAttribute('d', 'M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z');
+            togglePassword2.setAttribute('d', 'M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z');
+        }
+    });
+</script>
 </body>
 </html>
