@@ -34,7 +34,6 @@
                         <x-table-header>Tanggal Kembali</x-table-header>
                         <x-table-header>Total Hari</x-table-header>
                         <x-table-header>Total Pembayaran</x-table-header>
-                        <x-table-header>Tanggal</x-table-header>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,7 +48,6 @@
                             <x-table-contents><span class="return_plan_{{ $transaction->transaction_id }}">{{ $transaction->return_at }}</span></x-table-contents>
                             <x-table-contents><span id="total_days_{{ $transaction->transaction_id }}"></span></x-table-contents>
                             <x-table-contents>{{ "Rp " . number_format($transaction->total_paid,0,',','.') }}</x-table-contents>
-                            <x-table-contents>{{ $return_request->created }}</x-table-contents>
                         </tr>
                     @endforeach
                     @endif
