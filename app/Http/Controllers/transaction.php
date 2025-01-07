@@ -137,9 +137,9 @@ class transaction extends Controller
         ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
         ->orderBy('transactions.id','desc')->get();
 
+        $description = '';
 
-
-        return view('report.rent_history',compact('transactions'));
+        return view('report.rent_history',compact('transactions','description'));
     }
     public function reportRentHistorySearchDate(Request $request){
         $transactions = transactions::select(
@@ -155,9 +155,9 @@ class transaction extends Controller
         ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
         ->orderBy('transactions.id','desc')->get();
 
+        $description = 'Riwayat penyewaan iPhone dari tanggal '.$request->start_date.' sampai '.$request->end_date;
 
-
-        return view('report.rent_history',compact('transactions'));
+        return view('report.rent_history',compact('transactions','description'));
     }
     public function reportRentHistorySearchName(Request $request){
         $transactions = transactions::select(
@@ -173,8 +173,8 @@ class transaction extends Controller
         ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
         ->orderBy('transactions.id','desc')->get();
 
+        $description = 'Riwayat penyewaan '.$request->name;
 
-
-        return view('report.rent_history',compact('transactions'));
+        return view('report.rent_history',compact('transactions','description'));
     }
 }

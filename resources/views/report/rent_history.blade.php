@@ -9,15 +9,15 @@
                 <option value="name">Nama iPhone</option>
                 <option value="date">Rentang Tanggal</option>
             </select>
-            <div id="by-date" class="w-fit items-center flex flex-wrap px-4 gap-2 my-4">
-                <form action="{{ route('reportRentHistorySearchDate') }}" method="POST">
+            <div id="by-date" >
+                <form action="{{ route('reportRentHistorySearchDate') }}" method="POST" class="w-fit items-center flex flex-wrap px-4 gap-2">
                 @csrf
                 <label for="date_range" class="text-lg"> : </label>
                 <select name="opt" id="opt" class="border rounded-md p-2">
                     <option value="rent_at">Mulai Sewa</option>
                     <option value="return_at">Pengembalian</option>
                 </select>
-                <div class="flex gap-2">
+                <div class="flex gap-2 items-center">
                     <input type="date" id="start_date" name="start_date" value="{{ old('start_date') }}" class="p-2 border rounded-md" required>
                     <label for=""> - </label>
                     <input type="date" id="end_date" name="end_date" value="{{ old('end_date') }}" class="p-2 border rounded-md" required>
@@ -31,8 +31,8 @@
                 </div>
                 </form>
             </div>
-            <div id="by-name" class="w-fit items-center flex flex-wrap px-4 gap-2 my-4">
-                <form action="{{ route('reportRentHistorySearchName') }}" method="POST">
+            <div id="by-name" >
+                <form action="{{ route('reportRentHistorySearchName') }}" method="POST" class="w-fit items-center flex flex-wrap px-4 gap-2">
                 @csrf
                 <label for="date_range" class="text-lg"> : </label>
                 <div class="flex gap-2">
@@ -58,11 +58,13 @@
     <div class="w-11/12 mx-auto my-4 bg-white rounded-md p-8">
         <p class="font-bold text-2xl text-center mb-4">Riyawat Penyewaan iPhone</p>
         <div class="flex flex-wrap justify-center gap-4">
-        <div class="flex justify-items-start">
-                
+        <div class="flex mt-4 mb-1 justify-items-start">
+            @if($description)
+            <p>{{ $description }}</p>
+            @endif
         </div>
         <div class="overflow-x-scroll print:overflow-visible">
-            <table class="bg-white w-full mx-auto min-w-max table-auto text-left print:scale-50">
+            <table class="bg-white w-full mx-auto min-w-max table-auto text-left print:scale-75">
                 <thead>
                     <tr>
                         <x-table-header>ID Transaksi</x-table-header>
