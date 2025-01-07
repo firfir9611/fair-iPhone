@@ -6,7 +6,7 @@ use App\Models\transaction as transactions;
 use App\Models\unit_id;
 use App\Models\iphone_color;
 use App\Models\return_request;
-use app\Models\iphone;
+use app\Models\iphone as iphones;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -139,7 +139,7 @@ class transaction extends Controller
         ->orderBy('transactions.id','desc')->get();
 
         $description = '';
-        $iphones = iphone::all();
+        $iphones = iphones::all();
 
         return view('report.rent_history',compact('transactions','description','iphones'));
     }
@@ -162,7 +162,7 @@ class transaction extends Controller
         if($request->opt == 'return_at')
         $description = 'Riwayat pengembalian iPhone dari tanggal '.$request->start_date.' sampai '.$request->end_date;
 
-        $iphones = iphone::all();
+        $iphones = iphones::all();
 
         return view('report.rent_history',compact('transactions','description','iphones'));
     }
@@ -182,7 +182,7 @@ class transaction extends Controller
 
         $description = 'Riwayat penyewaan '.$request->name;
 
-        $iphones = iphone::all();
+        $iphones = iphones::all();
 
         return view('report.rent_history',compact('transactions','description','iphones'));
     }
