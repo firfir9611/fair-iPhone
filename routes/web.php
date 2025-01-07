@@ -78,6 +78,7 @@ Route::middleware('auth')->group(function () {
 
     //report
     Route::get('/report/rent/history', [transaction::class, 'reportRentHistory'])->name('reportRentHistory');
+    Route::post('/report/rent/history/search', [transaction::class, 'reportRentHistorySearch'])->name('reportRentHistorySearch');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
