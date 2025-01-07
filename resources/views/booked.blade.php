@@ -50,14 +50,14 @@
                                     @csrf
                                     <input type="hidden" value="" name="penalty" id="pinalty_input_{{ $transaction->transaction_id }}">
                                     @if( $transaction->status == 0 )
-                                    <button class="py-2 px-4 md:text-base text-xs bg-blue-500 rounded-md text-white" type="submit">Kembalikan Sekarang</button>
+                                    <button class="py-2 px-4 md:text-base text-xs bg-blue-500 rounded-md text-white return_btn" type="submit">Kembalikan Sekarang</button>
                                     @endif
                                 </form>
                                 @if( $transaction->status == 1 )
                                 <form action="{{ route('returnRequestSendCancel', $transaction->transaction_id) }}" method="POST">
                                     @csrf
                                     <p class="font-bold mb-2 text-green-500">Permintaan terkirim!, tunggu admin mengonfirmasi pengembalian</p>
-                                    <button class="py-2 px-4 md:text-base text-xs bg-gray-500 rounded-md text-white" type="submit">Batalkan Permintaan</button>
+                                    <button class="py-2 px-4 md:text-base text-xs bg-gray-500 rounded-md text-white cancel_btn" type="submit">Batalkan Permintaan</button>
                                 </form>
                                 @endif
                             </div>
@@ -73,6 +73,34 @@
     </div>
     <x-footer></x-footer>
 <script>
+    const cancelButtons = document.getElementsByClassName('cancel_btn');
+
+// Iterasi setiap tombol
+Array.from(cancelButtons).forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        setTimeout(function() {
+            const clickedButton = event.target;
+            clickedButton.disabled = true;
+            clickedButton.style.backgroundColor = '#A0AEC0';
+            clickedButton.innerHTML = 'Membatalkan Permintaan';
+        }, 50);
+    });
+});
+    const returnButtons = document.getElementsByClassName('return_btn');
+
+// Iterasi setiap tombol
+Array.from(returnButtons).forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        setTimeout(function() {
+            const clickedButton = event.target;
+            clickedButton.disabled = true;
+            clickedButton.style.backgroundColor = '#A0AEC0';
+            clickedButton.innerHTML = 'Mengirim Permintaan';
+        }, 50);
+    });
+});
+
+    
     document.addEventListener('DOMContentLoaded', function () {
         const transactions = @json($transactions);
         const iphone_colors = @json($iphone_colors);

@@ -3,7 +3,7 @@
 <x-head>Konfirmasi Pengembalian</x-head>
 <body class="bg-gray-100 overflow-x-hidden">
     <x-header></x-header>
-    <div class="w-11/12 mx-auto my-4 bg-white rounded-md p-8">
+    <div class="w-11/12 mx-auto my-4 bg-white rounded-md p-4">
         <p class="font-bold text-2xl text-center mb-4">Konfirmasi Pengembalian</p>
         <div class="flex flex-wrap justify-center gap-4">
         {{-- <div class="flex justify-items-start">
@@ -50,7 +50,7 @@
                                         @if($return_request->approve == 0)
                                         <form action="{{ route('returnRequestAcc', $return_request->return_request_id) }}" method="POST">
                                             @csrf
-                                            <button type="submit" class="mx-1 border hover:bg-blue-500 hover:text-white text-blue-500  border-blue-500 p-1 rounded-md">
+                                            <button type="submit" class=" border hover:bg-blue-500 hover:text-white text-blue-500  border-blue-500 py-1 px-2 rounded-md confirm_btn">
                                                 Konfirmasi
                                             </button>
                                         </form>
@@ -70,6 +70,22 @@
     </div>
     <x-footer></x-footer>
 <script>
+const confirmButtons = document.getElementsByClassName('confirm_btn');
+
+// Iterasi setiap tombol
+Array.from(confirmButtons).forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        setTimeout(function() {
+            const clickedButton = event.target;
+            clickedButton.disabled = true;
+            clickedButton.style.backgroundColor = '#A0AEC0';
+            clickedButton.classList.remove('text-blue-500');
+            clickedButton.classList.add('text-white');
+            clickedButton.innerHTML = 'Mengonfirmasi';
+        }, 50);
+    });
+});
+
 
     document.getElementById('pilih_semua').addEventListener('change', function () {
             let checkbox_pilih = document.querySelectorAll('.checkbox_pilih');

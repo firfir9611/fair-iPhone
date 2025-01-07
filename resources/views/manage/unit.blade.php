@@ -132,6 +132,9 @@
               </tbody>
             </table>
         </div>
+        @if(session('double'))
+                <p class="text-red-500 text-sm">{{ session('double') }}</p>
+            @endif
             <div class="flex justify-center">
                 <button type="button" onclick="open_popup_add()" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 p-1 rounded-md underline">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">

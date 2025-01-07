@@ -242,7 +242,7 @@ class iphone extends Controller
         )->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
         ->leftJoin('unit_colors','unit_colors.id','=','unit_ids.unit_color_id')
         ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
-        ->leftJoin('unit_imgs','unit_imgs.unit_id_id','=','unit_ids.id')->get();
+        ->leftJoin('unit_imgs','unit_imgs.unit_id_id','=','unit_ids.id')->orderBy('iphones.id')->get();
         $iphones = iphones::all();
         $unit_colors = iphone_color::select(
             'iphone_colors.iphone_id AS iphone_id','iphone_colors.unit_color_id AS color_id','unit_colors.color AS color_name'
@@ -375,12 +375,14 @@ class iphone extends Controller
     public function manageUnitAdd(Request $request, $id){
         $existing_unit = unit_id::where('unit_color_id', $request->color)
         ->where('unit_storage_id', $request->storage)
-        ->where('rent_price', $request->rent_price)
+        // ->where('rent_price', $request->rent_price)
         ->where('id', '!=', $id)->first();
 
         if($existing_unit){
             $existing_unit->stok += $request->stok;
             $existing_unit->save();
+
+            return redirect()->route('manageUnit')->with('double','Terdapat kesaman model, warna, dan penyimpanan!, stok terjumlahkan');
         }else{
             $unit_id = new unit_id();
             $unit_id->iphone_id = $request->iphone_id;

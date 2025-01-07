@@ -77,7 +77,7 @@
                                         @if($user->role != 'gm')
                                         <form action="{{ route('manageUserDelete', $user->id) }}" method="POST">
                                             @csrf
-                                            <button type="submit" class="mx-1 border hover:bg-blue-500 hover:text-white text-blue-500  border-blue-500 p-1 rounded-md">
+                                            <button type="submit" class="mx-1 border hover:bg-blue-500 hover:text-white text-blue-500 border-blue-500 p-1 rounded-md delete_btn">
                                                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                                 </svg>
@@ -101,13 +101,13 @@
                         <form action="{{ route('manageUserAdd') }}" method="POST">
                             @csrf
                             <td class="p-4 border-b border-blue-gray-50">
-                                <input class="p-2 border rounded-md" id="name" required type="text" name="name" placeholder="Masukan Nama Pengguna Baru">
+                                <input class="p-2 border rounded-md" maxlength="40" id="name" required type="text" name="name" placeholder="Masukan Nama Pengguna Baru">
                             </td>
                             <td class="p-4 border-b border-blue-gray-50">
-                                <input class="p-2 border rounded-md" id="email" required type="text" name="email" placeholder="Masukan Email Pengguna Baru">
+                                <input class="p-2 border rounded-md" id="email" maxlength="40" required type="text" name="email" placeholder="Masukan Email Pengguna Baru">
                             </td>
                             <td class="p-4 border-b border-blue-gray-50">
-                                <input class="p-2 border rounded-md w-32" id="password" required maxlength="20" type="text" name="password" placeholder="Masukan Kata Sandi Pengguna Baru">
+                                <input class="p-2 border rounded-md w-32" id="password" required maxlength="24" minlength="8" type="text" name="password" placeholder="Masukan Kata Sandi Pengguna Baru">
                             </td>
                             <td class="p-4 border-b border-blue-gray-50">
                                 <select name="role" class="p-2 border rounded-md">
@@ -119,7 +119,7 @@
                                 <div class="flex justify-end">
                                     <button id="user_add_btn" type="submit" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 p-1 rounded-md underline">
                                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                            <path id="user_add_icon" strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                         </svg>
                                     </button>
                                 </div>
@@ -137,10 +137,25 @@
 <x-footer></x-footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
+    const deleteBtn = document.getElementsByClassName('delete_btn');
+
+// Iterasi setiap tombol
+Array.from(deleteBtn).forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        setTimeout(function() {
+            const clickedButton = event.target;
+            clickedButton.disabled = true;
+            clickedButton.style.backgroundColor = '#A0AEC0';
+            clickedButton.setAttribute('d','M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99');
+        }, 50);
+    });
+});
+    
     document.getElementById('user_add_btn').addEventListener('click', function(event){
         const email = document.getElementById('email').value.trim();
         const name = document.getElementById('name').value.trim();
         const password = document.getElementById('password').value.trim();
+        const useAddIcon = document.getElementById('user_add_icon');
 
         if (!email || !password || !name) {
             return;
@@ -153,6 +168,9 @@
         setTimeout(function(){
             const button = event.target;
             button.disabled = true;
+            button.classList.remove('text-blue-500');
+            button.classList.add('text-white');
+            useAddIcon.setAttribute('d','M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99');
             button.style.backgroundColor = '#A0AEC0';
         }, 50);
     });

@@ -13,9 +13,9 @@
                         <label for="id">ID Unit : </label>
                         <input class="bg-white" name="id" type="text" value="{{ $unit_id->id }}" disabled>
                     </div>
-                    <button class="border border-blue-500 rounded-md bg-white hover:bg-blue-500 text-blue-500 hover:text-white py-1 px-2" type="submit">
+                    <button id="save_btn" class="border border-blue-500 rounded-md bg-white hover:bg-blue-500 text-blue-500 hover:text-white py-1 px-2" type="submit">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
+                            <path id="save_icon" strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
                         </svg>
                     </button>
                 </div>
@@ -41,23 +41,23 @@
                 </div>
                 <div class="mb-4">
                     <label for="name">Nama Iphone : </label><br>
-                    <input class="p-2 border rounded-md w-full" value="{{ $unit_id->iphone_name }}" type="text" disabled name="iphone_name" required>
+                    <input id="name" class="p-2 border rounded-md w-full" value="{{ $unit_id->iphone_name }}" type="text" disabled name="iphone_name" required>
                 </div>
                 <div class="mb-4">
                     <label for="rent_price">Harga Sewa : </label><br>
-                    <input class="p-2 border rounded-md w-full" value="{{ $unit_id->rent_price }}" type="number" placeholder="Masukan Harga Sewa iPhone" name="rent_price" required>
+                    <input id="price" class="p-2 border rounded-md w-full" value="{{ $unit_id->rent_price }}" type="number" placeholder="Masukan Harga Sewa iPhone" name="rent_price" required>
                 </div>
                 <div class="mb-4">
                     <label for="battery_health">Battery Health : </label><br>
-                    <input class="p-2 border rounded-md w-full" value="{{ $unit_id->battery_health }}" type="text" placeholder="Masukan Kesehatan Baterai iPhone" name="battery_health" required>
+                    <input id="battery_health" class="p-2 border rounded-md w-full" value="{{ $unit_id->battery_health }}" type="text" placeholder="Masukan Kesehatan Baterai iPhone" name="battery_health" required>
                 </div>
                 <div class="mb-4">
                     <label for="stok">Stok Tersedia : </label><br>
-                    <input class="p-2 border rounded-md w-full" value="{{ $unit_id->stok }}" type="number" placeholder="Masukan Kesehatan Baterai iPhone" name="stok" required>
+                    <input id="stok" class="p-2 border rounded-md w-full" value="{{ $unit_id->stok }}" type="number" placeholder="Masukan Kesehatan Baterai iPhone" name="stok" required>
                 </div>
                 <div class="mb-4">
                     <label for="stok_booked">Stok Sedang Disewa : </label><br>
-                    <input class="p-2 border rounded-md w-full" value="{{ $unit_id->stok_booked }}" disabled type="number" placeholder="Masukan Kesehatan Baterai iPhone" name="stok_booked" required>
+                    <input id="stok_booked" class="p-2 border rounded-md w-full" value="{{ $unit_id->stok_booked }}" disabled type="number" placeholder="Masukan Kesehatan Baterai iPhone" name="stok_booked" required>
                 </div>
                 <div class="mb-4">
                     <label for="color"> Warna : </label>
@@ -112,5 +112,27 @@
         </div>
     </div>
     <x-footer></x-footer>
+<script>
+    document.getElementById('save_btn').addEventListener('click', function (event) {
+        const saveIcon = document.getElementById('save_icon');
+        const name = document.getElementById('name').value.trim();
+        const price = document.getElementById('price').value.trim();
+        const battery_health = document.getElementById('battery_health').value.trim();
+        const stok = document.getElementById('stok').value.trim();
+
+        if (!name || !price || !battery_health || ! stok) {
+            return;
+        }
+
+        setTimeout(function(){
+            const button = event.target;
+            button.disabled = true;
+            button.style.backgroundColor = '#A0AEC0';
+            button.classList.remove('text-blue-500');
+            button.classList.add('text-white');
+            button.setAttribute('d','M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99');
+        }, 50);
+    });
+</script>
 </body>
 </html>

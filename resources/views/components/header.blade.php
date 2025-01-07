@@ -76,7 +76,7 @@
         @if(Auth::user()->role == 'admin' || Auth::user()->role == 'gm')
         <div x-data="{ isOpen: false }">
           <button  type="button" class="flex items-center gap-x-1 hover:bg-slate-100 rounded-md" aria-expanded="false" @click="isOpen = !isOpen">
-              <x-header-nav href="#" :active="request() -> is ('')">Kelola</x-header-nav>
+              <x-header-nav href="#" :active="request() -> is ('')">Admin</x-header-nav>
               <svg
               :class="{'rotate-180 transition ease-out duration-200': isOpen, 'rotate-0 transition ease-out duration-150': !isOpen }"
               class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
@@ -148,6 +148,20 @@
                       <span class="absolute inset-0"></span>
                     </a>
                     <p class="mt-1 text-gray-600">Konfirmasi Unit yang dikembalikan pelanggan</p>
+                  </div>
+                </div>
+                <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
+                  <div class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                    <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 3.75H6.912a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H15M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859M12 3v8.25m0 0-3-3m3 3 3-3" />
+                    </svg>
+                  </div>
+                  <div class="flex-auto">
+                    <a href="{{ route('reportRentHistory') }}" class="block font-semibold text-gray-900">
+                      Riwayat Penyewaan
+                      <span class="absolute inset-0"></span>
+                    </a>
+                    <p class="mt-1 text-gray-600">Lihat Riwayat Penyewaan dan Cetak Laporan</p>
                   </div>
                 </div>
               </div>

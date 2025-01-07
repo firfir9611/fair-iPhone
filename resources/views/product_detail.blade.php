@@ -144,6 +144,7 @@
                 @else
                 <p class="font-bold text-red-500">Login untuk melakukan penyewaan!</p>
                 @endif
+                <p id="checkout_notes" class="font-bold text-red-500"></p>
             </div>
             <div id="popup-add" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
               <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md z-20">
@@ -173,7 +174,7 @@
     <script>
         function open_popup_add() {
           const return_plan = document.getElementById('return_plan').value.trim();  
-          if(!return_plan){
+          if(return_plan){
           document.getElementById('popup-add').classList.remove('hidden');
             var payment = document.querySelector('input[name="payment"]:checked');
 
@@ -189,11 +190,12 @@
               document.getElementById('kidney_opt').classList.remove('hidden');
             }
           }else{
-            document.getElementById('transaction_start').submit();
+            document.getElementById('checkout_notes').innerHTML = 'Tentukan tanggal pengembalian sebelum melakukan pembayaran!';
           }
 
         }
         function close_popup_add() {
+          var payment = document.querySelector('input[name="payment"]:checked');
           if(payment.value == 'qris'){
             document.getElementById('qris_opt').classList.add('hidden');
           }else if(payment.value == 'kidney') {
