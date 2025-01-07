@@ -23,9 +23,9 @@
                     <input type="date" id="end_date" name="end_date" value="{{ old('end_date') }}" class="p-2 border rounded-md" required>
                 </div>
                 <div class="flex gap-2">
-                    <button id="search_btn" type="submit" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 py-1 px-2 rounded-md underline">
+                    <button id="search_btn_1" type="submit" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 py-1 px-2 rounded-md underline">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                            <path id="search_btn_icon" strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            <path id="search_btn_icon_1" strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
                     </button>
                 </div>
@@ -39,13 +39,14 @@
                     <input type="text" id="name_search" name="name" maxlength="30" value="{{ old('name') }}" class="p-2 border rounded-md" required>
                 </div>
                 <div class="flex gap-2">
-                    <button id="search_btn" type="submit" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 py-1 px-2 rounded-md underline">
+                    <button id="search_btn_2" type="submit" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 py-1 px-2 rounded-md underline">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                            <path id="search_btn_icon" strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            <path id="search_btn_icon_2" strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
                     </button>
                 </div>
                 </form>
+            </div>
         </div>
         <button id="print_btn" type="button" onclick="printPage()" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 py-1 px-2 rounded-md underline">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
@@ -101,6 +102,33 @@
 function printPage() {
     window.print();
 }
+
+document.getElementById('search_btn_1').addEventListener('click', function (event) {
+        const searchBtnIcon1 = document.getElementById('search_btn_icon_1');
+        setTimeout(function(){
+            const button = event.target;
+            button.disabled = true;
+            // button.style.backgroundColor = '#A0AEC0';
+            // button.classList.remove('text-blue-500');
+            // button.classList.add('text-white');
+            saveIcon.setAttribute('d','M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99');
+        }, 50);
+    });
+document.getElementById('search_btn_2').addEventListener('click', function (event) {
+        const searchBtnIcon2 = document.getElementById('search_btn_icon_2');
+        const nameSearch = document.getElementById('name_search').value.trim();
+        if (!nameSearch) {
+            return;
+        }
+        setTimeout(function(){
+            const button = event.target;
+            button.disabled = true;
+            // button.style.backgroundColor = '#A0AEC0';
+            // button.classList.remove('text-blue-500');
+            // button.classList.add('text-white');
+            saveIcon.setAttribute('d','M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99');
+        }, 50);
+    });
 
 document.addEventListener("DOMContentLoaded", function () {
     // Ambil semua transaksi yang ada di tabel
