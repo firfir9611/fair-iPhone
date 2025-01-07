@@ -438,7 +438,7 @@ class iphone extends Controller
         ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
         ->orderBy('transactions.id','desc')->get();
 
-        $description = '';
+        $description = 'Semua riwayat penyewaan iPhone';
         $iphones = iphones::all();
 
         return view('report.rent_history',compact('transactions','description','iphones'));

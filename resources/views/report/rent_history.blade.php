@@ -43,7 +43,6 @@
                         @endforeach
                         @endif
                     </select>
-                    <input type="text" id="name_search" name="name" maxlength="30" value="{{ old('name') }}" class="p-2 border rounded-md" required>
                 </div>
                 <div class="flex gap-2">
                     <button id="search_btn_2" type="submit" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 py-1 px-2 rounded-md underline">
