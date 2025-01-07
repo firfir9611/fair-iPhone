@@ -17,7 +17,7 @@
              <label for="address" class="mb-2 text-sm text-start text-grey-900">Alamat</label>
              <input name="address" id="address" required type="text" maxlength="100" placeholder="Ketikan alamatmu disini" class="border w-full px-5 py-4 mr-2 text-sm outline-none focus:border-blue-500 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-lg"/>
              <label for="phone_number" class="mb-2 text-sm text-start text-grey-900">No Whatsapp</label>
-             <input name="phone_number" id="phone_number" maxlength="15" required type="text" placeholder="Ketikan nomer whatsappmu disini" class="border w-full px-5 py-4 mr-2 text-sm outline-none focus:border-blue-500 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-lg"/>
+             <input name="phone_number" id="phone_number" maxlength="15" minlength="10" required type="text" placeholder="Ketikan nomer whatsappmu disini" class="border w-full px-5 py-4 mr-2 text-sm outline-none focus:border-blue-500 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-lg"/>
              <label for="gender" class="text-sm text-start text-grey-900">Jenis Kelamin</label>
              <div class="flex p-2 mb-4">
                 <input name="gender" type="radio" value="male" checked/>

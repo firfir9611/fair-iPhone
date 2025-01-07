@@ -3,6 +3,20 @@
 <x-head>Riwayat Penyewaan</x-head>
 <body class="bg-gray-100 overflow-x-hidden">
     <x-header></x-header>
+    <form action="" method="POST">
+        <div class="w-fit mx-auto flex px-4 py-2 gap-4 my-4 bg-white rounded-md p-8">
+        @csrf
+        <label for="date_range">Rentang Tanggal :</label>
+        <input type="date" id="start_date" value="" class="p-2 border rounded-md" required>
+        <label for=""> - </label>
+        <input type="date" id="end_date" value="" class="p-2 border rounded-md" required>
+        <button id="search_btn" type="submit" class="mx-1 hover:bg-blue-500 hover:text-white text-blue-500 border border-blue-500 p-1 rounded-md underline">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path id="search_btn_icon" strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+        </button>
+        </div>
+    </form>
     <div class="w-11/12 mx-auto my-4 bg-white rounded-md p-8">
         <p class="font-bold text-2xl text-center mb-4">Riyawat Penyewaan iPhone</p>
         <div class="flex flex-wrap justify-center gap-4">
@@ -29,7 +43,7 @@
                         <tr>
                             <x-table-contents>{{ $transaction->transaction_id }}</x-table-contents>
                             <x-table-contents>{{ $transaction->user_name }}</x-table-contents>
-                            <x-table-contents>{{ $transaction->iphone_name.' '.$return_request->color.' '.$return_request->storage }}</x-table-contents>
+                            <x-table-contents>{{ $transaction->iphone_name.' '.$transaction->color.' '.$transaction->storage }}</x-table-contents>
                             <x-table-contents><span class="rent_at_{{ $transaction->transaction_id }}">{{ $transaction->rent_at }}</span></x-table-contents>
                             <x-table-contents><span class="return_plan_{{ $transaction->transaction_id }}">{{ $transaction->return_plan }}</span></x-table-contents>
                             <x-table-contents><span class="return_plan_{{ $transaction->transaction_id }}">{{ $transaction->return_at }}</span></x-table-contents>
@@ -48,6 +62,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Ambil semua transaksi yang ada di tabel
     const transactions = document.querySelectorAll("tbody tr");
+    const today = new Date();
+    document.getElementById('start_date').value = today;
+    document.getElementById('end_date').value = today;
 
     transactions.forEach(function (transaction) {
         // Ambil ID transaksi
