@@ -6,6 +6,7 @@ use App\Models\transaction as transactions;
 use App\Models\unit_id;
 use App\Models\iphone_color;
 use App\Models\return_request;
+use app\Models\iphone;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -138,8 +139,9 @@ class transaction extends Controller
         ->orderBy('transactions.id','desc')->get();
 
         $description = '';
+        $iphones = iphone::all();
 
-        return view('report.rent_history',compact('transactions','description'));
+        return view('report.rent_history',compact('transactions','description','iphones'));
     }
     public function reportRentHistorySearchDate(Request $request){
         $transactions = transactions::select(
@@ -155,9 +157,14 @@ class transaction extends Controller
         ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
         ->orderBy('transactions.id','desc')->get();
 
+        if($request->opt == 'rent_at')
         $description = 'Riwayat penyewaan iPhone dari tanggal '.$request->start_date.' sampai '.$request->end_date;
+        if($request->opt == 'return_at')
+        $description = 'Riwayat pengembalian iPhone dari tanggal '.$request->start_date.' sampai '.$request->end_date;
 
-        return view('report.rent_history',compact('transactions','description'));
+        $iphones = iphone::all();
+
+        return view('report.rent_history',compact('transactions','description','iphones'));
     }
     public function reportRentHistorySearchName(Request $request){
         $transactions = transactions::select(
@@ -175,6 +182,8 @@ class transaction extends Controller
 
         $description = 'Riwayat penyewaan '.$request->name;
 
-        return view('report.rent_history',compact('transactions','description'));
+        $iphones = iphone::all();
+
+        return view('report.rent_history',compact('transactions','description','iphones'));
     }
 }

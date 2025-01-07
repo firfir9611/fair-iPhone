@@ -36,6 +36,13 @@
                 @csrf
                 <label for="date_range" class="text-lg"> : </label>
                 <div class="flex gap-2">
+                    <select name="name" id="name_search" class="border rounded-md p-2">
+                        @if($iphones->isNotEmpty())
+                        @foreach($iphones as $iphone)
+                        <option value="{{ $iphone->name }}">{{ $iphone->name }}</option>
+                        @endforeach
+                        @endif
+                    </select>
                     <input type="text" id="name_search" name="name" maxlength="30" value="{{ old('name') }}" class="p-2 border rounded-md" required>
                 </div>
                 <div class="flex gap-2">
@@ -113,7 +120,7 @@ document.getElementById('search_btn_1').addEventListener('click', function (even
             // button.style.backgroundColor = '#A0AEC0';
             // button.classList.remove('text-blue-500');
             // button.classList.add('text-white');
-            saveIcon.setAttribute('d','M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99');
+            searchBtnIcon1.setAttribute('d','M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99');
         }, 50);
     });
 document.getElementById('search_btn_2').addEventListener('click', function (event) {
@@ -128,7 +135,7 @@ document.getElementById('search_btn_2').addEventListener('click', function (even
             // button.style.backgroundColor = '#A0AEC0';
             // button.classList.remove('text-blue-500');
             // button.classList.add('text-white');
-            saveIcon.setAttribute('d','M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99');
+            searchBtnIcon2.setAttribute('d','M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99');
         }, 50);
     });
 
