@@ -6,7 +6,6 @@ use App\Models\transaction as transactions;
 use App\Models\unit_id;
 use App\Models\iphone_color;
 use App\Models\return_request;
-use app\Models\iphone as iphones;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -124,66 +123,5 @@ class transaction extends Controller
         return redirect()->back();
     }
 
-    public function reportRentHistory(){
-        $transactions = transactions::select(
-            'transactions.id AS transaction_id','transactions.total_paid AS total_paid','transactions.rent_at AS rent_at','transactions.return_plan AS return_plan',
-            'transactions.return_at AS return_at','unit_colors.color AS color','unit_storages.capacity AS storage','iphones.name AS iphone_name',
-            'unit_ids.iphone_id AS iphone_id','unit_ids.unit_color_id AS color_id','unit_ids.id AS unit_id',
-            'users.name AS user_name'
-        )->whereRaw('transactions.return_at IS NOT NULL')
-        ->leftJoin('unit_ids','unit_ids.id','=','transactions.unit_id_id')
-        ->leftJoin('users','users.id','=','transactions.user_id')
-        ->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
-        ->leftJoin('unit_colors','unit_colors.id','=','unit_ids.unit_color_id')
-        ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
-        ->orderBy('transactions.id','desc')->get();
-
-        $description = '';
-        $iphones = iphones::all();
-
-        return view('report.rent_history',compact('transactions','description','iphones'));
-    }
-    public function reportRentHistorySearchDate(Request $request){
-        $transactions = transactions::select(
-            'transactions.id AS transaction_id','transactions.total_paid AS total_paid','transactions.rent_at AS rent_at','transactions.return_plan AS return_plan',
-            'transactions.return_at AS return_at','unit_colors.color AS color','unit_storages.capacity AS storage','iphones.name AS iphone_name',
-            'unit_ids.iphone_id AS iphone_id','unit_ids.unit_color_id AS color_id','unit_ids.id AS unit_id',
-            'users.name AS user_name'
-        )->where('transactions.'.$request->opt,'>=',$request->start_date)->where('transactions.'.$request->opt,'<=',$request->end_date)
-        ->leftJoin('unit_ids','unit_ids.id','=','transactions.unit_id_id')
-        ->leftJoin('users','users.id','=','transactions.user_id')
-        ->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
-        ->leftJoin('unit_colors','unit_colors.id','=','unit_ids.unit_color_id')
-        ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
-        ->orderBy('transactions.id','desc')->get();
-
-        if($request->opt == 'rent_at')
-        $description = 'Riwayat penyewaan iPhone dari tanggal '.$request->start_date.' sampai '.$request->end_date;
-        if($request->opt == 'return_at')
-        $description = 'Riwayat pengembalian iPhone dari tanggal '.$request->start_date.' sampai '.$request->end_date;
-
-        $iphones = iphones::all();
-
-        return view('report.rent_history',compact('transactions','description','iphones'));
-    }
-    public function reportRentHistorySearchName(Request $request){
-        $transactions = transactions::select(
-            'transactions.id AS transaction_id','transactions.total_paid AS total_paid','transactions.rent_at AS rent_at','transactions.return_plan AS return_plan',
-            'transactions.return_at AS return_at','unit_colors.color AS color','unit_storages.capacity AS storage','iphones.name AS iphone_name',
-            'unit_ids.iphone_id AS iphone_id','unit_ids.unit_color_id AS color_id','unit_ids.id AS unit_id',
-            'users.name AS user_name'
-        )->where('iphones.name','like','%'.$request->name.'%')
-        ->leftJoin('unit_ids','unit_ids.id','=','transactions.unit_id_id')
-        ->leftJoin('users','users.id','=','transactions.user_id')
-        ->leftJoin('iphones','iphones.id','=','unit_ids.iphone_id')
-        ->leftJoin('unit_colors','unit_colors.id','=','unit_ids.unit_color_id')
-        ->leftJoin('unit_storages','unit_storages.id','=','unit_ids.unit_storage_id')
-        ->orderBy('transactions.id','desc')->get();
-
-        $description = 'Riwayat penyewaan '.$request->name;
-
-        $iphones = iphones::all();
-
-        return view('report.rent_history',compact('transactions','description','iphones'));
-    }
+   
 }
